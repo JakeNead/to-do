@@ -3,8 +3,7 @@
         "browser": true,
         "es2021": true
     },
-    "extends": ["eslint:recommended",
-                "prettier"],
+    "extends": "airbnb-base",
     "overrides": [
     ],
     "parserOptions": {
@@ -12,5 +11,6 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-console": "off"
     }
 }
