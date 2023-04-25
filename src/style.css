@@ -1,5 +1,6 @@
 * {
-  border: 1px solid black;
+}
+body {
 }
 
 #content {
@@ -16,18 +17,18 @@ header {
   align-items: center;
   position: relative;
   background-color: rgb(68 77 94);
+  color: rgb(162 201 253);
 }
 
 h1 {
   font: 45px;
-  color: rgb(162 201 253);
 }
 
-header > img {
+header > svg {
   height: 3rem;
   position: absolute;
   right: 1rem;
-  fill: red;
+  fill: currentColor;
 }
 
 main {
@@ -44,4 +45,22 @@ nav {
 
 section {
   flex-grow: 2;
+}
+
+footer {
+  background-color: rgb(68 77 94);
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(217 225 250);
+}
+footer p {
+  font-size: 1.2rem;
+}
+
+#odin-logo {
+  height: 1.4rem;
+  margin: 0.5rem;
+  fill: rgb(217 225 250);
 }
