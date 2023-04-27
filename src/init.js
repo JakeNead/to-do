@@ -42,17 +42,13 @@ const init = () => {
     <input type="description" name='description' id = 'description' placeholder="Description">
     <label for="date"></label>
     <input type="date" name="date" id="date">
-    <label for="project-select"></label>
+    <label for="project-select">Project
     <select name="project-select" id="project-select">
         <option value="">test</option>
-    </select>
-    <div id='priority-radio-btns'> Priority
-    <label for="low-priority"></label>
-    <input type="radio" name="priority" id="low-priority" value="low-priority">
-    <label for="med-priority"></label>
-    <input type="radio" name="priority" id="med-priority" value="med-priority">
-    <label for="high-priority"></label>
-    <input type="radio" name="priority" id="high-priority" value="high-priority">
+    </select></label>
+    <div id='priority-checkbox'> 
+    <label for="priority">Flag as priority</label>
+    <input type="checkbox" name="priority" id="priority" value="low-priority">
     </div>
     <div id='task-modal-buttons'>
     <button type="submit">Add</button>
