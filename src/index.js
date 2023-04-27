@@ -1,10 +1,24 @@
-import test from './test.js';
+import init from './init';
+// import test from './test';
+import './normalize.css';
+import './style.css';
+import './modal.css';
 
-console.log('Hello');
-test();
+init();
 
-// project factory function that connects with tasks
+// function project() {
+//   return {};
+// }
 
+// let storage = [
+//     "test project": {
+//         'task 1': {}
+//     }
+// ]
+
+// search for 'all', 'today', 'next 7 days', 'high/med/low priority'
+
+// project factory function
 // task factory function
 
 // checkbox
@@ -14,3 +28,4 @@ test();
 // priority
 // edit button
 // delete button
+// completed section
