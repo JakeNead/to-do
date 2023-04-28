@@ -1,5 +1,6 @@
 import initPage from './init';
 import modalEventListeners from './modals';
+import taskFactory from './taskFactory';
 import './normalize.css';
 import './style.css';
 import './modal.css';
@@ -7,20 +8,13 @@ import './modal.css';
 initPage();
 modalEventListeners();
 
-// function project() {
-//   return {};
-// }
-
 // let storage = [
 //     "test project": {
 //         'task 1': {}
 //     }
 // ]
 
-// search for 'all', 'today', 'next 7 days', 'high/med/low priority'
-
-// project factory function
-// task factory function
+// search for 'all', 'today', 'next 7 days', 'high priority'
 
 // checkbox
 // task name
