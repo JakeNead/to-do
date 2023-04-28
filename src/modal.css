@@ -1,18 +1,24 @@
 .modal {
-  background-color: rgb(68 77 94);
   padding: 1rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
   border-radius: 10px;
   z-index: 10;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  /* hidden for now */
-  opacity: 1;
+  background-color: rgb(68 77 94);
 }
 
-#project-modal {
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
 }
+
+/* #project-modal {
+}
+
+#task-modal {
+} */
 
 #project-modal form {
   display: flex;
@@ -23,13 +29,6 @@
   display: flex;
   justify-content: space-evenly;
   margin-top: 1rem;
-}
-
-#task-modal {
-}
-
-#task-modal.active {
-  transform: translate(-50%, -50%) scale(1);
 }
 
 #task-modal form {
@@ -49,12 +48,14 @@
 
 #overlay {
   position: fixed;
+  opacity: 0;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.4);
   pointer-events: none;
+  transition: 200ms ease-in-out;
 }
 
 #overlay.active {

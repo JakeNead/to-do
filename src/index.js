@@ -1,10 +1,11 @@
-import init from './init';
-// import test from './test';
+import initPage from './init';
+import modalEventListeners from './modals';
 import './normalize.css';
 import './style.css';
 import './modal.css';
 
-init();
+initPage();
+modalEventListeners();
 
 // function project() {
 //   return {};
