@@ -1,12 +1,13 @@
 import initPage from './init';
 import modalEventListeners from './modals';
-import taskFactory from './taskFactory';
+import newTask from './newTask';
 import './normalize.css';
 import './style.css';
 import './modal.css';
 
 initPage();
 modalEventListeners();
+
 const projects = {
   'Sample Project': {
     taskName: 'Submit summer schedule',
@@ -16,12 +17,6 @@ const projects = {
     completed: false,
   },
 };
-// let projects = {
-//     "test project": {
-//         taskName: 'laundry'
-//         notes: 'Set size to medium'
-//     }
-// }
 
 // search for 'all', 'today', 'next 7 days', 'high priority'
 

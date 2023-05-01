@@ -5,7 +5,6 @@ export default function taskFactory(taskName, notes, dueDate, isPriority, comple
     dueDate,
     isPriority,
     completed,
-
   };
 }
 
