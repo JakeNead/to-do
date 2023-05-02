@@ -1,5 +1,6 @@
 import initPage from './init';
 import modalEventListeners from './modals';
+import newProject from './newProject';
 import newTask from './newTask';
 import './normalize.css';
 import './style.css';
