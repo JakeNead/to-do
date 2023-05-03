@@ -32,7 +32,7 @@ const initPage = () => {
     <label for="project" ></label>
     <input type="text" name="project" id="project" placeholder="Project Name">
     <div id='project-modal-buttons'>
-    <button type="submit">Add</button>
+    <button id='project-submit' type="submit">Add</button>
     <button data-close-button>Cancel</button>
     </div>
 </form>
@@ -55,7 +55,7 @@ const initPage = () => {
     <input type="checkbox" name="priority" id="priority" value="low-priority">
     </div>
     <div id='task-modal-buttons'>
-    <button type="submit">Add</button>
+    <button id='task-submit' type="submit">Add</button>
     <button data-close-button >Cancel</button>
     </div>
 
