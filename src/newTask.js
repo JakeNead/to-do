@@ -1,5 +1,5 @@
-export default function taskFactory(taskName, notes, dueDate, isPriority, completed = false) {
-  return {
+export default function newTask(project, taskName, notes, dueDate, isPriority, completed = false) {
+  projects.project = {
     taskName,
     notes,
     dueDate,
