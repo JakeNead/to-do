@@ -1,13 +1,9 @@
 export default function newProject(projectName) {
-  const keyArray = Object.keys(projects);
-  let duplicate;
-  keyArray.forEach((key) => {
-    if (key.toLowerCase() === projectName.toLowerCase()) {
-      duplicate = true;
+  const nameArray = Object.keys(projects);
+  for (let i = 0; i < nameArray.length; i++) {
+    if (nameArray[i].toLowerCase() === projectName.toLowerCase()) {
+      return console.log('That name already exists!');
     }
-  });
-  if (duplicate) {
-    return console.log('That name already exists!');
   }
   projects[projectName] = {};
 }
