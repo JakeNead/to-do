@@ -28,9 +28,9 @@ const initPage = () => {
   </footer>
 
   <div id="project-modal" class='modal'>
-    <form action="#">
-    <label for="project" ></label>
-    <input type="text" name="project" id="project" placeholder="Project Name">
+    <form id='project-form' action="#">
+    <label for="projectInput" ></label>
+    <input type="text" name="projectInput" id="projectInput" placeholder="Project Name">
     <div id='project-modal-buttons'>
     <button id='project-submit' type="submit">Add</button>
     <button data-close-button>Cancel</button>
@@ -39,15 +39,15 @@ const initPage = () => {
 </div>
 
 <div id="task-modal" class='modal'>
-    <form action="#">
+    <form id='task-form' action="#">
     <label for="task" ></label>
     <input type="text" name="task" id="task" placeholder="Task Name">
     <label for="description"></label>
     <input type="description" name='description' id = 'description' placeholder="Description">
     <label for="date"></label>
     <input type="date" name="date" id="date">
-    <label for="project-select">Project
-    <select name="project-select" id="project-select">
+    <label for="projectSelect">Project
+    <select name="projectSelect" id="projectSelect">
         <option value="">test</option>
     </select></label>
     <div id='priority-checkbox'> 
