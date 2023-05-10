@@ -37,4 +37,15 @@ const modalEventListeners = () => {
   }
 };
 
-export default modalEventListeners;
+function clearTaskModal(taskForm) {
+  taskForm.task.value = '';
+  taskForm.description.value = '';
+  taskForm.date.value = '';
+  taskForm.priority.checked = false;
+// reset form and close modal
+}
+
+function clearProjectModal(projectForm) {
+  projectForm.projectInput.value = '';
+}
+export { modalEventListeners, clearProjectModal, clearTaskModal };
