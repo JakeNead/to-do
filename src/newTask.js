@@ -1,7 +1,18 @@
-export default function newTask(project, taskName, notes, dueDate, isPriority, completed = false) {
-  projects.project = {
+export default function newTask(
+  projects,
+  currentProject,
+  taskName,
+  description,
+  dueDate,
+  isPriority,
+  completed = false,
+) {
+  if (projects[currentProject].toLowerCase() === taskName.toLowerCase()) {
+    return console.log('That task name already exists!');
+  }
+  return {
     taskName,
-    notes,
+    description,
     dueDate,
     isPriority,
     completed,
