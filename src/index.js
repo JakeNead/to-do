@@ -1,5 +1,7 @@
 import initPage from './init';
-import modalEventListeners from './modals';
+import {
+  modalEventListeners, closeModal, clearProjectModal, clearTaskModal,
+} from './modals';
 import newProject from './newProject';
 import newTask from './newTask';
 import './normalize.css';
@@ -35,44 +37,44 @@ const todo = (function () {
     },
   };
 
+  const currentProject = 'Sample Project1';
+
   initPage();
   modalEventListeners();
 
   // cache dom
+  const projectModal = document.getElementById('project-modal');
   const projectForm = document.getElementById('project-form');
+  const taskModal = document.getElementById('task-modal');
   const taskForm = document.getElementById('task-form');
 
   // bind events
   projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    newProject(projectInput.value).bind(todo);
-    // projects[projectInput.value] = {};
+    newProject(projectInput.value, projects);
+    closeModal(projectModal);
+    clearProjectModal(projectForm);
     console.log(projects);
   });
 
   taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    newTask(taskForm.value);
+    projects[currentProject][task.value] = newTask(
+      description.value,
+      date.value,
+      priority.checked,
+    );
+    closeModal(taskModal);
+    clearTaskModal(taskForm);
+    console.log(projects);
   });
-
-  return { projects };
-  // submit new project
-  // render the projects nav bar
-  // render the selected project's tasks
-
-//   function isRepeatProject(projectName) {
-//     const nameArray = Object.keys(projects);
-//     for (let i = 0; i < nameArray.length; i++) {
-//       if (nameArray[i].toLowerCase() === projectName.toLowerCase()) {
-//         return console.log('That name already exists!');
-//       }
-//     }
-//     return projectName;
-//   }
 }());
 
-console.log(todo.projects);
+//   return { projects };
 
+// submit new project
+// render the projects nav bar
+// render the selected project's tasks
 // search for 'all', 'today', 'next 7 days', 'high priority'
 
 // checkbox
@@ -84,12 +86,6 @@ console.log(todo.projects);
 // delete button
 // completed section
 
-// create a factory function that creates a project and adds tasks as methods.
-
-// new factory function to try out
-
-// const project = function () {
-//   function newTask(project, taskName, notes, dueDate, isPriority, completed = false) {
 //     return {
 //       taskName,
 //       notes,

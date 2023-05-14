@@ -7,9 +7,10 @@ export default function newTask(
   isPriority,
   completed = false,
 ) {
-  if (projects[currentProject].toLowerCase() === taskName.toLowerCase()) {
-    return console.log('That task name already exists!');
-  }
+  // for (const prop)
+  // if (projects[currentProject].toLowerCase() === taskName.toLowerCase()) {
+  //   return console.log('That task name already exists!');
+  // }
   return {
     taskName,
     description,
@@ -18,6 +19,14 @@ export default function newTask(
     completed,
   };
 }
+// import the function below and run this before adding the task to projects
+
+// function isTaskDuplicate(){
+//     for (const prop in object)
+//   if (projects[currentProject].toLowerCase() === taskName.toLowerCase()) {
+//     return console.log('That task name already exists!');
+//   }
+// }
 
 // set task(setTaskName) {
 //       taskName = setTaskName;
