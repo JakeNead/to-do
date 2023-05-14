@@ -35,17 +35,32 @@ const modalEventListeners = () => {
     modal.classList.remove('active');
     overlay.classList.remove('active');
   }
+
+  //   function clearTaskModal(taskForm) {
+  //     taskForm.task.value = '';
+  //     taskForm.description.value = '';
+  //     taskForm.date.value = '';
+  //     taskForm.priority.checked = false;
+  //     // closeModal();
+  //   }
 };
 
+function closeModal(modal) {
+  if (modal == null) return;
+  modal.classList.remove('active');
+  overlay.classList.remove('active');
+}
+function clearProjectModal(modal) {
+  modal.projectInput.value = '';
+}
 function clearTaskModal(taskForm) {
   taskForm.task.value = '';
   taskForm.description.value = '';
   taskForm.date.value = '';
   taskForm.priority.checked = false;
-// reset form and close modal
+  // closeModal();
 }
 
-function clearProjectModal(projectForm) {
-  projectForm.projectInput.value = '';
-}
-export { modalEventListeners, clearProjectModal, clearTaskModal };
+export {
+  modalEventListeners, closeModal, clearTaskModal, clearProjectModal,
+};
