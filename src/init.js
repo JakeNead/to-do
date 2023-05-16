@@ -30,7 +30,7 @@ const initPage = () => {
   <div id="project-modal" class='modal'>
     <form id='project-form' action="#">
     <label for="projectInput" ></label>
-    <input type="text" name="projectInput" id="projectInput" placeholder="Project Name">
+    <input type="text" name="projectInput" id="projectInput" placeholder="Project Name" required>
     <div id='project-modal-buttons'>
     <button id='project-submit' type="submit">Add</button>
     <button data-close-button>Cancel</button>
@@ -41,7 +41,7 @@ const initPage = () => {
 <div id="task-modal" class='modal'>
     <form id='task-form' action="#">
     <label for="task" ></label>
-    <input type="text" name="task" id="task" placeholder="Task Name">
+    <input type="text" name="task" id="task" placeholder="Task Name" required>
     <label for="description"></label>
     <input type="text" name='description' id = 'description' placeholder="Description">
     <label for="date"></label>
