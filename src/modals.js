@@ -55,10 +55,8 @@ function clearTaskModal(taskForm) {
 
 function isUniqueName(value, obj) {
   const arr = [];
-
   Object.keys(obj).map((key) => arr.push(key.toLocaleLowerCase()));
-
-  return arr.includes(value.toLocaleLowerCase());
+  return !arr.includes(value.toLocaleLowerCase());
 }
 
 export {
