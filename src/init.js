@@ -15,7 +15,7 @@ const initPage = () => {
   <button id='add-project' data-modal-target='#project-modal'>+ Add Project</div>
   </nav>
   
-  <section>
+  <section id='tasks'>
   <p>Here are the main tasks for the current project</p>
   <button id='add-task' data-modal-target='#task-modal'>+ Add Task</div></section>
   </main>
