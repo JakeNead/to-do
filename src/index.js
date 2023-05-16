@@ -1,6 +1,6 @@
 import initPage from './init';
 import {
-  modalEventListeners, closeModal, clearProjectModal, clearTaskModal,
+  modalEventListeners, closeModal, clearProjectModal, clearTaskModal, isUniqueName,
 } from './modals';
 import newProject from './newProject';
 import newTask from './newTask';
@@ -59,18 +59,22 @@ const todo = (function () {
 
   taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    projects[currentProject][task.value] = newTask(
-      description.value,
-      date.value,
-      priority.checked,
-    );
-    closeModal(taskModal);
-    clearTaskModal(taskForm);
-    console.log(projects);
+    if (isUniqueName(task.value, projects[currentProject])) {
+      projects[currentProject][task.value] = newTask(
+        projects,
+        currentProject,
+        task.value,
+        description.value,
+        date.value,
+        priority.checked,
+      );
+      closeModal(taskModal);
+      clearTaskModal(taskForm);
+    } else {
+      console.log('That task name already exists!!');
+    }
   });
 }());
-
-//   return { projects };
 
 // submit new project
 // render the projects nav bar
@@ -85,13 +89,3 @@ const todo = (function () {
 // edit button
 // delete button
 // completed section
-
-//     return {
-//       taskName,
-//       notes,
-//       dueDate,
-//       isPriority,
-//       completed,
-//     };
-//   }
-// };
