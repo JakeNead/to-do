@@ -7,6 +7,7 @@ import newTask from './newTask';
 import './normalize.css';
 import './style.css';
 import './modal.css';
+import './renderTasks';
 
 const todo = (function () {
   const projects = {
@@ -47,6 +48,7 @@ const todo = (function () {
   const projectForm = document.getElementById('project-form');
   const taskModal = document.getElementById('task-modal');
   const taskForm = document.getElementById('task-form');
+  const task = document.getElementById('tasks');
 
   // bind events
   projectForm.addEventListener('submit', (e) => {
@@ -89,3 +91,5 @@ const todo = (function () {
 // edit button
 // delete button
 // completed section
+
+// May 16 goal: Create page render functions
