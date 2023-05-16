@@ -35,14 +35,6 @@ const modalEventListeners = () => {
     modal.classList.remove('active');
     overlay.classList.remove('active');
   }
-
-  //   function clearTaskModal(taskForm) {
-  //     taskForm.task.value = '';
-  //     taskForm.description.value = '';
-  //     taskForm.date.value = '';
-  //     taskForm.priority.checked = false;
-  //     // closeModal();
-  //   }
 };
 
 function closeModal(modal) {
@@ -53,14 +45,22 @@ function closeModal(modal) {
 function clearProjectModal(modal) {
   modal.projectInput.value = '';
 }
+
 function clearTaskModal(taskForm) {
   taskForm.task.value = '';
   taskForm.description.value = '';
   taskForm.date.value = '';
   taskForm.priority.checked = false;
-  // closeModal();
+}
+
+function isUniqueName(value, obj) {
+  const arr = [];
+
+  Object.keys(obj).map((key) => arr.push(key.toLocaleLowerCase()));
+
+  return arr.includes(value.toLocaleLowerCase());
 }
 
 export {
-  modalEventListeners, closeModal, clearTaskModal, clearProjectModal,
+  modalEventListeners, closeModal, clearTaskModal, clearProjectModal, isUniqueName,
 };
