@@ -7,7 +7,8 @@ import newTask from './newTask';
 import './normalize.css';
 import './style.css';
 import './modal.css';
-import './renderTasks';
+// import renderTasks from './renderTasks';
+import { renderProjects, renderTasks, removeChildElements } from './renderElements';
 
 const todo = (function () {
   const projects = {
@@ -38,25 +39,31 @@ const todo = (function () {
     },
   };
 
-  const currentProject = 'Sample Project1';
+  const currentProject = projects['Sample Project1'];
 
   initPage();
   modalEventListeners();
+
+  //   renderTasks();
 
   // cache dom
   const projectModal = document.getElementById('project-modal');
   const projectForm = document.getElementById('project-form');
   const taskModal = document.getElementById('task-modal');
   const taskForm = document.getElementById('task-form');
-  const task = document.getElementById('tasks');
+  const projectSection = document.getElementById('projects');
+  const taskSection = document.getElementById('tasks');
 
+  renderProjects(projects, projectSection);
+  renderTasks(currentProject, taskSection);
   // bind events
   projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     newProject(projectInput.value, projects);
     closeModal(projectModal);
     clearProjectModal(projectForm);
-    console.log(projects);
+    removeChildElements(projectSection);
+    renderProjects(projects, projectSection);
   });
 
   taskForm.addEventListener('submit', (e) => {
@@ -91,5 +98,3 @@ const todo = (function () {
 // edit button
 // delete button
 // completed section
-
-// May 16 goal: Create page render functions

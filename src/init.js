@@ -13,6 +13,7 @@ const initPage = () => {
   <div id='projects-section'>
   <h3>Projects</h3>
   <button id='add-project' data-modal-target='#project-modal'>+ Add Project</div>
+  <div id='projects'><div>
   </nav>
   
   <section id='tasks'>
