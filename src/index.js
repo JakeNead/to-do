@@ -7,7 +7,6 @@ import newTask from './newTask';
 import './normalize.css';
 import './style.css';
 import './modal.css';
-// import renderTasks from './renderTasks';
 import { renderProjects, renderTasks, removeChildElements } from './renderElements';
 
 const todo = (function () {
@@ -44,18 +43,17 @@ const todo = (function () {
   initPage();
   modalEventListeners();
 
-  //   renderTasks();
-
   // cache dom
   const projectModal = document.getElementById('project-modal');
   const projectForm = document.getElementById('project-form');
   const taskModal = document.getElementById('task-modal');
   const taskForm = document.getElementById('task-form');
   const projectSection = document.getElementById('projects');
-  const taskSection = document.getElementById('tasks');
+  const taskSection = document.getElementById('taskList');
 
   renderProjects(projects, projectSection);
   renderTasks(currentProject, taskSection);
+
   // bind events
   projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -68,8 +66,8 @@ const todo = (function () {
 
   taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (isUniqueName(task.value, projects[currentProject])) {
-      projects[currentProject][task.value] = newTask(
+    if (isUniqueName(task.value, currentProject)) {
+      currentProject[task.value] = newTask(
         projects,
         currentProject,
         task.value,
@@ -79,6 +77,8 @@ const todo = (function () {
       );
       closeModal(taskModal);
       clearTaskModal(taskForm);
+      removeChildElements(taskSection);
+      renderTasks(currentProject, taskSection);
     } else {
       console.log('That task name already exists!!');
     }
