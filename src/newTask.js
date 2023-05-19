@@ -7,7 +7,7 @@ export default function newTask(
   isPriority,
   completed = false,
 ) {
-  const taskNameArray = Object.keys(projects[currentProject]);
+  const taskNameArray = Object.keys(currentProject);
   if (taskNameArray.includes(taskName)) {
     return console.log('That task name already exists!');
   }
