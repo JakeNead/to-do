@@ -3,7 +3,7 @@ import {
   modalEventListeners, closeModal, clearProjectModal, clearTaskModal, isUniqueName,
 } from './modals';
 // import newProject from './newProject';
-import { newProject, newTask } from './newTask';
+import { NewProject, NewTask } from './newObjects';
 import './normalize.css';
 import './style.css';
 import './modal.css';
@@ -58,7 +58,7 @@ const todo = (function () {
   projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (isUniqueName(projectInput.value, projects)) {
-      newProject(projectInput.value, projects);
+      NewProject(projectInput.value, projects);
       closeModal(projectModal);
       clearProjectModal(projectForm);
       removeChildElements(projectSection);
@@ -71,7 +71,7 @@ const todo = (function () {
   taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (isUniqueName(task.value, currentProject)) {
-      currentProject[task.value] = newTask(
+      currentProject[task.value] = NewTask(
         projects,
         currentProject,
         task.value,
