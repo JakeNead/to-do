@@ -7,9 +7,9 @@ function renderProjects(projects, projectSection) {
 
 function renderTasks(currPro, taskSection) {
   const keys = Object.keys(currPro);
-  keys.forEach((key) => {
-    taskSection.innerHTML += `<div><span> ${key} </div>`;
-  });
+  for (let i = 0; i < keys.length; i += 1) {
+    taskSection.innerHTML += `<div id = '${keys[i]}'><span> ${keys[i]} </span><span>${currPro[keys[i]].notes}</span><span>${currPro[keys[i]].dueDate}<button>edit</button><button>delete</button></div>`;
+  }
 }
 
 function removeChildElements(parent) {
