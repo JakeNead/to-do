@@ -1,13 +1,13 @@
 function NewTask(
   currentProject,
   taskName,
-  description,
+  notes,
   dueDate,
   isPriority,
   completed = false,
 ) {
   return {
-    description,
+    notes,
     dueDate,
     isPriority,
     completed,
@@ -20,7 +20,7 @@ function NewProject(projectName, storage) {
 
 export { NewProject, NewTask };
 
-// try using object methods instead of separate functions
+// try using object methods instead of separate functions?
 
 // const Task = (
 //   title,
