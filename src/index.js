@@ -2,8 +2,8 @@ import initPage from './init';
 import {
   modalEventListeners, closeModal, clearProjectModal, clearTaskModal, isUniqueName,
 } from './modals';
-import newProject from './newProject';
-import newTask from './newTask';
+// import newProject from './newProject';
+import { newProject, newTask } from './newTask';
 import './normalize.css';
 import './style.css';
 import './modal.css';
@@ -57,11 +57,15 @@ const todo = (function () {
   // bind events
   projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    newProject(projectInput.value, projects);
-    closeModal(projectModal);
-    clearProjectModal(projectForm);
-    removeChildElements(projectSection);
-    renderProjects(projects, projectSection);
+    if (isUniqueName(projectInput.value, projects)) {
+      newProject(projectInput.value, projects);
+      closeModal(projectModal);
+      clearProjectModal(projectForm);
+      removeChildElements(projectSection);
+      renderProjects(projects, projectSection);
+    } else {
+      console.log('That project name already exists!');
+    }
   });
 
   taskForm.addEventListener('submit', (e) => {
@@ -83,6 +87,12 @@ const todo = (function () {
       console.log('That task name already exists!!');
     }
   });
+
+//   projectSelect.addEventListener('click', (proj) => {
+//     // assign current project variable to click
+//     // render tasks
+//     // highlight selected project
+//   });
 }());
 
 // submit new project
