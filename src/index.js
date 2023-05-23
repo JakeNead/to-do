@@ -7,7 +7,7 @@ import { NewProject, NewTask } from './newObjects';
 import './normalize.css';
 import './style.css';
 import './modal.css';
-import { renderProjects, renderTasks, removeChildElements } from './renderElements';
+import { renderProjects, renderTasks } from './renderElements';
 
 const todo = (function () {
   const projects = {
@@ -61,7 +61,6 @@ const todo = (function () {
       NewProject(projectInput.value, projects);
       closeModal(projectModal);
       clearProjectModal(projectForm);
-      removeChildElements(projectSection);
       renderProjects(projects, projectSection);
     } else {
       console.log('That project name already exists!');
@@ -81,7 +80,6 @@ const todo = (function () {
       );
       closeModal(taskModal);
       clearTaskModal(taskForm);
-      removeChildElements(taskSection);
       renderTasks(currentProject, taskSection);
     } else {
       console.log('That task name already exists!!');
