@@ -16,32 +16,42 @@ function NewTask(
 
 function NewProject(projectName, storage) {
   storage[projectName] = {};
+
+  function renameProj(oldKey, newKey) {
+    storage[newKey] = storage[oldKey];
+    delete storage[oldKey];
+  }
+  return { projectName: {}, renameProj };
 }
 
 export { NewProject, NewTask };
 
 // try using object methods instead of separate functions?
 
-// const Task = (
-//   title,
-//   taskName,
-//   description,
-//   dueDate,
-//   isPriority,
-//   completed = false,
-// ) => {
-//   let storage = [];
+// function CreateProject(name) {
+//   const tasks = [];
 
-//   const add = function (item) {
-//     storage.push(item);
-//   };
-//   const remove = function (item) {
-//     storage = storage.filter((thing) => thing !== item);
-//   };
+//   function createTask(title, notes, isPriority) {
+//     return {
+//       title,
+//       notes,
+//       isPriority,
+//       completed: false,
+//       markComplete() {
+//         this.completed = true;
+//       },
+//     };
+//   }
 
 //   return {
-//     get title() { return title; },
-//     add,
-//     remove,
+//     name,
+//     addTask(title, description) {
+//       const task = createTask(title, description);
+//       tasks.push(task);
+//       return task;
+//     },
+//     getTasks() {
+//       return tasks;
+//     },
 //   };
-// };
+// }
