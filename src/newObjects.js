@@ -17,11 +17,15 @@ function NewTask(
 function NewProject(projectName, storage) {
   storage[projectName] = {};
 
-  function renameProj(oldKey, newKey) {
-    storage[newKey] = storage[oldKey];
-    delete storage[oldKey];
+  function deleteProject() {
+    delete storage[projectName];
   }
-  return { projectName: {}, renameProj };
+
+  // function renameProj(oldKey, newKey) {
+  //   storage[newKey] = storage[oldKey];
+  //   delete storage[oldKey];
+  // }
+  return { projectName: {}, deleteProject };
 }
 
 export { NewProject, NewTask };

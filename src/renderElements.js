@@ -26,23 +26,29 @@ const renderElements = (function () {
     }
   };
 
-  function deleteTask(project, el) {
-    if (confirm('Are you sure you want to permanently delete this task?')) {
-      const task = el.dataset.taskDelete;
-      delete project[task];
-    }
-  }
-
-  const renderProjects = (projects) => {
-    const projectSection = document.getElementById('projects');
+  // function deleteTask(project, el) {
+  //   if (confirm('Are you sure you want to permanently delete this task?')) {
+  //     const task = el.dataset.taskDelete;
+  //     delete project[task];
+  //   }
+  // }
+  const projectEvents = (projects, projectSection) => {
+    const projectDeleteButton = document.querySelectorAll('.projectDeleteButton');
+    projectDeleteButton.forEach((el) => el.addEventListener('click', () => {
+      delete projects[el.parentElement.firstChild.textContent];
+      renderProjects(projects, projectSection);
+    }));
+  };
+  const renderProjects = (projects, projectSection) => {
     removeChildElements(projectSection);
     createProjectElements(projects);
+    projectEvents(projects, projectSection);
   };
-  const renderTasks = (currPro) => {
-    const taskSection = document.getElementById('taskList');
+  const renderTasks = (currPro, taskSection) => {
     removeChildElements(taskSection);
     createTaskElements(currPro);
   };
+
   return { renderProjects, renderTasks };
 }());
 

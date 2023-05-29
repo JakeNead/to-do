@@ -2,12 +2,11 @@ import initPage from './init';
 import {
   modalEventListeners, closeModal, clearProjectModal, clearTaskModal, isUniqueName,
 } from './modals';
-// import newProject from './newProject';
 import { NewProject, NewTask } from './newObjects';
 import './normalize.css';
 import './style.css';
 import './modal.css';
-import { renderProjects, renderTasks } from './renderElements';
+import renderElements from './renderElements';
 
 const todo = (function () {
   const projects = {
@@ -43,16 +42,17 @@ const todo = (function () {
   initPage();
   modalEventListeners();
 
-  // cache dom
+  // cache modal dom
   const projectModal = document.getElementById('project-modal');
   const projectForm = document.getElementById('project-form');
   const taskModal = document.getElementById('task-modal');
   const taskForm = document.getElementById('task-form');
-  const projectSection = document.getElementById('projects');
-  const taskSection = document.getElementById('taskList');
 
-  renderProjects(projects, projectSection);
-  renderTasks(currentProject, taskSection);
+  // render projects/tasks
+  const taskSection = document.getElementById('taskList');
+  const projectSection = document.getElementById('projects');
+  renderElements.renderProjects(projects, projectSection);
+  renderElements.renderTasks(currentProject, taskSection);
 
   // bind events
   projectForm.addEventListener('submit', (e) => {
@@ -61,7 +61,7 @@ const todo = (function () {
       NewProject(projectInput.value, projects);
       closeModal(projectModal);
       clearProjectModal(projectForm);
-      renderProjects(projects, projectSection);
+      renderElements.renderProjects(projects, projectSection);
     } else {
       console.log('That project name already exists!');
     }
@@ -71,7 +71,6 @@ const todo = (function () {
     e.preventDefault();
     if (isUniqueName(task.value, currentProject)) {
       currentProject[task.value] = NewTask(
-        projects,
         currentProject,
         task.value,
         description.value,
@@ -80,7 +79,7 @@ const todo = (function () {
       );
       closeModal(taskModal);
       clearTaskModal(taskForm);
-      renderTasks(currentProject, taskSection);
+      renderElements.renderTasks(currentProject, taskSection);
     } else {
       console.log('That task name already exists!!');
     }
@@ -93,11 +92,6 @@ const todo = (function () {
 //   });
 }());
 
-// submit new project
-// render the projects nav bar
-// render the selected project's tasks
-// search for 'all', 'today', 'next 7 days', 'high priority'
-
 // checkbox
 // task name
 // notes
@@ -106,3 +100,34 @@ const todo = (function () {
 // edit button
 // delete button
 // completed section
+
+// bundle render functions in one module
+// add click event for all projects to change currentProject
+// search for 'all', 'today', 'next 7 days', 'high priority'
+// display project name above task container
+
+// when a change to projects {} occurs.....
+//     clear proj/task container
+//     render proj/task elements
+//     cache the rendered DOM
+//     add event listeners to the
+//          proj elements(to render tasks and highlight currProj)
+//          proj delete button
+//          proj edit button
+//          task delete button
+//          task edit button
+//          task element completed?
+
+//   project variable runs:
+//      clear proj container
+//      render proj elements
+//      cache proj dom
+//      proj event listeners
+//          edit/delete
+
+//   task variable runs:
+//      clear task container
+//      render task elements
+//      cache task dom
+//      task event listeners
+//          edit/delete/completed
