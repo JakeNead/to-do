@@ -32,24 +32,28 @@ const renderElements = (function () {
   //     delete project[task];
   //   }
   // }
-  const projectEvents = (projects, projectSection) => {
+  const projectEvents = (projects, projectSection, currPro, taskSection) => {
+    // project delete button
     const projectDeleteButton = document.querySelectorAll('.projectDeleteButton');
     projectDeleteButton.forEach((el) => el.addEventListener('click', () => {
       delete projects[el.parentElement.firstChild.textContent];
-      renderProjects(projects, projectSection);
+      renderProjects(projects, projectSection, currPro, taskSection);
     }));
-  };
-  const renderProjects = (projects, projectSection) => {
-    removeChildElements(projectSection);
-    createProjectElements(projects);
-    projectEvents(projects, projectSection);
-  };
-  const renderTasks = (currPro, taskSection) => {
-    removeChildElements(taskSection);
-    createTaskElements(currPro);
-  };
 
-  return { renderProjects, renderTasks };
+    // const taskDeleteButton = document.querySelector();
+  };
+  const renderProjects = (projects, projectSection, currPro, taskSection) => {
+    removeChildElements(projectSection);
+    removeChildElements(taskSection);
+    createProjectElements(projects);
+    createTaskElements(currPro);
+    projectEvents(projects, projectSection, currPro, taskSection);
+  };
+  // const renderTasks = (currPro, taskSection) => {
+
+  // };
+
+  return { renderProjects };
 }());
 
 export default renderElements;

@@ -51,8 +51,7 @@ const todo = (function () {
   // render projects/tasks
   const taskSection = document.getElementById('taskList');
   const projectSection = document.getElementById('projects');
-  renderElements.renderProjects(projects, projectSection);
-  renderElements.renderTasks(currentProject, taskSection);
+  renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
 
   // bind events
   projectForm.addEventListener('submit', (e) => {
@@ -61,7 +60,7 @@ const todo = (function () {
       NewProject(projectInput.value, projects);
       closeModal(projectModal);
       clearProjectModal(projectForm);
-      renderElements.renderProjects(projects, projectSection);
+      renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
     } else {
       console.log('That project name already exists!');
     }
@@ -79,7 +78,7 @@ const todo = (function () {
       );
       closeModal(taskModal);
       clearTaskModal(taskForm);
-      renderElements.renderTasks(currentProject, taskSection);
+      renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
     } else {
       console.log('That task name already exists!!');
     }
