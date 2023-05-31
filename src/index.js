@@ -10,26 +10,23 @@ import renderElements from './renderElements';
 
 const todo = (function () {
   const projects = {
-    'Sample Project1': {
-      'Sample Task1': {
-        taskName: 'Submit summer schedule',
+    Project1: {
+      'Submit Summer Schedule': {
         notes: 'Include vaction dates and doctor appointments.',
         dueDate: '5/30/23',
         priority: true,
         completed: false,
       },
-      'Sample Task2': {
-        taskName: 'Build Workbench',
+      'Build Workbench': {
         notes: 'Use Scrapwood from the cabin',
         dueDate: '8/30/23',
         priority: false,
         completed: false,
       },
     },
-    'Sample Project2': {
-      'Sample Task': {
-        taskName: 'Submit summer schedule',
-        notes: 'Include vaction dates and doctor appointments.',
+    'Another Test Project': {
+      'Eat 3800 avocados': {
+        notes: 'Become a round, rolling feller that can\'t be stopped.',
         dueDate: '5/30/23',
         priority: true,
         completed: false,
@@ -37,7 +34,7 @@ const todo = (function () {
     },
   };
 
-  const currentProject = projects['Sample Project1'];
+  const currentProject = projects.Project1;
 
   initPage();
   modalEventListeners();
@@ -83,12 +80,6 @@ const todo = (function () {
       console.log('That task name already exists!!');
     }
   });
-
-//   projectSelect.addEventListener('click', (proj) => {
-//     // assign current project variable to click
-//     // render tasks
-//     // highlight selected project
-//   });
 }());
 
 // checkbox
