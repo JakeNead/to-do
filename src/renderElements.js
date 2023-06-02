@@ -8,7 +8,10 @@ const renderElements = (function () {
     const projectSection = document.getElementById('projects');
     const keys = Object.keys(projects);
     keys.forEach((key) => {
-      projectSection.innerHTML += `<li><span class='projElement'>${key}</span><button class='projectDeleteButton'> Delete</button></li>`;
+      projectSection.innerHTML += `<li><span class='projElement'>${key}</span>
+      <button class='projectEditButton'> Edit</button>
+      <button class='projectDeleteButton'> Delete</button>
+      </li>`;
     });
   };
 
@@ -29,8 +32,17 @@ const renderElements = (function () {
   const projectEvents = (projects, projectSection, currPro, taskSection) => {
     // delete projects
     const projectDeleteButton = document.querySelectorAll('.projectDeleteButton');
-    projectDeleteButton.forEach((el) => el.addEventListener('click', () => {
+    projectDeleteButton.forEach((el) => el.addEventListener('click', (e) => {
+      e.stopPropagation();
       delete projects[el.parentElement.firstChild.textContent];
+      if (projects[el.parentElement.firstChild.textContent] === currPro) {
+        if (Object.keys(projects)[0] === undefined) {
+          currPro = null;
+        } else {
+          currPro = Object.keys(projects)[0];
+        }
+      }
+
       renderProjects(projects, projectSection, currPro, taskSection);
     }));
 
@@ -47,8 +59,6 @@ const renderElements = (function () {
     removeChildElements(projectSection);
     removeChildElements(taskSection);
     createProjectElements(projects);
-    // bug occurs on the createTaskElements after a project is deleted
-    // it seems to run twice and the currPro variable might not actually work
     createTaskElements(currPro);
     projectEvents(projects, projectSection, currPro, taskSection);
   };

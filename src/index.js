@@ -34,7 +34,7 @@ const todo = (function () {
     },
   };
 
-  const currentProject = projects.Project1;
+  let currentProject = projects.Project1;
 
   initPage();
   modalEventListeners();
