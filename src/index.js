@@ -32,6 +32,14 @@ const todo = (function () {
         completed: false,
       },
     },
+    'third one': {
+      'Say hi to spruce': {
+        notes: 'Don\'t forget to give him wet food',
+        dueDate: '9/30/23',
+        priority: false,
+        completed: false,
+      },
+    },
   };
 
   let currentProject = projects.Project1;

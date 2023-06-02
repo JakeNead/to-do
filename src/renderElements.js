@@ -35,14 +35,13 @@ const renderElements = (function () {
     projectDeleteButton.forEach((el) => el.addEventListener('click', (e) => {
       e.stopPropagation();
       delete projects[el.parentElement.firstChild.textContent];
-      if (projects[el.parentElement.firstChild.textContent] === currPro) {
-        if (Object.keys(projects)[0] === undefined) {
+      if (projects[el.parentElement.firstChild.textContent] === undefined) {
+        if (Object.keys(projects).length === 0) {
           currPro = null;
         } else {
-          currPro = Object.keys(projects)[0];
+          currPro = projects[Object.keys(projects)[0]];
         }
       }
-
       renderProjects(projects, projectSection, currPro, taskSection);
     }));
 
@@ -51,7 +50,6 @@ const renderElements = (function () {
     projectElements.forEach((el) => el.addEventListener('click', () => {
       currPro = projects[el.firstChild.textContent];
       renderProjects(projects, projectSection, currPro, taskSection);
-      console.log(currPro);
     }));
   };
 
