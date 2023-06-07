@@ -1,14 +1,15 @@
 const renderElements = (function () {
-  const removeChildElements = (parent) => {
-    while (parent.hasChildNodes()) {
-      parent.removeChild(parent.firstChild);
-    }
+  const removeElements = () => {
+    const elements = document.querySelectorAll('.projectElement, .taskElement');
+    console.log(elements);
+    elements.forEach((el) => el.remove());
   };
+
   const createProjectElements = (projects) => {
     const projectSection = document.getElementById('projects');
     const keys = Object.keys(projects);
     keys.forEach((key) => {
-      projectSection.innerHTML += `<li><span class='projElement'>${key}</span>
+      projectSection.innerHTML += `<li class='projectElement'><span class='projElement'>${key}</span>
       <button class='projectEditButton'> Edit</button>
       <button class='projectDeleteButton'> Delete</button>
       </li>`;
@@ -16,10 +17,11 @@ const renderElements = (function () {
   };
 
   const createTaskElements = (currPro) => {
+    if (currPro === null) return;
     const taskSection = document.getElementById('taskList');
     const keys = Object.keys(currPro);
     for (let i = 0; i < keys.length; i += 1) {
-      taskSection.innerHTML += `<div class = '${keys[i]}'>
+      taskSection.innerHTML += `<div class='${keys[i]} taskElement'>
     <span> ${keys[i]} </span>
     <span>${currPro[keys[i]].dueDate}</span>
     <button data-taskEdit ='${keys[i]} editTask'>edit</button>
@@ -30,6 +32,13 @@ const renderElements = (function () {
   };
 
   const projectEvents = (projects, projectSection, currPro, taskSection) => {
+    // select projects
+    const projectElements = document.querySelectorAll('#projects li');
+    projectElements.forEach((el) => el.addEventListener('click', () => {
+      currPro = projects[el.firstChild.textContent];
+      renderProjects(projects, projectSection, currPro, taskSection);
+    }));
+
     // delete projects
     const projectDeleteButton = document.querySelectorAll('.projectDeleteButton');
     projectDeleteButton.forEach((el) => el.addEventListener('click', (e) => {
@@ -45,17 +54,15 @@ const renderElements = (function () {
       renderProjects(projects, projectSection, currPro, taskSection);
     }));
 
-    // select projects
-    const projectElements = document.querySelectorAll('#projects li');
-    projectElements.forEach((el) => el.addEventListener('click', () => {
-      currPro = projects[el.firstChild.textContent];
-      renderProjects(projects, projectSection, currPro, taskSection);
+    // edit projects
+    const projectEditButton = document.querySelectorAll('.projectEditButton');
+    projectEditButton.forEach((el) => el.addEventListener('click', (e) => {
+      e.stopPropagation();
     }));
   };
 
   const renderProjects = (projects, projectSection, currPro, taskSection) => {
-    removeChildElements(projectSection);
-    removeChildElements(taskSection);
+    removeElements();
     createProjectElements(projects);
     createTaskElements(currPro);
     projectEvents(projects, projectSection, currPro, taskSection);
