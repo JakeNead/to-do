@@ -1,7 +1,6 @@
 const renderElements = (function () {
   const removeElements = () => {
     const elements = document.querySelectorAll('.projectElement, .taskElement');
-    console.log(elements);
     elements.forEach((el) => el.remove());
   };
 
@@ -58,6 +57,9 @@ const renderElements = (function () {
     const projectEditButton = document.querySelectorAll('.projectEditButton');
     projectEditButton.forEach((el) => el.addEventListener('click', (e) => {
       e.stopPropagation();
+      el.parentElement.classList.add('hidden');
+      // add show edit class
+      // move edit form to el
     }));
   };
 
@@ -72,22 +74,3 @@ const renderElements = (function () {
 }());
 
 export default renderElements;
-
-// function deleteTask(project, el) {
-//   if (confirm('Are you sure you want to permanently delete this task?')) {
-//     const task = el.dataset.taskDelete;
-//     delete project[task];
-//   }
-// }
-// (() => {
-// const deleteBtn = document.querySelectorAll('data-taskDelete');
-// const editBtn = document.querySelectorAll('data-taskEdit');
-// const projElements = document.querySelectorAll('projElement');
-
-//   return {
-//     deleteBtn, editBtn, projElements,
-//   };
-
-// click event on projects to display correct tasks
-// delete task buttons
-// edit buttons

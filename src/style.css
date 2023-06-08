@@ -65,3 +65,7 @@ footer p {
   margin: 0.5rem;
   fill: rgb(217 225 250);
 }
+
+.hidden {
+  display: none;
+}

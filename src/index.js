@@ -53,6 +53,10 @@ const todo = (function () {
   const taskModal = document.getElementById('task-modal');
   const taskForm = document.getElementById('task-form');
 
+  const editProjectForm = document.getElementById('editProjectForm');
+  const editProjectSave = document.getElementById('editProjectForm');
+  const editProjectCancel = document.getElementById('editProjectForm');
+
   // render projects/tasks
   const taskSection = document.getElementById('taskList');
   const projectSection = document.getElementById('projects');
@@ -88,6 +92,11 @@ const todo = (function () {
       console.log('That task name already exists!!');
     }
   });
+  //   editProjectSave.addEventListener('click',
+  //   // reveal project form
+  //   // hide project element
+  //   );
+  //   editProjectCancel.addEventListener('click');
 }());
 
 // checkbox
@@ -99,8 +108,6 @@ const todo = (function () {
 // delete button
 // completed section
 
-// bundle render functions in one module
-// add click event for all projects to change currentProject
 // search for 'all', 'today', 'next 7 days', 'high priority'
 // display project name above task container
 

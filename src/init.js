@@ -16,7 +16,7 @@ const initPage = () => {
   <h3>Projects</h3>
   <button id='add-project' data-modal-target='#project-modal'>+ Add Project</div>
   <ul id='projects'>
-  <div class="editProjectForm">
+  <div id="editProjectForm" class="hidden">
   <form action="#">
       <input type="text">
       <div class="buttons">
