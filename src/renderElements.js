@@ -1,3 +1,5 @@
+import { isUniqueName } from './modals';
+
 const renderElements = (function () {
   const removeElements = () => {
     const elements = document.querySelectorAll('.projectElement, .taskElement');
@@ -5,7 +7,7 @@ const renderElements = (function () {
   };
 
   const createProjectElements = (projects) => {
-    const projectSection = document.getElementById('projects');
+    const projectSection = document.getElementById('projectList');
     const keys = Object.keys(projects);
     keys.forEach((key) => {
       projectSection.innerHTML += `<li class='projectElement'><span class='projElement'>${key}</span>
@@ -41,6 +43,11 @@ const renderElements = (function () {
     // delete projects
     const projectDeleteButton = document.querySelectorAll('.projectDeleteButton');
     projectDeleteButton.forEach((el) => el.addEventListener('click', (e) => {
+      deleteProjects(projects, e, el);
+      renderProjects(projects, projectSection, currPro, taskSection);
+    }));
+
+    function deleteProjects(projects, e, el) {
       e.stopPropagation();
       delete projects[el.parentElement.firstChild.textContent];
       if (projects[el.parentElement.firstChild.textContent] === undefined) {
@@ -50,18 +57,59 @@ const renderElements = (function () {
           currPro = projects[Object.keys(projects)[0]];
         }
       }
-      renderProjects(projects, projectSection, currPro, taskSection);
-    }));
+    }
 
     // edit projects
     const projectEditButton = document.querySelectorAll('.projectEditButton');
     projectEditButton.forEach((el) => el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      el.parentElement.classList.add('hidden');
-      // add show edit class
-      // move edit form to el
+      showProjEditForm(el, e, projectSection);
+      useProjectPlaceholderName(editProjectForm);
+      editProjSaveBtn(projects);
+      editProjCancelBtn();
     }));
   };
+
+  function showProjEditForm(el, e, projectSection) {
+    e.stopPropagation();
+    el.parentElement.classList.add('hidden');
+    editProjectForm.classList.add('visible');
+    projectSection.insertBefore(editProjectForm, el.parentElement);
+  }
+
+  function useProjectPlaceholderName(editProjectForm) {
+    console.log(editProjectForm.nextElementSibling.querySelector('.projElement').textContent);
+    editProjectInput.textContent = editProjectForm.nextElementSibling.querySelector('.projElement').textContent;
+    // I think i need to modify the placeholder value instead of textContent here.
+    // Good work today!!
+  }
+
+  function editProjCancelBtn() {
+    const editProjectCancelButton = document.getElementById('projectCancelButton');
+    editProjectCancelButton.addEventListener('click', () => {
+      editProjectForm.nextElementSibling.classList.remove('hidden');
+      editProjectForm.classList.remove('visible');
+    });
+  }
+
+  // save projects
+  function editProjSaveBtn(projects) {
+    const editProjectForm = document.getElementById('editProjectForm');
+
+    editProjectForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (isUniqueName(editProjectInput.value, projects)) {
+        console.log(editProjectForm.nextElementSibling.querySelector('.projElement').textContent);
+        // projects[]
+        // edit the name in projects {}
+        // change edit form class
+        // change taret project element class
+      }
+    });
+  }
+
+  // editProjectSaveButton.addEventListener('click', () => {
+  //   console.log('save test');
+  // });
 
   const renderProjects = (projects, projectSection, currPro, taskSection) => {
     removeElements();

@@ -52,14 +52,12 @@ const todo = (function () {
   const projectForm = document.getElementById('project-form');
   const taskModal = document.getElementById('task-modal');
   const taskForm = document.getElementById('task-form');
-
-  const editProjectForm = document.getElementById('editProjectForm');
-  const editProjectSave = document.getElementById('editProjectForm');
-  const editProjectCancel = document.getElementById('editProjectForm');
+  const editProjectCancelButton = document.getElementById('projectCancelButton');
+  const editProjectSave = document.getElementById('projectSaveButton');
 
   // render projects/tasks
   const taskSection = document.getElementById('taskList');
-  const projectSection = document.getElementById('projects');
+  const projectSection = document.getElementById('projectList');
   renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
 
   // bind events
@@ -92,24 +90,20 @@ const todo = (function () {
       console.log('That task name already exists!!');
     }
   });
-  //   editProjectSave.addEventListener('click',
-  //   // reveal project form
-  //   // hide project element
+  //   editProjectForm.addEventListener('click',
   //   );
-  //   editProjectCancel.addEventListener('click');
-}());
 
-// checkbox
-// task name
-// notes
-// due Date
-// priority
-// edit button
-// delete button
-// completed section
+  editProjectSave.addEventListener('click', () => { console.log('save test'); });
+  // reveal project form
+  // hide project element
+
+  // renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
+}());
 
 // search for 'all', 'today', 'next 7 days', 'high priority'
 // display project name above task container
+// add completed checkbox
+// add completed task section
 
 // when a change to projects {} occurs.....
 //     clear proj/task container
