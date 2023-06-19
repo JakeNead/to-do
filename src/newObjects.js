@@ -20,42 +20,82 @@ function NewProject(projectName, storage) {
   function deleteProject() {
     delete storage[projectName];
   }
-
-  // function renameProj(oldKey, newKey) {
-  //   storage[newKey] = storage[oldKey];
-  //   delete storage[oldKey];
-  // }
   return { projectName: {}, deleteProject };
 }
 
 export { NewProject, NewTask };
 
-// try using object methods instead of separate functions?
+const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskCompleted = false) => {
+  const id = crypto.randomUUID();
+  let name = taskName;
+  let notes = taskNotes;
+  let dueDate = taskDueDate;
+  let isPriority = taskIsPriority;
+  let completed = taskCompleted;
+  return {
 
-// function CreateProject(name) {
-//   const tasks = [];
+    getId() { return id; },
 
-//   function createTask(title, notes, isPriority) {
-//     return {
-//       title,
-//       notes,
-//       isPriority,
-//       completed: false,
-//       markComplete() {
-//         this.completed = true;
-//       },
-//     };
-//   }
+    setTaskName(newName) { name = newName; },
+    getTaskName() { return name; },
 
-//   return {
-//     name,
-//     addTask(title, description) {
-//       const task = createTask(title, description);
-//       tasks.push(task);
-//       return task;
-//     },
-//     getTasks() {
-//       return tasks;
-//     },
-//   };
-// }
+    setNotes(newNotes) { notes = newNotes; },
+    getNotes() { return notes.taskName; },
+
+    setDueDate(newDate) { dueDate = newDate; },
+    getDueDate() { return dueDate; },
+
+    setIsPriority() { isPriority = !isPriority; },
+    getIsPriority() { return isPriority; },
+
+    setCompleted() { completed = !completed; },
+    getCompleted() { return completed; },
+  };
+};
+
+const CreateProject = (projName) => {
+  const taskList = [];
+  const addTask = (taskName, taskNotes, taskDueDate, taskIsPriority) => {
+    taskList.push(CreateTask(taskName, taskNotes, taskDueDate, taskIsPriority));
+  };
+  const getTaskList = () => taskList;
+  const findTaskById = (id) => taskList.find((obj) => obj.getId === id);
+  const deleteTask = (id) => {
+    const index = taskList.findIndex((item) => item.getId() === id);
+    taskList.splice(index, 1);
+  };
+
+  return {
+    projName,
+    addTask,
+    getTaskList,
+    findTaskById,
+    deleteTask,
+  };
+};
+
+const ProjectManager = () => {
+  const storage = [];
+
+  const addProject = (projName) => {
+    storage.push(CreateProject(projName));
+  };
+
+  const deleteProject = (projectName) => {
+    delete storage[projectName];
+  };
+
+  const renameProject = (newName, oldName) => {
+    storage[newName] = storage[oldName];
+    delete storage[oldName];
+  };
+
+  return {
+    addProject,
+    deleteProject,
+    renameProject,
+    get getStorage() { return storage; },
+  };
+};
+
+const projectManager = ProjectManager();
