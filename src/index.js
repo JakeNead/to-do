@@ -2,50 +2,35 @@ import initPage from './init';
 import {
   modalEventListeners, closeModal, clearProjectModal, clearTaskModal, isUniqueName,
 } from './modals';
-import { NewProject, NewTask } from './newObjects';
+import { CreateTask, CreateProject, ProjectManager } from './newObjects';
 import './normalize.css';
 import './style.css';
 import './modal.css';
 import renderElements from './renderElements';
 
-const todo = (function () {
-  const projects = {
-    Project1: {
-      'Submit Summer Schedule': {
-        notes: 'Include vaction dates and doctor appointments.',
-        dueDate: '5/30/23',
-        priority: true,
-        completed: false,
-      },
-      'Build Workbench': {
-        notes: 'Use Scrapwood from the cabin',
-        dueDate: '8/30/23',
-        priority: false,
-        completed: false,
-      },
-    },
-    'Another Test Project': {
-      'Eat 3800 avocados': {
-        notes: 'Become a round, rolling feller that can\'t be stopped.',
-        dueDate: '5/30/23',
-        priority: true,
-        completed: false,
-      },
-    },
-    'third one': {
-      'Say hi to spruce': {
-        notes: 'Don\'t forget to give him wet food',
-        dueDate: '9/30/23',
-        priority: false,
-        completed: false,
-      },
-    },
-  };
+// initPage();
+// modalEventListeners();
+// renderProjects()
+//    import and run all the proj/task element events
+//        proj: click el, edit, delete
+//        task: click el, eidt, delete, completed
+//    imports editModalEvents() and runs it each refresh
+// navEvents()
+//     need to run renderProjects so has to load after that module
+//     on click search projects, make a temp obj arg added into renderProjects()
+//    'all', 'today', 'next 7 days', 'high priority', 'completed
+//    import renderProjects()
 
-  let currentProject = projects.Project1;
+const todo = (function () {
+  const projectManager = ProjectManager();
+  projectManager.addProject('Yard Work');
+  projectManager.getStorage[0].addTask('Mow lawn', 'Don\'t forget to mow by the front yard maple', '6/25/23', false, false);
+  projectManager.addProject('Shed Improvements');
+  projectManager.getStorage[1].addTask('Build Workbench', 'Use scrapwood from under the shed.', '8/25/23', false, false);
 
   initPage();
   modalEventListeners();
+  renderElements.renderProjects(projectManager);
 
   // cache modal dom
   const projectModal = document.getElementById('project-modal');
@@ -53,12 +38,12 @@ const todo = (function () {
   const taskModal = document.getElementById('task-modal');
   const taskForm = document.getElementById('task-form');
   const editProjectCancelButton = document.getElementById('projectCancelButton');
-  const editProjectSave = document.getElementById('projectSaveButton');
+  const editProjectForm = document.getElementById('editProjectForm');
 
   // render projects/tasks
-  const taskSection = document.getElementById('taskList');
-  const projectSection = document.getElementById('projectList');
-  renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
+  // const taskSection = document.getElementById('taskList');
+  // const projectSection = document.getElementById('projectList');
+  // renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
 
   // bind events
   projectForm.addEventListener('submit', (e) => {
@@ -90,17 +75,9 @@ const todo = (function () {
       console.log('That task name already exists!!');
     }
   });
-  //   editProjectForm.addEventListener('click',
-  //   );
-
-  editProjectSave.addEventListener('click', () => { console.log('save test'); });
-  // reveal project form
-  // hide project element
-
-  // renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
 }());
 
-// search for 'all', 'today', 'next 7 days', 'high priority'
+// search for 'all', 'today', 'next 7 days', 'high priority', 'completed
 // display project name above task container
 // add completed checkbox
 // add completed task section
@@ -130,3 +107,38 @@ const todo = (function () {
 //      cache task dom
 //      task event listeners
 //          edit/delete/completed
+
+// const projects = {
+//   Project1: {
+//     'Submit Summer Schedule': {
+//       notes: 'Include vaction dates and doctor appointments.',
+//       dueDate: '5/30/23',
+//       priority: true,
+//       completed: false,
+//     },
+//     'Build Workbench': {
+//       notes: 'Use Scrapwood from the cabin',
+//       dueDate: '8/30/23',
+//       priority: false,
+//       completed: false,
+//     },
+//   },
+//   'Another Test Project': {
+//     'Eat 3800 avocados': {
+//       notes: 'Become a round, rolling feller that can\'t be stopped.',
+//       dueDate: '5/30/23',
+//       priority: true,
+//       completed: false,
+//     },
+//   },
+//   'third one': {
+//     'Say hi to spruce': {
+//       notes: 'Don\'t forget to give him wet food',
+//       dueDate: '9/30/23',
+//       priority: false,
+//       completed: false,
+//     },
+//   },
+// };
+
+// let currentProject = projects.Project1;
