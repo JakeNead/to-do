@@ -1,56 +1,66 @@
 import { isUniqueName } from './modals';
 
 const renderElements = (function () {
+  // removeElements
   const removeElements = () => {
     const elements = document.querySelectorAll('.projectElement, .taskElement');
     elements.forEach((el) => el.remove());
   };
+  // renderProjectElements
+  const renderProjectElements = (PM) => {
+    projElements(PM);
+    projSelectEvents(PM);
+    projDeleteEvents(PM);
+  };
 
-  const renderProjectElements = (projMan) => {
+  const projElements = (PM) => {
     const projectSection = document.getElementById('projectList');
-    projMan.getStorage.forEach((item) => {
-      projectSection.innerHTML += `<li class='projectElement'><span class='projElement'>${item.projName}</span>
+    PM.getStorage.forEach((item) => {
+      projectSection.innerHTML += `<li class='projectElement' id=${item.id}><span class='projElement' data-proj-id=${item.id}>${item.projName}</span>
       <button class='projectEditButton'> Edit</button>
       <button class='projectDeleteButton'> Delete</button>
       </li>`;
     });
   };
 
-  const renderTaskElements = (projMan) => {
-    if (projMan.currPro === undefined) return;
+  const projSelectEvents = (PM) => {
+    const projectElements = document.querySelectorAll('.projElement');
+    projectElements.forEach((el) => el.addEventListener('click', () => {
+      PM.currPro = el.dataset.projId;
+      renderPage(PM);
+    }));
+  };
+
+  const projDeleteEvents = (PM) => {
+    const projectDeleteButton = document.querySelectorAll('.projectDeleteButton');
+    projectDeleteButton.forEach((el) => el.addEventListener('click', () => {
+      PM.deleteProject(el.parentElement.id);
+      renderPage(PM);
+    }));
+  };
+
+  // renderTaskElements
+  const renderTaskElements = (taskList) => {
+    if (taskList === undefined) return;
     const taskSection = document.getElementById('taskList');
-    // this should be a simple method call
-    // Need the taskList of the current project [{},{},{}]
-    // projMan
-    // {}.getTaskList
-    // this gives me
-    const keys = Object.keys(currPro);
-    for (let i = 0; i < keys.length; i += 1) {
-      taskSection.innerHTML += `<div class='${keys[i]} taskElement'>
-      <span> ${keys[i]} </span>
-      <span>${currPro[keys[i]].dueDate}</span>
-      <button data-taskEdit ='${keys[i]} editTask'>edit</button>
-      <button data-taskDelete ='${keys[i]} deleteTask'>delete</button>
-      <p>${currPro[keys[i]].notes}</p>
+    for (let i = 0; i < taskList.length; i += 1) {
+      taskSection.innerHTML += `<div class='${taskList[i].id} taskElement'>
+      <span> ${taskList[i].taskName} </span>
+      <span>${taskList[i].dueDate}</span>
+      <button data-taskEdit ='${taskList[i].id} editTask'>edit</button>
+      <button data-taskDelete ='${taskList[i].id} deleteTask'>delete</button>
+      <p>${taskList[i].notes}</p>
       </div>`;
     }
   };
-  const projectEvents = (projects, currPro) => {
-    const projectElements = document.querySelectorAll('#projectList li');
-    projectElements.forEach((el) => el.addEventListener('click', () => {
-      currPro = projects[el.firstChild.textContent];
-      renderProjects(projects, currPro);
-    }));
-  };
-  const renderProjects = (projectManager) => {
-    let currPro = projectManager.getStorage[0];
+
+  const renderPage = (PM) => {
     removeElements();
-    renderProjectElements(projectManager);
-    renderTaskElements(projectManager);
-    projectEvents(projectManager);
+    renderProjectElements(PM);
+    renderTaskElements(PM.currProjTaskList());
   };
 
-  return { renderProjects };
+  return { renderPage };
 }());
 
 export default renderElements;

@@ -2,7 +2,7 @@ import initPage from './init';
 import {
   modalEventListeners, closeModal, clearProjectModal, clearTaskModal, isUniqueName,
 } from './modals';
-import { CreateTask, CreateProject, ProjectManager } from './newObjects';
+import { CreateTask, CreateProject, PM } from './newObjects';
 import './normalize.css';
 import './style.css';
 import './modal.css';
@@ -10,27 +10,29 @@ import renderElements from './renderElements';
 
 // initPage();
 // modalEventListeners();
-// renderProjects()
+// renderPage()
 //    import and run all the proj/task element events
 //        proj: click el, edit, delete
 //        task: click el, eidt, delete, completed
 //    imports editModalEvents() and runs it each refresh
 // navEvents()
-//     need to run renderProjects so has to load after that module
-//     on click search projects, make a temp obj arg added into renderProjects()
+//     need to run renderPage so has to load after that module
+//     on click search projects, make a temp obj arg added into renderPage()
 //    'all', 'today', 'next 7 days', 'high priority', 'completed
-//    import renderProjects()
+//    import renderPage()
 
 const todo = (function () {
-  const projectManager = ProjectManager();
-  projectManager.addProject('Yard Work');
-  projectManager.getStorage[0].addTask('Mow lawn', 'Don\'t forget to mow by the front yard maple', '6/25/23', false, false);
-  projectManager.addProject('Shed Improvements');
-  projectManager.getStorage[1].addTask('Build Workbench', 'Use scrapwood from under the shed.', '8/25/23', false, false);
+  const pm = PM();
+  pm.addProject('Yard Work');
+  const projId = pm.getStorage[0].id;
+  pm.currPro = projId;
+  pm.getStorage[0].addTask('Mow lawn', 'Don\'t forget to mow by the front yard maple', '6/25/23', false, false);
+  pm.addProject('Shed Improvements');
+  pm.getStorage[1].addTask('Build Workbench', 'Use scrapwood from under the shed.', '8/25/23', false, false);
 
   initPage();
   modalEventListeners();
-  renderElements.renderProjects(projectManager);
+  renderElements.renderPage(pm);
 
   // cache modal dom
   const projectModal = document.getElementById('project-modal');
@@ -43,7 +45,7 @@ const todo = (function () {
   // render projects/tasks
   // const taskSection = document.getElementById('taskList');
   // const projectSection = document.getElementById('projectList');
-  // renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
+  // renderElements.renderPage(projects, projectSection, currentProject, taskSection);
 
   // bind events
   projectForm.addEventListener('submit', (e) => {
@@ -52,7 +54,7 @@ const todo = (function () {
       NewProject(projectInput.value, projects);
       closeModal(projectModal);
       clearProjectModal(projectForm);
-      renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
+      renderElements.renderPage(projects, projectSection, currentProject, taskSection);
     } else {
       console.log('That project name already exists!');
     }
@@ -70,7 +72,7 @@ const todo = (function () {
       );
       closeModal(taskModal);
       clearTaskModal(taskForm);
-      renderElements.renderProjects(projects, projectSection, currentProject, taskSection);
+      renderElements.renderPage(projects, taskSection);
     } else {
       console.log('That task name already exists!!');
     }

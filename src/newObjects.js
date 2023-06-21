@@ -32,22 +32,22 @@ const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskComple
   let completed = taskCompleted;
   return {
 
-    getId() { return id; },
+    get id() { return id; },
 
-    setTaskName(newName) { name = newName; },
-    getTaskName() { return name; },
+    set taskName(newName) { name = newName; },
+    get taskName() { return name; },
 
-    setNotes(newNotes) { notes = newNotes; },
-    getNotes() { return notes.taskName; },
+    set notes(newNotes) { notes = newNotes; },
+    get notes() { return notes; },
 
-    setDueDate(newDate) { dueDate = newDate; },
-    getDueDate() { return dueDate; },
+    set dueDate(newDate) { dueDate = newDate; },
+    get dueDate() { return dueDate; },
 
-    setIsPriority() { isPriority = !isPriority; },
-    getIsPriority() { return isPriority; },
+    togglePriority() { isPriority = !isPriority; },
+    get isPriority() { return isPriority; },
 
-    setCompleted() { completed = !completed; },
-    getCompleted() { return completed; },
+    toggleCompleted() { completed = !completed; },
+    get completed() { return completed; },
   };
 };
 
@@ -56,62 +56,60 @@ const CreateProject = (projName) => {
 
   const id = crypto.randomUUID();
 
-  const getId = () => id;
-
   const addTask = (taskName, taskNotes, taskDueDate, taskIsPriority) => {
     taskList.push(CreateTask(taskName, taskNotes, taskDueDate, taskIsPriority));
   };
 
-  const getTaskList = () => taskList;
+  const findTaskById = (taskId) => taskList.find((obj) => obj.getId === taskId);
 
-  const findTaskById = (id) => taskList.find((obj) => obj.getId === id);
-
-  const deleteTask = (id) => {
-    const index = taskList.findIndex((item) => item.getId() === id);
+  const deleteTask = (taskId) => {
+    const index = taskList.findIndex((item) => item.getId() === taskId);
     taskList.splice(index, 1);
   };
 
   return {
     projName,
-    getId,
+    get id() { return id; },
     addTask,
-    getTaskList,
+    get taskList() { return taskList; },
     findTaskById,
     deleteTask,
   };
 };
 
-const ProjectManager = () => {
+const PM = () => {
   const storage = [];
-  // currentProject could be a UUID
   let currentProject;
   const addProject = (projName) => {
     storage.push(CreateProject(projName));
   };
-
-  const deleteProject = (projectName) => {
-    delete storage[projectName];
+  const deleteProject = (id) => {
+    const index = storage.findIndex((obj) => obj.id === id);
+    storage.splice(index, 1);
   };
-
   const renameProject = (newName, oldName) => {
     storage[newName] = storage[oldName];
     delete storage[oldName];
   };
-
+  const currProjTaskList = () => {
+    const proj = storage.findIndex((obj) => obj.id === currentProject);
+    if (storage[proj] === undefined) {
+      return undefined;
+    }
+    return storage[proj].taskList;
+  };
   return {
     addProject,
     deleteProject,
     renameProject,
+    currProjTaskList,
     get getStorage() { return storage; },
     get currPro() { return currentProject; },
-    set currPro(proj) { currentProject = proj; },
-    get currProjObj() {
-      const proj = storage.findIndex((obj) => obj.getId === currentProject);
-      return storage[proj].getTaskList();
-    },
+    set currPro(id) { currentProject = id; },
+
   };
 };
 
 export {
-  CreateTask, CreateProject, ProjectManager,
+  CreateTask, CreateProject, PM,
 };
