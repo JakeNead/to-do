@@ -18,7 +18,8 @@ const initPage = () => {
   <ul id='projectList'>
   <div id="editProjectForm" class="hidden">
   <form action="#">
-      <input type="text" id="editProjectInput" required>
+      <label for="editProjName"></label>
+      <input type="text" id="editProjName" name="editProjName">
       <div class="buttons">
       <button type="submit" id="projectSaveButton">Save</button>
       <button id="projectCancelButton">Cancel</button>

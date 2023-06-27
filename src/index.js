@@ -27,7 +27,7 @@ const todo = (function () {
   // add some test projects/tasks
   pm.addProject('Yard Work');
   const projId = pm.getStorage[0].id;
-  pm.currPro = projId;
+  pm.currProId = projId;
   pm.getStorage[0].addTask('Mow lawn', 'Don\'t forget to mow by the front yard maple', '6/25/23', false, false);
   pm.addProject('Shed Improvements');
   pm.getStorage[1].addTask('Build Workbench', 'Use scrapwood from under the shed.', '8/25/23', false, false);

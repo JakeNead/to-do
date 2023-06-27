@@ -1,3 +1,4 @@
+import { CreateTask } from './newObjects';
 import renderProjects from './renderElements';
 
 const modalEvents = (pm) => {
@@ -46,6 +47,7 @@ const modalEvents = (pm) => {
     overlay.classList.remove('active');
   }
 
+  // add new project
   projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (pm.isUniqueProject(projectInput.value)) {
@@ -58,11 +60,11 @@ const modalEvents = (pm) => {
     }
   });
 
+  // add new task
   taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (isUniqueName(task.value, currentProject)) {
-      currentProject[task.value] = NewTask(
-        currentProject,
+    if (pm.currPro.isUniqueTask(task.value)) {
+      pm.currPro.addTask(
         task.value,
         description.value,
         date.value,
@@ -70,20 +72,12 @@ const modalEvents = (pm) => {
       );
       closeModal(taskModal);
       clearTaskModal(taskForm);
-      render.renderPage(projects, taskSection);
+      renderProjects(pm);
     } else {
       console.log('That task name already exists!!');
     }
   });
 };
-
-//
-
-// function closeModal(modal) {
-//   if (modal == null) return;
-//   modal.classList.remove('active');
-//   overlay.classList.remove('active');
-// }
 
 function clearProjectModal(modal) {
   modal.projectInput.value = '';
@@ -121,7 +115,7 @@ function editProjectFormEvents(projects) {
       projects[editProjectForm.querySelector('input').value] = projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
       delete projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
       hideEditProjectForm();
-      renderProjects(projects, projectSection, currPro, taskSection);
+      renderProjects(pm);
       // edit the name in projects {}
       // change edit form class
       // change target project element class

@@ -67,13 +67,16 @@ const CreateProject = (projName) => {
     taskList.splice(index, 1);
   };
 
+  const isUniqueTask = (newTaskName) => !(taskList.some((obj) => obj.taskName.toLowerCase() === newTaskName.toLowerCase()));
+
   return {
     projName,
-    get id() { return id; },
     addTask,
-    get taskList() { return taskList; },
     findTaskById,
     deleteTask,
+    isUniqueTask,
+    get id() { return id; },
+    get taskList() { return taskList; },
   };
 };
 
@@ -89,23 +92,25 @@ const PM = () => {
     storage[newName] = storage[oldName];
     delete storage[oldName];
   };
-  const currProjTaskList = () => {
-    const proj = storage.findIndex((obj) => obj.id === currentProject);
-    if (storage[proj] === undefined) {
-      return undefined;
-    }
-    return storage[proj].taskList;
-  };
+  // const currProjTaskList = () => {
+  //   const proj = storage.findIndex((obj) => obj.id === currentProject);
+  //   if (storage[proj] === undefined) {
+  //     return undefined;
+  //   }
+  //   return storage[proj].taskList;
+  // };
   const isUniqueProject = (newProjName) => !(storage.some((obj) => obj.projName.toLowerCase() === newProjName.toLowerCase()));
+
   return {
     addProject,
     deleteProject,
     renameProject,
-    currProjTaskList,
+    // currProjTaskList,
     isUniqueProject,
     get getStorage() { return storage; },
-    get currPro() { return currentProject; },
-    set currPro(id) { currentProject = id; },
+    get currPro() { return storage[storage.findIndex((obj) => obj.id === currentProject)]; },
+    get currProId() { return currentProject; },
+    set currProId(id) { currentProject = id; },
 
   };
 };

@@ -1,5 +1,3 @@
-import { isUniqueName } from './modals';
-
 const render = (function () {
   // removeElements
   const removeElements = () => {
@@ -27,7 +25,7 @@ const render = (function () {
   const projSelectEvents = (PM) => {
     const projectElements = document.querySelectorAll('.projElement');
     projectElements.forEach((el) => el.addEventListener('click', () => {
-      PM.currPro = el.dataset.projId;
+      PM.currProId = el.dataset.projId;
       renderPage(PM);
     }));
   };
@@ -80,7 +78,7 @@ const render = (function () {
   const renderPage = (PM) => {
     removeElements();
     renderProjectElements(PM);
-    renderTaskElements(PM.currProjTaskList());
+    renderTaskElements(PM.currPro.taskList);
   };
 
   return { renderPage };
@@ -90,12 +88,6 @@ const renderProjects = render.renderPage;
 
 export default renderProjects;
 
-// edit projects thought process as of june 10th
-// on edit project click....
-// show form/hide clicked project
-// update placeholder
-//
-// edit form only needs event listeners once
-// if in index.js....
-// submit modifies projects then runs render projects and hides edit form
-// Soooooo try transfering the edit project form save/cancel to the modal module.
+// task delete
+// task edit
+// project edit
