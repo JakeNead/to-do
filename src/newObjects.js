@@ -80,9 +80,7 @@ const CreateProject = (projName) => {
 const PM = () => {
   const storage = [];
   let currentProject;
-  const addProject = (projName) => {
-    storage.push(CreateProject(projName));
-  };
+  const addProject = (newProjName) => storage.push(CreateProject(newProjName));
   const deleteProject = (id) => {
     const index = storage.findIndex((obj) => obj.id === id);
     storage.splice(index, 1);
@@ -98,11 +96,13 @@ const PM = () => {
     }
     return storage[proj].taskList;
   };
+  const isUniqueProject = (newProjName) => !(storage.some((obj) => obj.projName.toLowerCase() === newProjName.toLowerCase()));
   return {
     addProject,
     deleteProject,
     renameProject,
     currProjTaskList,
+    isUniqueProject,
     get getStorage() { return storage; },
     get currPro() { return currentProject; },
     set currPro(id) { currentProject = id; },

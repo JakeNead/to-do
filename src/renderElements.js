@@ -1,6 +1,6 @@
 import { isUniqueName } from './modals';
 
-const renderElements = (function () {
+const render = (function () {
   // removeElements
   const removeElements = () => {
     const elements = document.querySelectorAll('.projectElement, .taskElement');
@@ -11,6 +11,7 @@ const renderElements = (function () {
     projElements(PM);
     projSelectEvents(PM);
     projDeleteEvents(PM);
+    projEditEvents(PM);
   };
 
   const projElements = (PM) => {
@@ -32,12 +33,34 @@ const renderElements = (function () {
   };
 
   const projDeleteEvents = (PM) => {
-    const projectDeleteButton = document.querySelectorAll('.projectDeleteButton');
-    projectDeleteButton.forEach((el) => el.addEventListener('click', () => {
+    const projDelBtn = document.querySelectorAll('.projectDeleteButton');
+    projDelBtn.forEach((el) => el.addEventListener('click', () => {
       PM.deleteProject(el.parentElement.id);
       renderPage(PM);
     }));
   };
+
+  const projEditEvents = () => {
+    const projEditBtn = document.querySelectorAll('.projectEditButton');
+    const editProjectForm = document.querySelector('#editProjectForm');
+    const editProjectName = document.querySelector('#editProjName');
+    projEditBtn.forEach((el) => el.addEventListener('click', (e) => {
+      console.log(el);
+      /// work on the useProjectPlaceholderName function
+      // need to access the project element id to insert placeholder name
+      showProjEditForm(el);
+      useProjectPlaceholderName(editProjectForm, editProjectName);
+    }));
+  };
+  function showProjEditForm(el) {
+    const projectSection = document.getElementById('projectList');
+    el.parentElement.classList.add('hidden');
+    editProjectForm.classList.add('visible');
+    projectSection.insertBefore(editProjectForm, el.parentElement);
+  }
+  function useProjectPlaceholderName(editProjectForm, input) {
+    input.placeholder = editProjectForm.nextElementSibling.querySelector('.projElement').textContent;
+  }
 
   // renderTaskElements
   const renderTaskElements = (taskList) => {
@@ -53,7 +76,7 @@ const renderElements = (function () {
       </div>`;
     }
   };
-
+  // global function
   const renderPage = (PM) => {
     removeElements();
     renderProjectElements(PM);
@@ -63,7 +86,9 @@ const renderElements = (function () {
   return { renderPage };
 }());
 
-export default renderElements;
+const renderProjects = render.renderPage;
+
+export default renderProjects;
 
 // edit projects thought process as of june 10th
 // on edit project click....

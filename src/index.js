@@ -1,12 +1,12 @@
 import initPage from './init';
 import {
-  modalEventListeners, closeModal, clearProjectModal, clearTaskModal, isUniqueName,
+  modalEvents, closeModal, clearProjectModal, clearTaskModal, isUniqueName,
 } from './modals';
 import { CreateTask, CreateProject, PM } from './newObjects';
 import './normalize.css';
 import './style.css';
 import './modal.css';
-import renderElements from './renderElements';
+import renderProjects from './renderElements';
 
 // initPage();
 // modalEventListeners();
@@ -23,6 +23,8 @@ import renderElements from './renderElements';
 
 const todo = (function () {
   const pm = PM();
+
+  // add some test projects/tasks
   pm.addProject('Yard Work');
   const projId = pm.getStorage[0].id;
   pm.currPro = projId;
@@ -31,52 +33,17 @@ const todo = (function () {
   pm.getStorage[1].addTask('Build Workbench', 'Use scrapwood from under the shed.', '8/25/23', false, false);
 
   initPage();
-  modalEventListeners();
-  renderElements.renderPage(pm);
+  modalEvents(pm);
+  // modals(pm, render)
+  renderProjects(pm);
 
-  // cache modal dom
-  const projectModal = document.getElementById('project-modal');
-  const projectForm = document.getElementById('project-form');
-  const taskModal = document.getElementById('task-modal');
-  const taskForm = document.getElementById('task-form');
-  const editProjectCancelButton = document.getElementById('projectCancelButton');
-  const editProjectForm = document.getElementById('editProjectForm');
-
-  // render projects/tasks
-  // const taskSection = document.getElementById('taskList');
-  // const projectSection = document.getElementById('projectList');
-  // renderElements.renderPage(projects, projectSection, currentProject, taskSection);
-
-  // bind events
-  projectForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (isUniqueName(projectInput.value, projects)) {
-      NewProject(projectInput.value, projects);
-      closeModal(projectModal);
-      clearProjectModal(projectForm);
-      renderElements.renderPage(projects, projectSection, currentProject, taskSection);
-    } else {
-      console.log('That project name already exists!');
-    }
-  });
-
-  taskForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (isUniqueName(task.value, currentProject)) {
-      currentProject[task.value] = NewTask(
-        currentProject,
-        task.value,
-        description.value,
-        date.value,
-        priority.checked,
-      );
-      closeModal(taskModal);
-      clearTaskModal(taskForm);
-      renderElements.renderPage(projects, taskSection);
-    } else {
-      console.log('That task name already exists!!');
-    }
-  });
+  // // cache modal dom
+  // const projectModal = document.getElementById('project-modal');
+  // // const projectForm = document.getElementById('project-form');
+  // const taskModal = document.getElementById('task-modal');
+  // // const taskForm = document.getElementById('task-form');
+  // const editProjectCancelButton = document.getElementById('projectCancelButton');
+  // const editProjectForm = document.getElementById('editProjectForm');
 }());
 
 // search for 'all', 'today', 'next 7 days', 'high priority', 'completed
