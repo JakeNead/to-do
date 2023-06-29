@@ -1,28 +1,3 @@
-// function NewTask(
-//   currentProject,
-//   taskName,
-//   notes,
-//   dueDate,
-//   isPriority,
-//   completed = false,
-// ) {
-//   return {
-//     notes,
-//     dueDate,
-//     isPriority,
-//     completed,
-//   };
-// }
-
-// function NewProject(projectName, storage) {
-//   storage[projectName] = {};
-
-//   function deleteProject() {
-//     delete storage[projectName];
-//   }
-//   return { projectName: {}, deleteProject };
-// }
-
 const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskCompleted = false) => {
   const id = crypto.randomUUID();
   let name = taskName;
