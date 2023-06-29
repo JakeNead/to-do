@@ -12,6 +12,7 @@
     },
     "rules": {
         "no-console": "off",
-        "prefer-const": "off"
+        "prefer-const": "off",
+        "max-len": "off"
     }
 }
