@@ -25,6 +25,7 @@ const render = (function () {
   const projSelectEvents = (PM) => {
     const projectElements = document.querySelectorAll('.projElement');
     projectElements.forEach((el) => el.addEventListener('click', () => {
+      el.stopImmediatePropagation();
       PM.currProId = el.dataset.projId;
       renderPage(PM);
     }));
@@ -40,24 +41,23 @@ const render = (function () {
 
   const projEditEvents = () => {
     const projEditBtn = document.querySelectorAll('.projectEditButton');
-    const editProjectForm = document.querySelector('#editProjectForm');
-    const editProjectName = document.querySelector('#editProjName');
+    const editProjectContainer = document.querySelector('#editProjectContainer');
+    const editProjName = document.querySelector('#editProjName');
     projEditBtn.forEach((el) => el.addEventListener('click', (e) => {
-      console.log(el);
       /// work on the useProjectPlaceholderName function
       // need to access the project element id to insert placeholder name
       showProjEditForm(el);
-      useProjectPlaceholderName(editProjectForm, editProjectName);
+      useProjectPlaceholderName(editProjectContainer, editProjName);
     }));
   };
   function showProjEditForm(el) {
     const projectSection = document.getElementById('projectList');
     el.parentElement.classList.add('hidden');
-    editProjectForm.classList.add('visible');
-    projectSection.insertBefore(editProjectForm, el.parentElement);
+    editProjectContainer.classList.add('visible');
+    projectSection.insertBefore(editProjectContainer, el.parentElement);
   }
-  function useProjectPlaceholderName(editProjectForm, input) {
-    input.placeholder = editProjectForm.nextElementSibling.querySelector('.projElement').textContent;
+  function useProjectPlaceholderName(editProjectContainer, input) {
+    input.placeholder = editProjectContainer.nextElementSibling.querySelector('.projElement').textContent;
   }
 
   // renderTaskElements

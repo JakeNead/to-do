@@ -16,16 +16,16 @@ const initPage = () => {
   <h3>Projects</h3>
   <button id='add-project' data-modal-target='#project-modal'>+ Add Project</div>
   <ul id='projectList'>
-  <div id="editProjectForm" class="hidden">
-  <form action="#">
+  <div id="editProjectContainer" class="hidden">
+  <form id ="editProjectForm" action="#">
       <label for="editProjName"></label>
       <input type="text" id="editProjName" name="editProjName">
       <div class="buttons">
-      <button type="submit" id="projectSaveButton">Save</button>
-      <button id="projectCancelButton">Cancel</button>
-  </div>
+        <button type="submit" id="projectSaveButton">Save</button>
+        <button id="projectCancelButton">Cancel</button>
+      </div>
   </form>
-</div>
+  </div>
   </ul>
   </nav>
   

@@ -1,18 +1,16 @@
-import { CreateTask } from './newObjects';
+// import { CreateTask } from './newObjects';
 import renderProjects from './renderElements';
 
 const modalEvents = (pm) => {
-  // cache modal dom
   const openModalButtons = document.querySelectorAll('[data-modal-target]');
   const closeModalButtons = document.querySelectorAll('[data-close-button]');
   const overlay = document.getElementById('overlay');
   const projectForm = document.getElementById('project-form');
   const taskForm = document.getElementById('task-form');
-
   const projectModal = document.getElementById('project-modal');
   const taskModal = document.getElementById('task-modal');
+  const editProjectForm = document.getElementById('editProjectForm');
   // const editProjectCancelButton = document.getElementById('projectCancelButton');
-  // const editProjectForm = document.getElementById('editProjectForm');
 
   openModalButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -77,6 +75,20 @@ const modalEvents = (pm) => {
       console.log('That task name already exists!!');
     }
   });
+
+  // edit project name
+
+  editProjectForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('test');
+    // if (isUniqueName(editProjectInput.value, projects)) {
+    //   // new key = old key
+    //   projects[editProjectForm.querySelector('input').value] = projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
+    //   delete projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
+    //   hideEditProjectForm();
+    //   renderProjects(pm);
+    // }
+  });
 };
 
 function clearProjectModal(modal) {
@@ -90,12 +102,6 @@ function clearTaskModal(taskForm) {
   taskForm.priority.checked = false;
 }
 
-function isUniqueName(value, obj) {
-  const arr = [];
-  Object.keys(obj).map((key) => arr.push(key.toLocaleLowerCase()));
-  return !arr.includes(value.toLocaleLowerCase());
-}
-
 function hideEditProjectForm() {
   const editProjectCancelButton = document.getElementById('projectCancelButton');
   editProjectCancelButton.addEventListener('click', () => {
@@ -107,20 +113,21 @@ function hideEditProjectForm() {
 // save new project name
 function editProjectFormEvents(projects) {
   const editProjectForm = document.getElementById('editProjectForm');
-  // save button
-  editProjectForm.addEventListener('submit', (e, projects, projectSection, currPro, taskSection) => {
-    e.preventDefault();
-    if (isUniqueName(editProjectInput.value, projects)) {
-      // new key = old key
-      projects[editProjectForm.querySelector('input').value] = projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
-      delete projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
-      hideEditProjectForm();
-      renderProjects(pm);
-      // edit the name in projects {}
-      // change edit form class
-      // change target project element class
-    }
-  });
+  // // save button
+  // editProjectForm.addEventListener('submit', (e) => {
+  //   e.preventDefault();
+  //   console.log(e);
+  //   if (isUniqueName(editProjectInput.value, projects)) {
+  //     // new key = old key
+  //     projects[editProjectForm.querySelector('input').value] = projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
+  //     delete projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
+  //     hideEditProjectForm();
+  //     renderProjects(pm);
+  //     // edit the name in projects {}
+  //     // change edit form class
+  //     // change target project element class
+  //   }
+  // });
 
   // cancel button
   const editProjectCancelButton = document.getElementById('projectCancelButton');

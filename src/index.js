@@ -8,19 +8,6 @@ import './style.css';
 import './modal.css';
 import renderProjects from './renderElements';
 
-// initPage();
-// modalEventListeners();
-// renderPage()
-//    import and run all the proj/task element events
-//        proj: click el, edit, delete
-//        task: click el, eidt, delete, completed
-//    imports editModalEvents() and runs it each refresh
-// navEvents()
-//     need to run renderPage so has to load after that module
-//     on click search projects, make a temp obj arg added into renderPage()
-//    'all', 'today', 'next 7 days', 'high priority', 'completed
-//    import renderPage()
-
 const todo = (function () {
   const pm = PM();
 
@@ -34,16 +21,7 @@ const todo = (function () {
 
   initPage();
   modalEvents(pm);
-  // modals(pm, render)
   renderProjects(pm);
-
-  // // cache modal dom
-  // const projectModal = document.getElementById('project-modal');
-  // // const projectForm = document.getElementById('project-form');
-  // const taskModal = document.getElementById('task-modal');
-  // // const taskForm = document.getElementById('task-form');
-  // const editProjectCancelButton = document.getElementById('projectCancelButton');
-  // const editProjectForm = document.getElementById('editProjectForm');
 }());
 
 // search for 'all', 'today', 'next 7 days', 'high priority', 'completed
