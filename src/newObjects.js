@@ -80,7 +80,6 @@ const PM = () => {
     addProject,
     deleteProject,
     renameProject,
-    // currProjTaskList,
     isUniqueProject,
     get getStorage() { return storage; },
     get currPro() { return storage[storage.findIndex((obj) => obj.id === currentProject)]; },
@@ -90,6 +89,4 @@ const PM = () => {
   };
 };
 
-export {
-  CreateTask, CreateProject, PM,
-};
+export default PM;

@@ -1,8 +1,6 @@
 import initPage from './init';
-import {
-  modalEvents, closeModal, clearProjectModal, clearTaskModal, isUniqueName,
-} from './modals';
-import { CreateTask, CreateProject, PM } from './newObjects';
+import modalEvents from './modals';
+import PM from './newObjects';
 import './normalize.css';
 import './style.css';
 import './modal.css';
@@ -11,7 +9,7 @@ import renderProjects from './renderElements';
 const todo = (function () {
   const pm = PM();
 
-  // add some test projects/tasks
+  // test projects/tasks
   pm.addProject('Yard Work');
   const projId = pm.getStorage[0].id;
   pm.currProId = projId;
@@ -54,38 +52,3 @@ const todo = (function () {
 //      cache task dom
 //      task event listeners
 //          edit/delete/completed
-
-// const projects = {
-//   Project1: {
-//     'Submit Summer Schedule': {
-//       notes: 'Include vaction dates and doctor appointments.',
-//       dueDate: '5/30/23',
-//       priority: true,
-//       completed: false,
-//     },
-//     'Build Workbench': {
-//       notes: 'Use Scrapwood from the cabin',
-//       dueDate: '8/30/23',
-//       priority: false,
-//       completed: false,
-//     },
-//   },
-//   'Another Test Project': {
-//     'Eat 3800 avocados': {
-//       notes: 'Become a round, rolling feller that can\'t be stopped.',
-//       dueDate: '5/30/23',
-//       priority: true,
-//       completed: false,
-//     },
-//   },
-//   'third one': {
-//     'Say hi to spruce': {
-//       notes: 'Don\'t forget to give him wet food',
-//       dueDate: '9/30/23',
-//       priority: false,
-//       completed: false,
-//     },
-//   },
-// };
-
-// let currentProject = projects.Project1;

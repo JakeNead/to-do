@@ -1,4 +1,3 @@
-// import { CreateTask } from './newObjects';
 import renderProjects from './renderElements';
 
 const modalEvents = (pm) => {
@@ -110,46 +109,30 @@ function hideEditProjectForm() {
   });
 }
 
-// save new project name
-function editProjectFormEvents(projects) {
-  const editProjectForm = document.getElementById('editProjectForm');
-  // // save button
-  // editProjectForm.addEventListener('submit', (e) => {
-  //   e.preventDefault();
-  //   console.log(e);
-  //   if (isUniqueName(editProjectInput.value, projects)) {
-  //     // new key = old key
-  //     projects[editProjectForm.querySelector('input').value] = projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
-  //     delete projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
-  //     hideEditProjectForm();
-  //     renderProjects(pm);
-  //     // edit the name in projects {}
-  //     // change edit form class
-  //     // change target project element class
-  //   }
-  // });
+// // save new project name
+// function editProjectFormEvents(projects) {
+//   const editProjectForm = document.getElementById('editProjectForm');
+//   // save button
+//   editProjectForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     console.log(e);
+//     if (isUniqueName(editProjectInput.value, projects)) {
+//     // new key = old key
+//       projects[editProjectForm.querySelector('input').value] = projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
+//       delete projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
+//       hideEditProjectForm();
+//       renderProjects(pm);
+//     // edit the name in projects {}
+//     // change edit form class
+//     // change target project element class
+//     }
+//   });
+// }
 
-  // cancel button
-  const editProjectCancelButton = document.getElementById('projectCancelButton');
-  editProjectCancelButton.addEventListener('click', () => {
-  });
-  hideEditProjectForm();
-}
+// // cancel button
+// const editProjectCancelButton = document.getElementById('projectCancelButton');
+// editProjectCancelButton.addEventListener('click', () => {
+// });
+// hideEditProjectForm();
 
-export {
-  modalEvents,
-  // closeModal,
-  // clearTaskModal,
-  // clearProjectModal,
-  // isUniqueName,
-  // editProjectFormEvents,
-};
-
-// or modals needs to import render elements as a callback?....
-
-// the add proj/task buttons can be part of the modals .js
-// they do need to call render on submit....
-
-// 6/26 idea
-// in index.js, pass renderPage(pm) as argument in modalEvents
-// include renderPage to the modal events file
+export default modalEvents;

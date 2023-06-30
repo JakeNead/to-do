@@ -25,7 +25,6 @@ const render = (function () {
   const projSelectEvents = (PM) => {
     const projectElements = document.querySelectorAll('.projElement');
     projectElements.forEach((el) => el.addEventListener('click', () => {
-      el.stopImmediatePropagation();
       PM.currProId = el.dataset.projId;
       renderPage(PM);
     }));
@@ -61,16 +60,17 @@ const render = (function () {
   }
 
   // renderTaskElements
-  const renderTaskElements = (taskList) => {
-    if (taskList === undefined) return;
+  const renderTaskElements = (currPro) => {
+    if (currPro === undefined) return;
     const taskSection = document.getElementById('taskList');
-    for (let i = 0; i < taskList.length; i += 1) {
-      taskSection.innerHTML += `<div class='${taskList[i].id} taskElement'>
-      <span> ${taskList[i].taskName} </span>
-      <span>${taskList[i].dueDate}</span>
-      <button data-taskEdit ='${taskList[i].id} editTask'>edit</button>
-      <button data-taskDelete ='${taskList[i].id} deleteTask'>delete</button>
-      <p>${taskList[i].notes}</p>
+    const tasks = currPro.taskList;
+    for (let i = 0; i < tasks.length; i += 1) {
+      taskSection.innerHTML += `<div class='${tasks[i].id} taskElement'>
+      <span> ${tasks[i].taskName} </span>
+      <span>${tasks[i].dueDate}</span>
+      <button data-taskEdit ='${tasks[i].id} editTask'>edit</button>
+      <button data-taskDelete ='${tasks[i].id} deleteTask'>delete</button>
+      <p>${tasks[i].notes}</p>
       </div>`;
     }
   };
@@ -78,7 +78,7 @@ const render = (function () {
   const renderPage = (PM) => {
     removeElements();
     renderProjectElements(PM);
-    renderTaskElements(PM.currPro.taskList);
+    renderTaskElements(PM.currPro);
   };
 
   return { renderPage };
@@ -87,7 +87,3 @@ const render = (function () {
 const renderProjects = render.renderPage;
 
 export default renderProjects;
-
-// task delete
-// task edit
-// project edit
