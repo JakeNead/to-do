@@ -6,7 +6,6 @@ const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskComple
   let isPriority = taskIsPriority;
   let completed = taskCompleted;
   return {
-
     get id() { return id; },
 
     set taskName(newName) { name = newName; },
@@ -58,22 +57,19 @@ const CreateProject = (projName) => {
 const PM = () => {
   const storage = [];
   let currentProject;
+
   const addProject = (newProjName) => storage.push(CreateProject(newProjName));
+
   const deleteProject = (id) => {
     const index = storage.findIndex((obj) => obj.id === id);
     storage.splice(index, 1);
   };
+
   const renameProject = (newName, oldName) => {
     storage[newName] = storage[oldName];
     delete storage[oldName];
   };
-  // const currProjTaskList = () => {
-  //   const proj = storage.findIndex((obj) => obj.id === currentProject);
-  //   if (storage[proj] === undefined) {
-  //     return undefined;
-  //   }
-  //   return storage[proj].taskList;
-  // };
+
   const isUniqueProject = (newProjName) => !(storage.some((obj) => obj.projName.toLowerCase() === newProjName.toLowerCase()));
 
   return {
