@@ -65,9 +65,8 @@ const PM = () => {
     storage.splice(index, 1);
   };
 
-  const renameProject = (newName, oldName) => {
-    storage[newName] = storage[oldName];
-    delete storage[oldName];
+  const renameProject = (newName) => {
+    storage[storage.findIndex((obj) => obj.id === currentProject)].projName = newName;
   };
 
   const isUniqueProject = (newProjName) => !(storage.some((obj) => obj.projName.toLowerCase() === newProjName.toLowerCase()));

@@ -4,12 +4,15 @@ const render = (function () {
     const elements = document.querySelectorAll('.projectElement, .taskElement');
     elements.forEach((el) => el.remove());
   };
-  // renderProjectElements
+  // render Project Elements
   const renderProjectElements = (PM) => {
+    const editProjectContainer = document.querySelector('#editProjectContainer');
     projElements(PM);
     projSelectEvents(PM);
     projDeleteEvents(PM);
-    projEditEvents(PM);
+    projEditButtonEvents(PM);
+    projEditSave(PM);
+    projEditCancel(PM);
   };
 
   const projElements = (PM) => {
@@ -38,24 +41,47 @@ const render = (function () {
     }));
   };
 
-  const projEditEvents = () => {
+  const projEditButtonEvents = (pm) => {
     const projEditBtn = document.querySelectorAll('.projectEditButton');
-    const editProjectContainer = document.querySelector('#editProjectContainer');
     const editProjName = document.querySelector('#editProjName');
-    projEditBtn.forEach((el) => el.addEventListener('click', (e) => {
+    projEditBtn.forEach((el) => el.addEventListener('click', () => {
       /// work on the useProjectPlaceholderName function
       // need to access the project element id to insert placeholder name
+      pm.currProId = el.parentElement.id;
       showProjEditForm(el);
-      useProjectPlaceholderName(editProjectContainer, editProjName);
+      useProjectPlaceholderName(editProjName);
     }));
   };
+
+  const projEditSave = (pm) => {
+    const editProjectForm = document.getElementById('editProjectForm');
+    editProjectForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      pm.renameProject(editProjName.value);
+      hideProjEditForm();
+      renderProjects(pm);
+    });
+  };
+
+  const projEditCancel = (pm) => {
+    const editProjectCancelButton = document.getElementById('projectCancelButton');
+    editProjectCancelButton.addEventListener('click', (e) => {
+      editProjectContainer.classList.remove('visible');
+      renderProjects(pm);
+    });
+  };
+
+  const hideProjEditForm = () => {
+    editProjectContainer.classList.remove('visible');
+  };
+
   function showProjEditForm(el) {
     const projectSection = document.getElementById('projectList');
     el.parentElement.classList.add('hidden');
     editProjectContainer.classList.add('visible');
     projectSection.insertBefore(editProjectContainer, el.parentElement);
   }
-  function useProjectPlaceholderName(editProjectContainer, input) {
+  function useProjectPlaceholderName(input) {
     input.placeholder = editProjectContainer.nextElementSibling.querySelector('.projElement').textContent;
   }
 
@@ -87,3 +113,5 @@ const render = (function () {
 const renderProjects = render.renderPage;
 
 export default renderProjects;
+
+// cache the modal DOM variables in one place?

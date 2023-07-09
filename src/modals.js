@@ -8,8 +8,6 @@ const modalEvents = (pm) => {
   const taskForm = document.getElementById('task-form');
   const projectModal = document.getElementById('project-modal');
   const taskModal = document.getElementById('task-modal');
-  const editProjectForm = document.getElementById('editProjectForm');
-  // const editProjectCancelButton = document.getElementById('projectCancelButton');
 
   openModalButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -45,7 +43,9 @@ const modalEvents = (pm) => {
   }
 
   // add new project
-  projectForm.addEventListener('submit', (e) => {
+  projectForm.addEventListener('submit', addNewProject);
+
+  function addNewProject(e) {
     e.preventDefault();
     if (pm.isUniqueProject(projectInput.value)) {
       pm.addProject(projectInput.value);
@@ -55,10 +55,12 @@ const modalEvents = (pm) => {
     } else {
       console.log('That project name already exists!');
     }
-  });
+  }
 
   // add new task
-  taskForm.addEventListener('submit', (e) => {
+  taskForm.addEventListener('submit', addNewTask);
+
+  function addNewTask(e) {
     e.preventDefault();
     if (pm.currPro.isUniqueTask(task.value)) {
       pm.currPro.addTask(
@@ -73,21 +75,7 @@ const modalEvents = (pm) => {
     } else {
       console.log('That task name already exists!!');
     }
-  });
-
-  // edit project name
-
-  editProjectForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    console.log('test');
-    // if (isUniqueName(editProjectInput.value, projects)) {
-    //   // new key = old key
-    //   projects[editProjectForm.querySelector('input').value] = projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
-    //   delete projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
-    //   hideEditProjectForm();
-    //   renderProjects(pm);
-    // }
-  });
+  }
 };
 
 function clearProjectModal(modal) {
@@ -101,13 +89,7 @@ function clearTaskModal(taskForm) {
   taskForm.priority.checked = false;
 }
 
-function hideEditProjectForm() {
-  const editProjectCancelButton = document.getElementById('projectCancelButton');
-  editProjectCancelButton.addEventListener('click', () => {
-    editProjectForm.nextElementSibling.classList.remove('hidden');
-    editProjectForm.classList.remove('visible');
-  });
-}
+export default modalEvents;
 
 // // save new project name
 // function editProjectFormEvents(projects) {
@@ -134,5 +116,3 @@ function hideEditProjectForm() {
 // editProjectCancelButton.addEventListener('click', () => {
 // });
 // hideEditProjectForm();
-
-export default modalEvents;

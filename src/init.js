@@ -19,10 +19,10 @@ const initPage = () => {
   <div id="editProjectContainer" class="hidden">
   <form id ="editProjectForm" action="#">
       <label for="editProjName"></label>
-      <input type="text" id="editProjName" name="editProjName">
+      <input type="text" id="editProjName" name="editProjName" required>
       <div class="buttons">
         <button type="submit" id="projectSaveButton">Save</button>
-        <button id="projectCancelButton">Cancel</button>
+        <button type="reset" id="projectCancelButton">Cancel</button>
       </div>
   </form>
   </div>
