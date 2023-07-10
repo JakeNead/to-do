@@ -71,16 +71,24 @@ const PM = () => {
 
   const isUniqueProject = (newProjName) => !(storage.some((obj) => obj.projName.toLowerCase() === newProjName.toLowerCase()));
 
+  const todayTasks = () => {};
+
+  const weekTasks = () => {};
+
+  const allTasks = () => storage.flatMap((projObj) => projObj.taskList);
+
   return {
     addProject,
     deleteProject,
     renameProject,
     isUniqueProject,
+    todayTasks,
+    weekTasks,
+    allTasks,
     get getStorage() { return storage; },
     get currPro() { return storage[storage.findIndex((obj) => obj.id === currentProject)]; },
     get currProId() { return currentProject; },
     set currProId(id) { currentProject = id; },
-
   };
 };
 
