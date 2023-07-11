@@ -9,9 +9,11 @@ const initPage = () => {
   <main>
   
   <nav>
-  <p>today</p>
-  <p>week</p>
-  <p>all</p>
+  <ul>
+  <li id="todayTasks" >today</li>
+  <li id="weekTasks" >week</li>
+  <li id="allTasks" >all</li>
+  </ul>
   <div id='projects-section'>
   <h3>Projects</h3>
   <button id='add-project' data-modal-target='#project-modal'>+ Add Project</div>
@@ -57,24 +59,32 @@ const initPage = () => {
 </div>
 
 <div id="task-modal" class='modal'>
-    <form id='task-form' action="#">
+  <form id='task-form' action="#">
     <label for="task" ></label>
     <input type="text" name="task" id="task" placeholder="Task Name" required>
+
     <label for="description"></label>
     <input type="text" name='description' id = 'description' placeholder="Description">
+
     <label for="date"></label>
     <input type="date" name="date" id="date">
-    
+
+    <div id='projectSelect'>
+    <label for="priority">Project</label>
+    <select name="projectName"> 
+    </select>
+    </div>
+
     <div id='priority-checkbox'> 
-    <label for="priority">Flag as priority</label>
+    <label for="priority">Priority</label>
     <input type="checkbox" name="priority" id="priority" value="low-priority">
     </div>
+ 
     <div id='task-modal-buttons'>
     <button id='task-submit' type="submit">Add</button>
     <button data-close-button >Cancel</button>
     </div>
-
-</form>
+  </form>
 </div>
   </div>
   <div id='overlay'> </div>
