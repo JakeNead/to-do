@@ -1,9 +1,15 @@
 const render = (function () {
   // removeElements
-  const removeElements = () => {
-    const elements = document.querySelectorAll('.projectElement, .taskElement');
+  const removeProjects = () => {
+    const elements = document.querySelectorAll('.projectElement');
     elements.forEach((el) => el.remove());
   };
+
+  const removeTasks = () => {
+    const elements = document.querySelectorAll('.taskElement');
+    elements.forEach((el) => el.remove());
+  };
+
   // render Project Elements
   const renderProjectElements = (PM) => {
     const editProjectContainer = document.querySelector('#editProjectContainer');
@@ -29,7 +35,7 @@ const render = (function () {
     const projectElements = document.querySelectorAll('.projElement');
     projectElements.forEach((el) => el.addEventListener('click', () => {
       PM.currProId = el.dataset.projId;
-      renderPage(PM);
+      renderProjects(PM);
     }));
   };
 
@@ -37,7 +43,7 @@ const render = (function () {
     const projDelBtn = document.querySelectorAll('.projectDeleteButton');
     projDelBtn.forEach((el) => el.addEventListener('click', () => {
       PM.deleteProject(el.parentElement.id);
-      renderPage(PM);
+      renderProjects(PM);
     }));
   };
 
@@ -88,8 +94,10 @@ const render = (function () {
   // renderTaskElements
   const renderTaskElements = (currPro) => {
     if (currPro === undefined) return;
+    let tasks = (Array.isArray(currPro) ? currPro : currPro.taskList);
     const taskSection = document.getElementById('taskList');
-    const tasks = currPro.taskList;
+    // console.log(currPro);
+    // const tasks = currPro.taskList;
     for (let i = 0; i < tasks.length; i += 1) {
       taskSection.innerHTML += `<div class='${tasks[i].id} taskElement'>
       <span> ${tasks[i].taskName} </span>
@@ -100,18 +108,18 @@ const render = (function () {
       </div>`;
     }
   };
+
   // global function
-  const renderPage = (PM) => {
-    removeElements();
+  const renderProjects = (PM) => {
+    removeProjects();
+    removeTasks();
     renderProjectElements(PM);
     renderTaskElements(PM.currPro);
   };
 
-  return { renderPage };
+  return { renderProjects, renderTaskElements, removeTasks };
 }());
 
-const renderProjects = render.renderPage;
+const { renderProjects, renderTaskElements, removeTasks } = render;
 
-export default renderProjects;
-
-// cache the modal DOM variables in one place?
+export { renderProjects, renderTaskElements, removeTasks };
