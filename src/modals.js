@@ -1,21 +1,45 @@
-import renderProjects from './renderElements';
+import { renderProjects } from './renderElements';
 
 const modalEvents = (pm) => {
-  const openModalButtons = document.querySelectorAll('[data-modal-target]');
+  // const openModalButtons = document.querySelectorAll('[data-modal-target]');
+  const addTaskButton = document.querySelector('#add-task');
+  const addProjectButton = document.querySelector('#add-project');
   const closeModalButtons = document.querySelectorAll('[data-close-button]');
   const overlay = document.getElementById('overlay');
   const projectForm = document.getElementById('project-form');
   const taskForm = document.getElementById('task-form');
   const projectModal = document.getElementById('project-modal');
   const taskModal = document.getElementById('task-modal');
+  const selectElement = document.querySelector('[name=projectName]');
 
-  openModalButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const modal = document.querySelector(button.dataset.modalTarget);
-      openModal(modal);
-    });
+  addProjectButton.addEventListener('click', () => {
+    openModal(document.querySelector('#project-modal'));
   });
 
+  addTaskButton.addEventListener('click', () => {
+    openModal(document.querySelector('#task-modal'));
+    clearProjectOptions();
+    displayProjectOptions(pm.projectNameArray);
+  });
+
+  function clearProjectOptions() {
+    while (selectElement.firstChild) {
+      selectElement.removeChild(selectElement.firstChild);
+    }
+  }
+
+  function displayProjectOptions(nameArray) {
+    const selectElement = document.querySelector('[name=projectName]');
+    for (let i = 0; i < nameArray.length; i += 1) {
+      const option = document.createElement('option');
+      option.textContent = nameArray[i];
+      option.setAttribute('value', nameArray[i]);
+      option.setAttribute('id', nameArray[i]);
+      selectElement.appendChild(option);
+    }
+  }
+
+  // open/close modals
   closeModalButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const modal = button.closest('.modal');
@@ -62,12 +86,14 @@ const modalEvents = (pm) => {
 
   function addNewTask(e) {
     e.preventDefault();
-    if (pm.currPro.isUniqueTask(task.value)) {
-      pm.currPro.addTask(
+    const projObj = pm.findProject(projectName.value);
+    if (projObj.isUniqueTask(task.value)) {
+      projObj.addTask(
         task.value,
         description.value,
         date.value,
         priority.checked,
+        projectName.value,
       );
       closeModal(taskModal);
       clearTaskModal(taskForm);
@@ -90,29 +116,3 @@ function clearTaskModal(taskForm) {
 }
 
 export default modalEvents;
-
-// // save new project name
-// function editProjectFormEvents(projects) {
-//   const editProjectForm = document.getElementById('editProjectForm');
-//   // save button
-//   editProjectForm.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     console.log(e);
-//     if (isUniqueName(editProjectInput.value, projects)) {
-//     // new key = old key
-//       projects[editProjectForm.querySelector('input').value] = projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
-//       delete projects[editProjectForm.nextElementSibling.querySelector('.projElement').textContent];
-//       hideEditProjectForm();
-//       renderProjects(pm);
-//     // edit the name in projects {}
-//     // change edit form class
-//     // change target project element class
-//     }
-//   });
-// }
-
-// // cancel button
-// const editProjectCancelButton = document.getElementById('projectCancelButton');
-// editProjectCancelButton.addEventListener('click', () => {
-// });
-// hideEditProjectForm();

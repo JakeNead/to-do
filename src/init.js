@@ -16,7 +16,7 @@ const initPage = () => {
   </ul>
   <div id='projects-section'>
   <h3>Projects</h3>
-  <button id='add-project' data-modal-target='#project-modal'>+ Add Project</div>
+  <button id='add-project'>+ Add Project</div>
   <ul id='projectList'>
   <div id="editProjectContainer" class="hidden">
   <form id ="editProjectForm" action="#">
@@ -33,7 +33,7 @@ const initPage = () => {
   
   <section id='tasks'>
   <p>Here are the main tasks for the current project</p>
-  <button id='add-task' data-modal-target='#task-modal'>+ Add Task</button>
+  <button id='add-task' >+ Add Task</button>
   <div id='taskList'></div>
   </section>
 
@@ -69,9 +69,9 @@ const initPage = () => {
     <label for="date"></label>
     <input type="date" name="date" id="date">
 
-    <div id='projectSelect'>
-    <label for="priority">Project</label>
-    <select name="projectName"> 
+    <div id='project-elect'>
+    <label for="projectName">Project</label>
+    <select name="projectName" id="projectName"> 
     </select>
     </div>
 

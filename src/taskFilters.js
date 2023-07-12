@@ -14,7 +14,6 @@ const taskFilters = (pm) => {
   });
 
   all.addEventListener('click', () => {
-    console.log(renderTaskElements);
     removeTasks();
     renderTaskElements(pm.allTasks());
   });

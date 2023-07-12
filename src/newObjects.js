@@ -77,6 +77,8 @@ const PM = () => {
 
   const allTasks = () => storage.flatMap((projObj) => projObj.taskList);
 
+  const findProject = (selectProj) => storage[storage.findIndex((obj) => obj.projName === selectProj)];
+
   return {
     addProject,
     deleteProject,
@@ -85,11 +87,23 @@ const PM = () => {
     todayTasks,
     weekTasks,
     allTasks,
+    findProject,
     get getStorage() { return storage; },
     get currPro() { return storage[storage.findIndex((obj) => obj.id === currentProject)]; },
     get currProId() { return currentProject; },
     set currProId(id) { currentProject = id; },
+    get projectNameArray() {
+      let nameArr = [];
+      storage.forEach((item) => { nameArr.push(item.projName); });
+      return nameArr;
+    },
+
   };
 };
 
 export default PM;
+
+// given a project name,
+// search storage[] for the project obj
+
+// add the new task to the tasklist[]
