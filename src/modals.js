@@ -1,7 +1,6 @@
 import { renderProjects } from './renderElements';
 
 const modalEvents = (pm) => {
-  // const openModalButtons = document.querySelectorAll('[data-modal-target]');
   const addTaskButton = document.querySelector('#add-task');
   const addProjectButton = document.querySelector('#add-project');
   const closeModalButtons = document.querySelectorAll('[data-close-button]');

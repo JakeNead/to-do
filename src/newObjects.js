@@ -1,8 +1,10 @@
+import { format } from 'date-fns';
+
 const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskCompleted = false) => {
   const id = crypto.randomUUID();
   let name = taskName;
   let notes = taskNotes;
-  let dueDate = taskDueDate;
+  let dueDate = format(new Date(taskDueDate), 'MMM do yyyy');
   let isPriority = taskIsPriority;
   let completed = taskCompleted;
   return {

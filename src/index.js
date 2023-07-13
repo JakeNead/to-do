@@ -20,7 +20,8 @@ taskFilters(pm);
 modalEvents(pm);
 renderProjects(pm);
 
-// on addTask submit event, add the new task to the selected project
+// convert date format on addTask submit and editTask
+// need is today, less than 7 days functions
 
 // search for 'all', 'today', 'next 7 days', 'high priority'
 // display project name above task container
