@@ -82,7 +82,10 @@ const PM = () => {
     return tasks.filter((obj) => isToday(obj.dueDateObj));
   };
 
-  const weekTasks = () => { storage.flatMap((projObj) => projObj.taskList).filter((obj) => isThisWeek(obj.date, 1)); };
+  const weekTasks = () => {
+    const tasks = storage.flatMap((projObj) => projObj.taskList);
+    return tasks.filter((obj) => isThisWeek(obj.dueDateObj));
+  };
 
   const allTasks = () => storage.flatMap((projObj) => projObj.taskList);
 
