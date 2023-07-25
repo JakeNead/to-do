@@ -6,11 +6,13 @@ const taskFilters = (pm) => {
   const all = document.querySelector('#allTasks');
 
   today.addEventListener('click', () => {
-    console.log('today');
+    removeTasks();
+    renderTaskElements(pm.todayTasks());
   });
 
   week.addEventListener('click', () => {
-    console.log('week');
+    removeTasks();
+    renderTaskElements(pm.weekTasks());
   });
 
   all.addEventListener('click', () => {

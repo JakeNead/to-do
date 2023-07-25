@@ -24,9 +24,11 @@ const projElements = (PM) => {
   const projectSection = document.getElementById('projectList');
   PM.getStorage.forEach((item) => {
     projectSection.innerHTML += `<li class='projectElement' id=${item.id}><span class='projElement' data-proj-id=${item.id}>${item.projName}</span>
-      <button class='projectEditButton'> Edit</button>
-      <button class='projectDeleteButton'> Delete</button>
-      </li>`;
+      <div class='projectButtons'>
+        <button class='projectEditButton'> Edit</button>
+        <button class='projectDeleteButton'> Delete</button>
+      </div>
+    </li>`;
   });
 };
 

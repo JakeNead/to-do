@@ -1,12 +1,15 @@
-import { format } from 'date-fns';
+import {
+  format, isToday, isThisWeek, parseISO,
+} from 'date-fns';
 
 const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskCompleted = false) => {
   const id = crypto.randomUUID();
   let name = taskName;
   let notes = taskNotes;
-  let dueDate = format(new Date(taskDueDate), 'MMM do yyyy');
+  let dueDate = taskDueDate;
   let isPriority = taskIsPriority;
   let completed = taskCompleted;
+
   return {
     get id() { return id; },
 
@@ -17,7 +20,8 @@ const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskComple
     get notes() { return notes; },
 
     set dueDate(newDate) { dueDate = newDate; },
-    get dueDate() { return dueDate; },
+    get dueDate() { return format(parseISO(dueDate), 'MMM do YYY'); },
+    get dueDateObj() { return parseISO(dueDate); },
 
     togglePriority() { isPriority = !isPriority; },
     get isPriority() { return isPriority; },
@@ -73,9 +77,12 @@ const PM = () => {
 
   const isUniqueProject = (newProjName) => !(storage.some((obj) => obj.projName.toLowerCase() === newProjName.toLowerCase()));
 
-  const todayTasks = () => {};
+  const todayTasks = () => {
+    const tasks = storage.flatMap((projObj) => projObj.taskList);
+    return tasks.filter((obj) => isToday(obj.dueDateObj));
+  };
 
-  const weekTasks = () => {};
+  const weekTasks = () => { storage.flatMap((projObj) => projObj.taskList).filter((obj) => isThisWeek(obj.date, 1)); };
 
   const allTasks = () => storage.flatMap((projObj) => projObj.taskList);
 
@@ -104,8 +111,3 @@ const PM = () => {
 };
 
 export default PM;
-
-// given a project name,
-// search storage[] for the project obj
-
-// add the new task to the tasklist[]

@@ -11,9 +11,9 @@ const pm = PM();
 
 // test projects/tasks
 pm.addProject('Yard Work');
-pm.getStorage[0].addTask('Mow lawn', 'Don\'t forget to mow by the front yard maple', '6/25/23', false, false);
+pm.getStorage[0].addTask('Mow lawn', 'Don\'t forget to mow by the front yard maple', '2023-06-25', false, false);
 pm.addProject('Shed Improvements');
-pm.getStorage[1].addTask('Build Workbench', 'Use scrapwood from under the shed.', '8/25/23', false, false);
+pm.getStorage[1].addTask('Build Workbench', 'Use scrapwood from under the shed.', '2023-07-24', false, false);
 
 initPage();
 taskFilters(pm);
