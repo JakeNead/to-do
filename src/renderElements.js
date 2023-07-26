@@ -37,7 +37,13 @@ const projSelectEvents = (PM) => {
   projectElements.forEach((el) => el.addEventListener('click', () => {
     PM.currProId = el.dataset.projId;
     renderProjects(PM);
+    updateTaskHeader(el.textContent);
   }));
+};
+
+const updateTaskHeader = (title) => {
+  const taskHeader = document.querySelector('#taskHeader');
+  taskHeader.textContent = title;
 };
 
 const projDeleteEvents = (PM) => {
@@ -116,4 +122,6 @@ const renderProjects = (PM) => {
   renderTaskElements(PM.currPro);
 };
 
-export { renderProjects, renderTaskElements, removeTasks };
+export {
+  renderProjects, renderTaskElements, removeTasks, updateTaskHeader,
+};

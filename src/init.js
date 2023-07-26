@@ -32,8 +32,10 @@ const initPage = () => {
   </nav>
   
   <section id='tasks'>
-  <p>Here are the main tasks for the current project</p>
+  <div id='taskHeaderSection'>
+  <h2 id='taskHeader'></h2>
   <button id='add-task' >+ Add Task</button>
+  </div>
   <div id='taskList'></div>
   </section>
 

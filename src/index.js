@@ -22,11 +22,9 @@ taskFilters(pm);
 modalEvents(pm);
 renderProjects(pm);
 
-// convert date format on addTask submit and editTask
-// need is today, less than 7 days functions
-
-// search for 'all', 'today', 'next 7 days', 'high priority'
 // display project name above task container
-// add completed checkbox
-// add edit/delete task functionality
-// add completed task section?
+// search for 'high priority'
+// completed checkbox
+// edit/delete task functionality
+// local storage
+// completed task section?
