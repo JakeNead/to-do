@@ -9,10 +9,12 @@ const initPage = () => {
   <main>
   
   <nav>
-  <ul>
-  <li id="todayTasks" >today</li>
-  <li id="weekTasks" >week</li>
-  <li id="allTasks" >all</li>
+  <ul>  
+  <li id="allTasks" >All</li>
+  <li id="todayTasks" >Today</li>
+  <li id="weekTasks" >Week</li>
+  <li id="priorityTasks" >Priority</li>
+
   </ul>
   <div id='projects-section'>
   <h3>Projects</h3>

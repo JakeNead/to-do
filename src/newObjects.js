@@ -89,6 +89,11 @@ const PM = () => {
 
   const allTasks = () => storage.flatMap((projObj) => projObj.taskList);
 
+  const priorityTasks = () => {
+    const tasks = storage.flatMap((projObj) => projObj.taskList);
+    return tasks.filter((obj) => obj.isPriority);
+  };
+
   const findProject = (selectProj) => storage[storage.findIndex((obj) => obj.projName === selectProj)];
 
   return {
@@ -99,6 +104,7 @@ const PM = () => {
     todayTasks,
     weekTasks,
     allTasks,
+    priorityTasks,
     findProject,
     get getStorage() { return storage; },
     get currPro() { return storage[storage.findIndex((obj) => obj.id === currentProject)]; },

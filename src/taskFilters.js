@@ -4,6 +4,7 @@ const taskFilters = (pm) => {
   const today = document.querySelector('#todayTasks');
   const week = document.querySelector('#weekTasks');
   const all = document.querySelector('#allTasks');
+  const priority = document.querySelector('#priorityTasks');
 
   today.addEventListener('click', () => {
     removeTasks();
@@ -21,6 +22,11 @@ const taskFilters = (pm) => {
     removeTasks();
     renderTaskElements(pm.allTasks());
     updateTaskHeader('All');
+  });
+  priority.addEventListener('click', () => {
+    removeTasks();
+    renderTaskElements(pm.priorityTasks());
+    updateTaskHeader('Priority');
   });
 };
 
