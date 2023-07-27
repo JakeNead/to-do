@@ -98,20 +98,39 @@ function useProjectPlaceholderName(input) {
   input.value = editProjectContainer.nextElementSibling.querySelector('.projElement').textContent;
 }
 
-// renderTaskElements
-const renderTaskElements = (currPro) => {
+// renderTaskList
+const renderTaskList = (currPro) => {
   if (currPro === undefined) return;
+  renderTaskElements(currPro);
+  taskNoteEvents();
+};
+
+const renderTaskElements = (currPro) => {
   let tasks = (Array.isArray(currPro) ? currPro : currPro.taskList);
   const taskSection = document.getElementById('taskList');
   for (let i = 0; i < tasks.length; i += 1) {
     taskSection.innerHTML += `<div class='${tasks[i].id} taskElement'>
-      <span> ${tasks[i].taskName} </span>
-      <span>${tasks[i].dueDate}</span>
-      <button data-taskEdit ='${tasks[i].id} editTask'>edit</button>
-      <button data-taskDelete ='${tasks[i].id} deleteTask'>delete</button>
-      <p>${tasks[i].notes}</p>
+      <div class='mainTaskContent'> 
+        <h3> ${tasks[i].taskName} </h3>
+        <div class='taskDateAndButtons'>
+          <span>${tasks[i].dueDate}</span>
+          <button data-taskEdit ='${tasks[i].id} editTask'>edit</button>
+          <button data-taskDelete ='${tasks[i].id} deleteTask'>delete</button>
+        </div>
+      </div>
+      <p class='taskNotes hidden' >${tasks[i].notes}</p>
       </div>`;
   }
+};
+
+const taskNoteEvents = () => {
+  const taskElements = document.querySelectorAll('.taskElement');
+  taskElements.forEach((el) => el.addEventListener('click', () => {
+    const taskNotes = el.querySelector('p');
+    if (taskNotes.classList.contains('hidden')) {
+      taskNotes.classList.remove('hidden');
+    } else taskNotes.classList.add('hidden');
+  }));
 };
 
 // global function
@@ -119,9 +138,9 @@ const renderProjects = (PM) => {
   removeProjects();
   removeTasks();
   renderProjectElements(PM);
-  renderTaskElements(PM.currPro);
+  renderTaskList(PM.currPro);
 };
 
 export {
-  renderProjects, renderTaskElements, removeTasks, updateTaskHeader,
+  renderProjects, renderTaskList, removeTasks, updateTaskHeader,
 };

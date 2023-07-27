@@ -9,12 +9,11 @@ const initPage = () => {
   <main>
   
   <nav>
-  <ul>  
-  <li id="allTasks" >All</li>
-  <li id="todayTasks" >Today</li>
-  <li id="weekTasks" >Week</li>
-  <li id="priorityTasks" >Priority</li>
-
+  <ul id="taskFilters">  
+    <li id="allTasks" >All</li>
+    <li id="todayTasks" >Today</li>
+    <li id="weekTasks" >Week</li>
+    <li id="priorityTasks" >Priority</li>
   </ul>
   <div id='projects-section'>
   <h3>Projects</h3>
@@ -71,7 +70,7 @@ const initPage = () => {
     <input type="text" name='description' id = 'description' placeholder="Description">
 
     <label for="date"></label>
-    <input type="date" name="date" id="date">
+    <input type="date" name="date" id="date" required>
 
     <div id='project-elect'>
     <label for="projectName">Project</label>

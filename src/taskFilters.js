@@ -1,4 +1,4 @@
-import { renderTaskElements, removeTasks, updateTaskHeader } from './renderElements';
+import { renderTaskList, removeTasks, updateTaskHeader } from './renderElements';
 
 const taskFilters = (pm) => {
   const today = document.querySelector('#todayTasks');
@@ -8,24 +8,24 @@ const taskFilters = (pm) => {
 
   today.addEventListener('click', () => {
     removeTasks();
-    renderTaskElements(pm.todayTasks());
+    renderTaskList(pm.todayTasks());
     updateTaskHeader('Today');
   });
 
   week.addEventListener('click', () => {
     removeTasks();
-    renderTaskElements(pm.weekTasks());
+    renderTaskList(pm.weekTasks());
     updateTaskHeader('This Week');
   });
 
   all.addEventListener('click', () => {
     removeTasks();
-    renderTaskElements(pm.allTasks());
+    renderTaskList(pm.allTasks());
     updateTaskHeader('All');
   });
   priority.addEventListener('click', () => {
     removeTasks();
-    renderTaskElements(pm.priorityTasks());
+    renderTaskList(pm.priorityTasks());
     updateTaskHeader('Priority');
   });
 };
