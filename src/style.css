@@ -1,3 +1,10 @@
+:root {
+  --color-light-font: rgb(217 225 250);
+}
+body {
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
 #content {
   height: 100vh;
   display: flex;
@@ -16,7 +23,8 @@ header {
 }
 
 h1 {
-  font: 45px;
+  font-size: 45px;
+  margin: 0.5rem;
 }
 
 header > svg {
@@ -24,6 +32,16 @@ header > svg {
   position: absolute;
   right: 1rem;
   fill: currentColor;
+}
+#taskHeaderSection {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--color-light-font);
+  padding: 1rem;
+}
+
+#taskHeader {
+  margin: 0px;
 }
 
 main {
@@ -33,15 +51,56 @@ main {
 }
 
 nav {
-  flex-grow: 1;
   max-width: 600px;
   background-color: rgb(55 62 77);
   padding: 2rem;
 }
 
+#taskFilters {
+  list-style: none;
+  padding: 0px;
+}
+
 #projects-section {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+#projectList {
+  list-style: none;
+  padding: 0px;
+}
+
+.projectElement {
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;
+}
+
+.projectButtons {
+  display: flex;
+}
+
+#editProjectContainer {
+}
+
+#tasks {
+  padding: 2rem;
+}
+
+#taskList {
+}
+
+.taskElement {
+  border: 1px solid var(--color-light-font);
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.mainTaskContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 section {
