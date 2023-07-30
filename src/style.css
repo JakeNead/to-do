@@ -1,5 +1,8 @@
 :root {
   --color-light-font: rgb(217 225 250);
+  --color-dark-font: rgb(170, 178, 207);
+  --color-header: rgb(68 77 94);
+  --color-main: rgb(46 52 64);
 }
 body {
   font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
@@ -18,7 +21,7 @@ header {
   justify-content: center;
   align-items: center;
   position: relative;
-  background-color: rgb(68 77 94);
+  background-color: var(--color-header);
   color: rgb(162 201 253);
 }
 
@@ -47,7 +50,7 @@ header > svg {
 main {
   display: flex;
   height: 100%;
-  background-color: rgb(46 52 64);
+  background-color: var(--color-main);
 }
 
 nav {
@@ -93,7 +96,6 @@ nav {
 .taskElement {
   border: 1px solid var(--color-light-font);
   border-radius: 4px;
-  padding: 0.5rem;
   margin-top: 1rem;
 }
 
@@ -101,6 +103,32 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.mainTaskContent > h3 {
+  margin: 0px;
+}
+
+.taskElementLeftSide {
+  display: flex;
+  align-items: center;
+}
+.taskElementLeftSide > button {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 1000px;
+
+  margin: 1rem;
+}
+
+[data-task-complete="false"] {
+  border: 2px solid var(--color-light-font);
+  background-color: var(--color-header);
+}
+
+[data-task-complete="true"] {
+  border: 2px solid var(--color-dark-font);
+  background-color: var(--color-main);
 }
 
 section {
