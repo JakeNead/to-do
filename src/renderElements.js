@@ -5,7 +5,7 @@ const removeProjects = () => {
 };
 
 const removeTasks = () => {
-  const elements = document.querySelectorAll('.taskElement');
+  const elements = document.querySelectorAll('[data-task-id]');
   elements.forEach((el) => el.remove());
 };
 
@@ -23,7 +23,10 @@ const renderProjectElements = (PM) => {
 const projElements = (PM) => {
   const projectSection = document.getElementById('projectList');
   PM.getStorage.forEach((item) => {
-    projectSection.innerHTML += `<li class='projectElement' id=${item.id}><span class='projElement' data-proj-id=${item.id}>${item.projName}</span>
+    projectSection.innerHTML += `
+    <li class='projectElement' id=${item.id}>
+      <span class='projElement' data-proj-id=${item.id}>${item.projName}
+      </span>
       <div class='projectButtons'>
         <button class='projectEditButton'> Edit</button>
         <button class='projectDeleteButton'> Delete</button>
@@ -58,8 +61,6 @@ const projEditButtonEvents = (pm) => {
   const projEditBtn = document.querySelectorAll('.projectEditButton');
   const editProjName = document.querySelector('#editProjName');
   projEditBtn.forEach((el) => el.addEventListener('click', () => {
-    /// work on the useProjectPlaceholderName function
-    // need to access the project element id to insert placeholder name
     pm.currProId = el.parentElement.id;
     showProjEditForm(el);
     useProjectPlaceholderName(editProjName);
@@ -78,7 +79,7 @@ const projEditSave = (pm) => {
 
 const projEditCancel = (pm) => {
   const editProjectCancelButton = document.getElementById('projectCancelButton');
-  editProjectCancelButton.addEventListener('click', (e) => {
+  editProjectCancelButton.addEventListener('click', () => {
     editProjectContainer.classList.remove('visible');
     renderProjects(pm);
   });
@@ -92,44 +93,62 @@ function showProjEditForm(el) {
   const projectSection = document.getElementById('projectList');
   el.parentElement.classList.add('hidden');
   editProjectContainer.classList.add('visible');
-  projectSection.insertBefore(editProjectContainer, el.parentElement);
+  projectSection.insertBefore(editProjectContainer, el.parentElement.parentElement);
 }
 function useProjectPlaceholderName(input) {
   input.value = editProjectContainer.nextElementSibling.querySelector('.projElement').textContent;
 }
 
 // renderTaskList
-const renderTaskList = (currPro) => {
+const renderTaskList = (currPro, pm) => {
   if (currPro === undefined) return;
   renderTaskElements(currPro);
   taskNoteEvents();
+  isCompletedEvents(pm);
+  console.log(currPro);
+  console.log(pm);
 };
 
 const renderTaskElements = (currPro) => {
   let tasks = (Array.isArray(currPro) ? currPro : currPro.taskList);
   const taskSection = document.getElementById('taskList');
   for (let i = 0; i < tasks.length; i += 1) {
-    taskSection.innerHTML += `<div class='${tasks[i].id} taskElement'>
+    taskSection.innerHTML += `<div data-task-id='${tasks[i].id} taskElement'>
       <div class='mainTaskContent'> 
-        <h3> ${tasks[i].taskName} </h3>
-        <div class='taskDateAndButtons'>
+        <div class='taskElementLeftSide'>
+          <button data-task-complete=${tasks[i].completed} data-task-id=${tasks[i].id} type='button'> </button>
+          <h3> ${tasks[i].taskName} </h3>
+        </div>
+        <div class='taskElementRightSide'>
           <span>${tasks[i].dueDate}</span>
           <button data-taskEdit ='${tasks[i].id} editTask'>edit</button>
           <button data-taskDelete ='${tasks[i].id} deleteTask'>delete</button>
         </div>
       </div>
-      <p class='taskNotes hidden' >${tasks[i].notes}</p>
+      <p class='taskNote hidden' >${tasks[i].notes}</p>
       </div>`;
   }
 };
 
 const taskNoteEvents = () => {
+  console.log('taskNoteEvents');
   const taskElements = document.querySelectorAll('.taskElement');
-  taskElements.forEach((el) => el.addEventListener('click', () => {
-    const taskNotes = el.querySelector('p');
-    if (taskNotes.classList.contains('hidden')) {
-      taskNotes.classList.remove('hidden');
-    } else taskNotes.classList.add('hidden');
+  taskElements.forEach((el) => el.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const taskNote = el.querySelector('p');
+    if (taskNote.classList.contains('hidden')) {
+      taskNote.classList.remove('hidden');
+    } else taskNote.classList.add('hidden');
+  }));
+};
+
+const isCompletedEvents = (pm) => {
+  const isCompletedButtons = document.querySelectorAll('[data-task-complete]');
+  isCompletedButtons.forEach((btn) => btn.addEventListener('click', (e) => {
+    pm.findTaskById(btn.dataset.taskId).toggleCompleted();
+    // create toggleTaskComplete method that passes task id as argument
+    renderTaskList();
+    console.log(pm.findTaskById(btn.dataset.taskId).completed);
   }));
 };
 
@@ -138,9 +157,19 @@ const renderProjects = (PM) => {
   removeProjects();
   removeTasks();
   renderProjectElements(PM);
-  renderTaskList(PM.currPro);
+  renderTaskList(PM.currPro, PM);
 };
 
 export {
   renderProjects, renderTaskList, removeTasks, updateTaskHeader,
 };
+
+// currently renderTaskList uses the currPro method to return the current project object.
+
+// isCompletedEvents needs to be able to pass the current task list to renderTaskList
+
+// Refactor renderTaskList to only accept a task list!
+// or...
+// Refactor renderTaskList to accept a project object or tasklist
+
+// bug with insertBefore

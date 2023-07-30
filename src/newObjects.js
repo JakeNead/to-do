@@ -23,7 +23,7 @@ const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskComple
     get dueDate() { return format(parseISO(dueDate), 'MMM do YYY'); },
     get dueDateObj() { return parseISO(dueDate); },
 
-    togglePriority() { isPriority = !isPriority; },
+    togglePriority() { isPriority = isPriority === 'true' ? 'false' : 'true'; },
     get isPriority() { return isPriority; },
 
     toggleCompleted() { completed = !completed; },
@@ -40,8 +40,6 @@ const CreateProject = (projName) => {
     taskList.push(CreateTask(taskName, taskNotes, taskDueDate, taskIsPriority));
   };
 
-  const findTaskById = (taskId) => taskList.find((obj) => obj.getId === taskId);
-
   const deleteTask = (taskId) => {
     const index = taskList.findIndex((item) => item.getId() === taskId);
     taskList.splice(index, 1);
@@ -52,7 +50,6 @@ const CreateProject = (projName) => {
   return {
     projName,
     addTask,
-    findTaskById,
     deleteTask,
     isUniqueTask,
     get id() { return id; },
@@ -96,6 +93,8 @@ const PM = () => {
 
   const findProject = (selectProj) => storage[storage.findIndex((obj) => obj.projName === selectProj)];
 
+  const findTaskById = (taskId) => allTasks().find((obj) => obj.id === taskId);
+
   return {
     addProject,
     deleteProject,
@@ -106,6 +105,7 @@ const PM = () => {
     allTasks,
     priorityTasks,
     findProject,
+    findTaskById,
     get getStorage() { return storage; },
     get currPro() { return storage[storage.findIndex((obj) => obj.id === currentProject)]; },
     get currProId() { return currentProject; },

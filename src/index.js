@@ -22,8 +22,6 @@ taskFilters(pm);
 modalEvents(pm);
 renderProjects(pm);
 
-// display project name above task container
-// search for 'high priority'
 // completed checkbox
 // edit/delete task functionality
 // local storage

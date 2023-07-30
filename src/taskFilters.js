@@ -8,24 +8,24 @@ const taskFilters = (pm) => {
 
   today.addEventListener('click', () => {
     removeTasks();
-    renderTaskList(pm.todayTasks());
+    renderTaskList(pm.todayTasks(), pm);
     updateTaskHeader('Today');
   });
 
   week.addEventListener('click', () => {
     removeTasks();
-    renderTaskList(pm.weekTasks());
+    renderTaskList(pm.weekTasks(), pm);
     updateTaskHeader('This Week');
   });
 
   all.addEventListener('click', () => {
     removeTasks();
-    renderTaskList(pm.allTasks());
+    renderTaskList(pm.allTasks(), pm);
     updateTaskHeader('All');
   });
   priority.addEventListener('click', () => {
     removeTasks();
-    renderTaskList(pm.priorityTasks());
+    renderTaskList(pm.priorityTasks(), pm);
     updateTaskHeader('Priority');
   });
 };
