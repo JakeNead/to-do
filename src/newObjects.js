@@ -1,6 +1,7 @@
 import {
   format, isToday, isThisWeek, parseISO,
 } from 'date-fns';
+import taskFilters from './taskFilters';
 
 const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskCompleted = false) => {
   const id = crypto.randomUUID();
@@ -69,7 +70,8 @@ const PM = () => {
   };
 
   const renameProject = (newName) => {
-    storage[storage.findIndex((obj) => obj.id === currentProject)].projName = newName;
+    console.log(currentProject);
+    currentProject.projName = newName;
   };
 
   const isUniqueProject = (newProjName) => !(storage.some((obj) => obj.projName.toLowerCase() === newProjName.toLowerCase()));
@@ -107,16 +109,25 @@ const PM = () => {
     findProject,
     findTaskById,
     get getStorage() { return storage; },
-    get currPro() { return storage[storage.findIndex((obj) => obj.id === currentProject)]; },
-    get currProId() { return currentProject; },
-    set currProId(id) { currentProject = id; },
+    get currPro() { return currentProject; },
+    set currPro(proj) { currentProject = proj; },
+    set currProFromId(id) { currentProject = storage[storage.findIndex((obj) => obj.id === id)]; },
     get projectNameArray() {
       let nameArr = [];
       storage.forEach((item) => { nameArr.push(item.projName); });
       return nameArr;
     },
-
   };
 };
 
 export default PM;
+
+// taskFilters - set curr pro array, render
+//    curr pro will be the task filter methods
+//    if currPro = *'taskName' then render tasks will have to have a series of conditionals to assign the taskLIst based on the currPro
+// projects - set curr pro array, render
+//    curr pro will pass the projId as arg to assign the projobj to   currpro
+// add task - add the task to target proj, render
+//    curr pro will be the taskfilter method or a proj obj
+// convert currPro to an array of tasks
+//

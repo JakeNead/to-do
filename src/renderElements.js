@@ -24,7 +24,7 @@ const projElements = (PM) => {
   const projectSection = document.getElementById('projectList');
   PM.getStorage.forEach((item) => {
     projectSection.innerHTML += `
-    <li class='projectElement' id=${item.id}>
+    <li class='projectElement' data-proj-id=${item.id}>
       <span class='projElement' data-proj-id=${item.id}>${item.projName}
       </span>
       <div class='projectButtons'>
@@ -38,21 +38,28 @@ const projElements = (PM) => {
 const projSelectEvents = (PM) => {
   const projectElements = document.querySelectorAll('.projElement');
   projectElements.forEach((el) => el.addEventListener('click', () => {
-    PM.currProId = el.dataset.projId;
+    PM.currProFromId = el.dataset.projId;
     renderProjects(PM);
-    updateTaskHeader(el.textContent);
+    // updateTaskHeader(el.textContent);
   }));
 };
 
-const updateTaskHeader = (title) => {
+const updateTaskHeader = (PM) => {
   const taskHeader = document.querySelector('#taskHeader');
+  let title;
+  if (typeof PM.currPro === 'string') {
+    title = PM.currPro;
+  } else if (PM.currPro === undefined) {
+    title = '';
+  } else title = PM.currPro.projName;
   taskHeader.textContent = title;
 };
 
 const projDeleteEvents = (PM) => {
   const projDelBtn = document.querySelectorAll('.projectDeleteButton');
   projDelBtn.forEach((el) => el.addEventListener('click', () => {
-    PM.deleteProject(el.parentElement.id);
+    PM.deleteProject(el.parentElement.parentElement.dataset.projId);
+    PM.currPro = undefined;
     renderProjects(PM);
   }));
 };
@@ -61,10 +68,22 @@ const projEditButtonEvents = (pm) => {
   const projEditBtn = document.querySelectorAll('.projectEditButton');
   const editProjName = document.querySelector('#editProjName');
   projEditBtn.forEach((el) => el.addEventListener('click', () => {
-    pm.currProId = el.parentElement.id;
-    showProjEditForm(el);
+    pm.currProFromId = el.parentElement.id;
+    showProjEditForm(el, pm);
     useProjectPlaceholderName(editProjName);
   }));
+};
+
+function showProjEditForm(el, pm) {
+  const projectSection = document.getElementById('projectList');
+  el.parentElement.parentElement.classList.add('hidden');
+  editProjectContainer.classList.add('visible');
+  projectSection.insertBefore(editProjectContainer, el.parentElement.parentElement);
+  pm.currProFromId = el.parentElement.parentElement.dataset.projId;
+}
+
+const useProjectPlaceholderName = (input) => {
+  input.value = editProjectContainer.nextElementSibling.querySelector('.projElement').textContent;
 };
 
 const projEditSave = (pm) => {
@@ -72,6 +91,7 @@ const projEditSave = (pm) => {
   editProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     pm.renameProject(editProjName.value);
+    // updateTaskHeader(editProjName.value);
     hideProjEditForm();
     renderProjects(pm);
   });
@@ -89,28 +109,28 @@ const hideProjEditForm = () => {
   editProjectContainer.classList.remove('visible');
 };
 
-function showProjEditForm(el) {
-  const projectSection = document.getElementById('projectList');
-  el.parentElement.classList.add('hidden');
-  editProjectContainer.classList.add('visible');
-  projectSection.insertBefore(editProjectContainer, el.parentElement.parentElement);
-}
-function useProjectPlaceholderName(input) {
-  input.value = editProjectContainer.nextElementSibling.querySelector('.projElement').textContent;
-}
-
 // renderTaskList
-const renderTaskList = (currPro, pm) => {
-  if (currPro === undefined) return;
-  renderTaskElements(currPro);
+const renderTaskList = (pm) => {
+  updateTaskHeader(pm);
+  if (pm.currPro === undefined) return;
+  renderTaskElements(pm);
   taskNoteEvents();
   isCompletedEvents(pm);
-  console.log(currPro);
-  console.log(pm);
 };
 
-const renderTaskElements = (currPro) => {
-  let tasks = (Array.isArray(currPro) ? currPro : currPro.taskList);
+const renderTaskElements = (pm) => {
+  let tasks;
+  if (pm.currPro === 'All') {
+    tasks = pm.allTasks();
+  } else if (pm.currPro === 'Today') {
+    tasks = pm.todayTasks();
+  } else if (pm.currPro === 'Week') {
+    tasks = pm.weekTasks();
+  } else if (pm.currPro === 'Priority') {
+    tasks = pm.priorityTasks();
+  } else {
+    tasks = pm.currPro.taskList;
+  }
   const taskSection = document.getElementById('taskList');
   for (let i = 0; i < tasks.length; i += 1) {
     taskSection.innerHTML += `<div data-task-id='${tasks[i].id} taskElement'>
@@ -121,8 +141,8 @@ const renderTaskElements = (currPro) => {
         </div>
         <div class='taskElementRightSide'>
           <span>${tasks[i].dueDate}</span>
-          <button data-taskEdit ='${tasks[i].id} editTask'>edit</button>
-          <button data-taskDelete ='${tasks[i].id} deleteTask'>delete</button>
+          <button data-task-edit ='${tasks[i].id} editTask'>edit</button>
+          <button data-task-delete ='${tasks[i].id} deleteTask'>delete</button>
         </div>
       </div>
       <p class='taskNote hidden' >${tasks[i].notes}</p>
@@ -131,7 +151,6 @@ const renderTaskElements = (currPro) => {
 };
 
 const taskNoteEvents = () => {
-  console.log('taskNoteEvents');
   const taskElements = document.querySelectorAll('.taskElement');
   taskElements.forEach((el) => el.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -146,10 +165,13 @@ const isCompletedEvents = (pm) => {
   const isCompletedButtons = document.querySelectorAll('[data-task-complete]');
   isCompletedButtons.forEach((btn) => btn.addEventListener('click', (e) => {
     pm.findTaskById(btn.dataset.taskId).toggleCompleted();
-    // create toggleTaskComplete method that passes task id as argument
-    renderTaskList();
-    console.log(pm.findTaskById(btn.dataset.taskId).completed);
+    removeTasks();
+    renderTaskList(pm);
   }));
+};
+
+const taskDeleteEvents = () => {
+  const taskDeleteButton = document.querySelectorAll('[data-taskDelete');
 };
 
 // global function
@@ -157,19 +179,11 @@ const renderProjects = (PM) => {
   removeProjects();
   removeTasks();
   renderProjectElements(PM);
-  renderTaskList(PM.currPro, PM);
+  renderTaskList(PM);
 };
 
 export {
   renderProjects, renderTaskList, removeTasks, updateTaskHeader,
 };
 
-// currently renderTaskList uses the currPro method to return the current project object.
-
-// isCompletedEvents needs to be able to pass the current task list to renderTaskList
-
-// Refactor renderTaskList to only accept a task list!
-// or...
-// Refactor renderTaskList to accept a project object or tasklist
-
-// bug with insertBefore
+// could move updateTaskHeader to the renderTaskList function

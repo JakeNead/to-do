@@ -7,26 +7,30 @@ const taskFilters = (pm) => {
   const priority = document.querySelector('#priorityTasks');
 
   today.addEventListener('click', () => {
+    pm.currPro = 'Today';
     removeTasks();
-    renderTaskList(pm.todayTasks(), pm);
-    updateTaskHeader('Today');
+    renderTaskList(pm);
+    // updateTaskHeader('Today');
   });
 
   week.addEventListener('click', () => {
+    pm.currPro = 'Week';
     removeTasks();
-    renderTaskList(pm.weekTasks(), pm);
-    updateTaskHeader('This Week');
+    renderTaskList(pm);
+    // updateTaskHeader('This Week');
   });
 
   all.addEventListener('click', () => {
+    pm.currPro = 'All';
     removeTasks();
-    renderTaskList(pm.allTasks(), pm);
-    updateTaskHeader('All');
+    renderTaskList(pm);
+    // updateTaskHeader('All');
   });
   priority.addEventListener('click', () => {
+    pm.currPro = 'Priority';
     removeTasks();
-    renderTaskList(pm.priorityTasks(), pm);
-    updateTaskHeader('Priority');
+    renderTaskList(pm);
+    // updateTaskHeader('Priority');
   });
 };
 
