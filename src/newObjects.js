@@ -1,10 +1,10 @@
 import {
   format, isToday, isThisWeek, parseISO,
 } from 'date-fns';
-import taskFilters from './taskFilters';
 
-const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskCompleted = false) => {
+const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, projectId, taskCompleted = false) => {
   const id = crypto.randomUUID();
+  const projId = projectId;
   let name = taskName;
   let notes = taskNotes;
   let dueDate = taskDueDate;
@@ -13,6 +13,7 @@ const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskComple
 
   return {
     get id() { return id; },
+    get projId() { return projId; },
 
     set taskName(newName) { name = newName; },
     get taskName() { return name; },
@@ -38,11 +39,11 @@ const CreateProject = (projName) => {
   const id = crypto.randomUUID();
 
   const addTask = (taskName, taskNotes, taskDueDate, taskIsPriority) => {
-    taskList.push(CreateTask(taskName, taskNotes, taskDueDate, taskIsPriority));
+    taskList.push(CreateTask(taskName, taskNotes, taskDueDate, taskIsPriority, id));
   };
 
   const deleteTask = (taskId) => {
-    const index = taskList.findIndex((item) => item.getId() === taskId);
+    const index = taskList.findIndex((item) => item.id === taskId);
     taskList.splice(index, 1);
   };
 
@@ -70,7 +71,6 @@ const PM = () => {
   };
 
   const renameProject = (newName) => {
-    console.log(currentProject);
     currentProject.projName = newName;
   };
 
@@ -95,7 +95,14 @@ const PM = () => {
 
   const findProject = (selectProj) => storage[storage.findIndex((obj) => obj.projName === selectProj)];
 
+  const findProjectById = (projId) => storage[storage.findIndex((obj) => obj.id === projId)];
+
   const findTaskById = (taskId) => allTasks().find((obj) => obj.id === taskId);
+
+  const deleteTask = (taskId) => {
+    const index = allTasks().findIndex((item) => item.id === taskId);
+    allTasks().splice(index, 1);
+  };
 
   return {
     addProject,
@@ -106,7 +113,9 @@ const PM = () => {
     weekTasks,
     allTasks,
     priorityTasks,
+    deleteTask,
     findProject,
+    findProjectById,
     findTaskById,
     get getStorage() { return storage; },
     get currPro() { return currentProject; },
@@ -122,12 +131,8 @@ const PM = () => {
 
 export default PM;
 
-// taskFilters - set curr pro array, render
-//    curr pro will be the task filter methods
-//    if currPro = *'taskName' then render tasks will have to have a series of conditionals to assign the taskLIst based on the currPro
-// projects - set curr pro array, render
-//    curr pro will pass the projId as arg to assign the projobj to   currpro
-// add task - add the task to target proj, render
-//    curr pro will be the taskfilter method or a proj obj
-// convert currPro to an array of tasks
-//
+// delete task needs to somehow identify the proj obj in order to run a delete task method.
+
+// for now my pm method is attempting to delete the task from the allTasks() method.
+
+// Am I encountering a shallow copy issue?

@@ -116,6 +116,7 @@ const renderTaskList = (pm) => {
   renderTaskElements(pm);
   taskNoteEvents();
   isCompletedEvents(pm);
+  taskDeleteEvents(pm);
 };
 
 const renderTaskElements = (pm) => {
@@ -133,7 +134,7 @@ const renderTaskElements = (pm) => {
   }
   const taskSection = document.getElementById('taskList');
   for (let i = 0; i < tasks.length; i += 1) {
-    taskSection.innerHTML += `<div data-task-id='${tasks[i].id} taskElement'>
+    taskSection.innerHTML += `<div data-task-id=${tasks[i].id} class='taskElement'>
       <div class='mainTaskContent'> 
         <div class='taskElementLeftSide'>
           <button data-task-complete=${tasks[i].completed} data-task-id=${tasks[i].id} type='button'> </button>
@@ -141,8 +142,8 @@ const renderTaskElements = (pm) => {
         </div>
         <div class='taskElementRightSide'>
           <span>${tasks[i].dueDate}</span>
-          <button data-task-edit ='${tasks[i].id} editTask'>edit</button>
-          <button data-task-delete ='${tasks[i].id} deleteTask'>delete</button>
+          <button data-task-edit =${tasks[i].id}>edit</button>
+          <button class='taskDeleteButton'data-proj-id=${tasks[i].projId} data-task-id=${tasks[i].id}>delete</button>
         </div>
       </div>
       <p class='taskNote hidden' >${tasks[i].notes}</p>
@@ -170,8 +171,14 @@ const isCompletedEvents = (pm) => {
   }));
 };
 
-const taskDeleteEvents = () => {
-  const taskDeleteButton = document.querySelectorAll('[data-taskDelete');
+const taskDeleteEvents = (pm) => {
+  const taskDeleteButton = document.querySelectorAll('.taskDeleteButton');
+  taskDeleteButton.forEach((btn) => btn.addEventListener('click', () => {
+    pm.deleteTask(btn.dataset.projDelete, btn.dataset.taskDelete);
+    pm.findProjectById(btn.dataset.projId).deleteTask(btn.dataset.taskId);
+    removeTasks();
+    renderTaskList(pm);
+  }));
 };
 
 // global function
@@ -186,4 +193,4 @@ export {
   renderProjects, renderTaskList, removeTasks, updateTaskHeader,
 };
 
-// could move updateTaskHeader to the renderTaskList function
+// could move renderTask conditionals to PM
