@@ -112,6 +112,7 @@ nav {
 .taskElementLeftSide {
   display: flex;
   align-items: center;
+  position: relative;
 }
 .taskElementLeftSide > button {
   width: 1.5rem;
@@ -129,6 +130,25 @@ nav {
 [data-task-complete="true"] {
   border: 2px solid var(--color-dark-font);
   background-color: var(--color-main);
+}
+
+.taskNote {
+  margin: 0 1rem 1rem 3.5rem;
+  /* margin-left: 1rem;
+  margin-right: 1rem; */
+}
+
+.priorityIcon {
+  display: none;
+}
+
+.priorityIcon.true {
+  display: block;
+  position: absolute;
+  fill: gold;
+  left: -13px;
+  top: 5px;
+  height: 1.2rem;
 }
 
 section {

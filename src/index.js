@@ -22,7 +22,7 @@ taskFilters(pm);
 modalEvents(pm);
 renderProjects(pm);
 
-// completed checkbox
-// edit/delete task functionality
+// could move renderTask conditionals to PM
+// edit task functionality
 // local storage
 // completed task section?

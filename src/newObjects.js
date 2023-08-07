@@ -104,6 +104,19 @@ const PM = () => {
     allTasks().splice(index, 1);
   };
 
+  const currentTaskArray = () => {
+    if (currentProject === 'All') {
+      return allTasks();
+    } if (currentProject === 'Today') {
+      return todayTasks();
+    } if (currentProject === 'Week') {
+      return weekTasks();
+    } if (currentProject === 'Priority') {
+      return priorityTasks();
+    }
+    return currentProject.taskList;
+  };
+
   return {
     addProject,
     deleteProject,
@@ -117,6 +130,7 @@ const PM = () => {
     findProject,
     findProjectById,
     findTaskById,
+    currentTaskArray,
     get getStorage() { return storage; },
     get currPro() { return currentProject; },
     set currPro(proj) { currentProject = proj; },
@@ -131,8 +145,5 @@ const PM = () => {
 
 export default PM;
 
-// delete task needs to somehow identify the proj obj in order to run a delete task method.
-
-// for now my pm method is attempting to delete the task from the allTasks() method.
-
-// Am I encountering a shallow copy issue?
+// priority icon
+// isPriority = true will stile the icon so it's visible
