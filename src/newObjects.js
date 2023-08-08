@@ -60,7 +60,7 @@ const CreateProject = (projName) => {
 };
 
 const PM = () => {
-  const storage = [];
+  let storage = [];
   let currentProject;
 
   const addProject = (newProjName) => storage.push(CreateProject(newProjName));
@@ -132,6 +132,7 @@ const PM = () => {
     findTaskById,
     currentTaskArray,
     get getStorage() { return storage; },
+    set storage(newStorage) { storage = newStorage; },
     get currPro() { return currentProject; },
     set currPro(proj) { currentProject = proj; },
     set currProFromId(id) { currentProject = storage[storage.findIndex((obj) => obj.id === id)]; },
@@ -144,6 +145,3 @@ const PM = () => {
 };
 
 export default PM;
-
-// priority icon
-// isPriority = true will stile the icon so it's visible

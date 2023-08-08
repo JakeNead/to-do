@@ -1,3 +1,5 @@
+import { lookForLocalStorage, updateLocalStorage } from './localStorage';
+
 // remove Elements
 const removeProjects = () => {
   const elements = document.querySelectorAll('.projectElement');
@@ -40,7 +42,6 @@ const projSelectEvents = (PM) => {
   projectElements.forEach((el) => el.addEventListener('click', () => {
     PM.currProFromId = el.dataset.projId;
     renderProjects(PM);
-    // updateTaskHeader(el.textContent);
   }));
 };
 
@@ -120,19 +121,7 @@ const renderTaskList = (pm) => {
 };
 
 const renderTaskElements = (pm) => {
-// let tasks = currentTaskArray()
-  let tasks;
-  if (pm.currPro === 'All') {
-    tasks = pm.allTasks();
-  } else if (pm.currPro === 'Today') {
-    tasks = pm.todayTasks();
-  } else if (pm.currPro === 'Week') {
-    tasks = pm.weekTasks();
-  } else if (pm.currPro === 'Priority') {
-    tasks = pm.priorityTasks();
-  } else {
-    tasks = pm.currPro.taskList;
-  }
+  let tasks = pm.currentTaskArray();
   const taskSection = document.getElementById('taskList');
   for (let i = 0; i < tasks.length; i += 1) {
     taskSection.innerHTML += `<div data-task-id=${tasks[i].id} class='taskElement'>
@@ -189,6 +178,8 @@ const renderProjects = (PM) => {
   removeTasks();
   renderProjectElements(PM);
   renderTaskList(PM);
+  updateLocalStorage(PM);
+  lookForLocalStorage();
 };
 
 export {

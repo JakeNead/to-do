@@ -6,8 +6,11 @@ import './style.css';
 import './modal.css';
 import { renderProjects } from './renderElements';
 import taskFilters from './taskFilters';
+import { lookForLocalStorage } from './localStorage';
 
 const pm = PM();
+
+lookForLocalStorage(pm);
 
 // test projects/tasks
 pm.addProject('Yard Work');
@@ -22,7 +25,7 @@ taskFilters(pm);
 modalEvents(pm);
 renderProjects(pm);
 
-// could move renderTask conditionals to PM
-// edit task functionality
 // local storage
+// edit task functionality
+// could move renderTask conditionals to PM
 // completed task section?
