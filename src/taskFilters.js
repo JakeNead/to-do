@@ -1,4 +1,4 @@
-import { renderTaskList, removeTasks, updateTaskHeader } from './renderElements';
+import { renderTaskList, removeTasks } from './renderElements';
 
 const taskFilters = (pm) => {
   const today = document.querySelector('#todayTasks');

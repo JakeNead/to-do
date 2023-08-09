@@ -178,8 +178,6 @@ const renderProjects = (PM) => {
   removeTasks();
   renderProjectElements(PM);
   renderTaskList(PM);
-  updateLocalStorage(PM);
-  lookForLocalStorage();
 };
 
 export {

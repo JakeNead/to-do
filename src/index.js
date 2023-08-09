@@ -6,19 +6,19 @@ import './style.css';
 import './modal.css';
 import { renderProjects } from './renderElements';
 import taskFilters from './taskFilters';
-import { lookForLocalStorage } from './localStorage';
+import { lookForLocalStorage, updateLocalStorage } from './localStorage';
 
 const pm = PM();
 
-lookForLocalStorage(pm);
-
 // test projects/tasks
-pm.addProject('Yard Work');
-pm.getStorage[0].addTask('Mow lawn', 'Don\'t forget to mow by the front yard maple', '2023-07-25', false, false);
-pm.getStorage[0].addTask('Bag Leaves', 'Borrow Frodo\'s rake.', '2023-06-20', false, false);
-pm.getStorage[0].addTask('Fight off the Ant Lions', 'Don\'t step on the ground...', '2023-07-28', false, false);
-pm.addProject('Shed Improvements');
-pm.getStorage[1].addTask('Build Workbench', 'Use scrapwood from under the shed.', '2023-07-24', false, false);
+// pm.addProject('Yard Work');
+// pm.getStorage[0].addTask('Mow lawn', 'Don\'t forget to mow by the front yard maple', '2023-07-25', false, false);
+// pm.getStorage[0].addTask('Bag Leaves', 'Borrow Frodo\'s rake.', '2023-06-20', false, false);
+// pm.getStorage[0].addTask('Fight off the Ant Lions', 'Don\'t step on the ground...', '2023-07-28', false, false);
+// pm.addProject('Shed Improvements');
+// pm.getStorage[1].addTask('Build Workbench', 'Use scrapwood from under the shed.', '2023-07-24', false, false);
+
+lookForLocalStorage(pm);
 
 initPage();
 taskFilters(pm);
