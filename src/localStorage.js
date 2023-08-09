@@ -65,10 +65,10 @@ const updateLocalStorage = (pm) => {
 // look for local storage on init load only
 const lookForLocalStorage = (pm) => {
   if (localStorage.getItem('todoStorage') === null) {
-    console.log('local storage is empty. Load the demo projects');
+    console.log('Demo projects loaded');
     instantiateObjects(demoArray, pm);
   } else {
-    console.log(JSON.parse(localStorage.getItem('todoStorage')));
+    console.log('Local storage loaded');
     instantiateObjects(JSON.parse(localStorage.getItem('todoStorage')), pm);
   }
 };
