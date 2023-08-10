@@ -85,6 +85,7 @@ const modalEvents = (pm) => {
 
   function addNewTask(e) {
     e.preventDefault();
+    console.log(e);
     const projObj = pm.findProject(projectName.value);
     if (projObj.isUniqueTask(task.value)) {
       projObj.addTask(

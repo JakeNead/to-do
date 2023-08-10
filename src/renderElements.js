@@ -218,7 +218,7 @@ function showTaskEditForm(el, pm) {
 // };
 
 const taskEditCancel = (pm) => {
-  const editTaskCancelButton = document.getElementById('taskCancelButton');
+  const editTaskCancelButton = document.getElementById('editTaskCancelButton');
   editTaskCancelButton.addEventListener('click', () => {
     editTaskForm.classList.remove('visible');
     renderTaskList(pm);

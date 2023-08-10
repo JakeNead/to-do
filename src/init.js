@@ -40,27 +40,27 @@ const initPage = () => {
   <div id='taskList'>
   <form id="editTaskForm" class='hidden' action="#">
 
-    <div id='nameAndNotes'>
-      <label for="task" ></label>
-      <input type="text" name="task" id="task" placeholder="Task Name" required>
+    <div id='newNameAndNotes'>
+      <label for="newTask" ></label>
+      <input type="text" name="newTask" id="newTask" placeholder="New Task Name" required>
 
-      <label for="description"></label>
-      <input type="text" name='description' id = 'description' placeholder="Description">
+      <label for="newNotes"></label>
+      <input type="text" name='newNotes' id = 'newNotes' placeholder="New Notes">
     </div>
 
-    <div id='dateAndPriority'>
-      <label for="date"></label>
-      <input type="date" name="date" id="date" required>
+    <div id='newDateAndPriority'>
+      <label for="newDate"></label>
+      <input type="newDate" name="newDate" id="newDate" required>
   
-      <div id='priority-checkbox'> 
-      <label for="priority">Priority</label>
-      <input type="checkbox" name="priority" id="priority" value="low-priority">
+      <div id='newPriorityCheckbox'> 
+      <label for="newPriority">Priority</label>
+      <input type="checkbox" name="newPriority" id="newPriority" value="low-priority">
       </div>
     </div>
 
     <div class="taskEditButtons">
-      <button type="submit" id="taskSaveButton">Save</button>
-      <button type="reset" id="taskCancelButton">Cancel</button>
+      <button type="submit" id="editTaskSaveButton">Save</button>
+      <button type="reset" id="editTaskCancelButton">Cancel</button>
     </div>
     
   </form>
