@@ -99,7 +99,7 @@ const initPage = () => {
     <label for="date"></label>
     <input type="date" name="date" id="date" required>
 
-    <div id='project-elect'>
+    <div id='project-select'>
     <label for="projectName">Project</label>
     <select name="projectName" id="projectName"> 
     </select>
