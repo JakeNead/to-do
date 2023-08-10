@@ -57,23 +57,21 @@ const demoArray = [
     taskList: [],
   }];
 
-// save to local storage whenever a project or task is updated
+// Save to local storage whenever a project or task is modified
 const updateLocalStorage = (pm) => {
   localStorage.setItem('todoStorage', JSON.stringify(pm.getStorage));
 };
 
-// look for local storage on init load only
+// Used init load only
 const lookForLocalStorage = (pm) => {
   if (localStorage.getItem('todoStorage') === null) {
-    console.log('Demo projects loaded');
     instantiateObjects(demoArray, pm);
   } else {
-    console.log('Local storage loaded');
     instantiateObjects(JSON.parse(localStorage.getItem('todoStorage')), pm);
   }
 };
 
-// Create new objects from the demoArray or local JSON data
+// Create object instances from the demoArray or local JSON data
 const instantiateObjects = (storage, pm) => {
   for (let i = 0; i < storage.length; i += 1) {
     pm.addProject(storage[i].projName);
@@ -85,11 +83,3 @@ const instantiateObjects = (storage, pm) => {
 };
 
 export { updateLocalStorage, lookForLocalStorage };
-
-// on page load, check if localStorage is empty
-//   if empty, load the demo projects/tasks
-//   if not empty, render the local storage projects/tasks
-
-// Options for adding methods to projects again:
-//      loop through my storage data and recreate the obj instances
-//      apply prototype methods to each proj/task

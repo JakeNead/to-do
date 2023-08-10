@@ -37,7 +37,34 @@ const initPage = () => {
   <h2 id='taskHeader'></h2>
   <button id='add-task' >+ Add Task</button>
   </div>
-  <div id='taskList'></div>
+  <div id='taskList'>
+  <form id="editTaskForm" class='hidden' action="#">
+
+    <div id='nameAndNotes'>
+      <label for="task" ></label>
+      <input type="text" name="task" id="task" placeholder="Task Name" required>
+
+      <label for="description"></label>
+      <input type="text" name='description' id = 'description' placeholder="Description">
+    </div>
+
+    <div id='dateAndPriority'>
+      <label for="date"></label>
+      <input type="date" name="date" id="date" required>
+  
+      <div id='priority-checkbox'> 
+      <label for="priority">Priority</label>
+      <input type="checkbox" name="priority" id="priority" value="low-priority">
+      </div>
+    </div>
+
+    <div class="taskEditButtons">
+      <button type="submit" id="taskSaveButton">Save</button>
+      <button type="reset" id="taskCancelButton">Cancel</button>
+    </div>
+    
+  </form>
+  </div>
   </section>
 
   </main>

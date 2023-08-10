@@ -25,7 +25,6 @@ taskFilters(pm);
 modalEvents(pm);
 renderProjects(pm);
 
-// local storage
 // edit task functionality
-// could move renderTask conditionals to PM
+// button SVGs
 // completed task section?

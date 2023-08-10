@@ -112,12 +112,17 @@ const hideProjEditForm = () => {
 
 // renderTaskList
 const renderTaskList = (pm) => {
+  const editTaskForm = document.querySelector('#editTaskForm');
   updateTaskHeader(pm);
   if (pm.currPro === undefined) return;
+  removeTasks();
   renderTaskElements(pm);
   taskNoteEvents();
   isCompletedEvents(pm);
   taskDeleteEvents(pm);
+  taskEditButtonEvents(pm);
+  // taskEditSave(PM);
+  taskEditCancel(pm);
 };
 
 const renderTaskElements = (pm) => {
@@ -133,8 +138,8 @@ const renderTaskElements = (pm) => {
         </div>
         <div class='taskElementRightSide'>
           <span>${tasks[i].dueDate}</span>
-          <button data-task-edit =${tasks[i].id}>edit</button>
-          <button class='taskDeleteButton'data-proj-id=${tasks[i].projId} data-task-id=${tasks[i].id}>delete</button>
+          <button class='taskEditButton'data-task-edit =${tasks[i].id}>edit</button>
+          <button class='taskDeleteButton' data-proj-id=${tasks[i].projId} data-task-id=${tasks[i].id}>delete</button>
         </div>
       </div>
       <p class='taskNote hidden' >${tasks[i].notes}</p>
@@ -170,6 +175,42 @@ const taskDeleteEvents = (pm) => {
     removeTasks();
     renderTaskList(pm);
   }));
+};
+
+const taskEditButtonEvents = (pm) => {
+  const taskEditBtn = document.querySelectorAll('.taskEditButton');
+  const editTaskName = document.querySelector('#editProjName');
+  taskEditBtn.forEach((el) => el.addEventListener('click', () => {
+    // pm.currProFromId = el.parentElement.id;
+    showTaskEditForm(el, pm);
+    // useTaskPlaceholderNames(editTaskName);
+  }));
+};
+
+function showTaskEditForm(el, pm) {
+  const taskSection = document.getElementById('taskList');
+  el.closest('.taskElement').classList.add('hidden');
+  editTaskForm.classList.add('visible');
+  taskSection.insertBefore(editTaskForm, el.closest('.taskElement'));
+  // pm.currProFromId = el.parentElement.parentElement.dataset.projId;
+}
+
+// const taskEditSave = (pm) => {
+//   const editTaskForm = document.getElementById('editTaskForm');
+//   editTaskForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     pm.renameProject(editProjName.value);
+//     hideTaskEditForm();
+//     renderTasks(pm);
+//   });
+// };
+
+const taskEditCancel = (pm) => {
+  const editTaskCancelButton = document.getElementById('taskCancelButton');
+  editTaskCancelButton.addEventListener('click', () => {
+    editTaskForm.classList.remove('visible');
+    renderTaskList(pm);
+  });
 };
 
 // global function
