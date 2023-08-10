@@ -69,10 +69,16 @@ const projEditButtonEvents = (pm) => {
   const projEditBtn = document.querySelectorAll('.projectEditButton');
   const editProjName = document.querySelector('#editProjName');
   projEditBtn.forEach((el) => el.addEventListener('click', () => {
-    pm.currProFromId = el.parentElement.id;
+    // pm.currProFromId = el.parentElement.id;
+    removeProjHiddenAttr();
     showProjEditForm(el, pm);
     useProjectPlaceholderName(editProjName);
   }));
+};
+
+const removeProjHiddenAttr = () => {
+  const projEls = document.querySelectorAll('.projectElement');
+  projEls.forEach((el) => { el.classList.remove('hidden'); });
 };
 
 function showProjEditForm(el, pm) {
@@ -182,9 +188,15 @@ const taskEditButtonEvents = (pm) => {
   const editTaskName = document.querySelector('#editProjName');
   taskEditBtn.forEach((el) => el.addEventListener('click', () => {
     // pm.currProFromId = el.parentElement.id;
+    removeTaskHiddenAttr();
     showTaskEditForm(el, pm);
     // useTaskPlaceholderNames(editTaskName);
   }));
+};
+
+const removeTaskHiddenAttr = () => {
+  const taskEls = document.querySelectorAll('.taskElement');
+  taskEls.forEach((el) => { el.classList.remove('hidden'); });
 };
 
 function showTaskEditForm(el, pm) {
