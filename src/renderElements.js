@@ -1,4 +1,5 @@
-import { lookForLocalStorage, updateLocalStorage } from './localStorage';
+import { format, parseISO } from 'date-fns';
+import { updateLocalStorage } from './localStorage';
 
 // remove Elements
 const removeProjects = () => {
@@ -127,7 +128,7 @@ const renderTaskList = (pm) => {
   isCompletedEvents(pm);
   taskDeleteEvents(pm);
   taskEditButtonEvents(pm);
-  // taskEditSave(PM);
+  // taskEditSave(pm);
   taskEditCancel(pm);
 };
 
@@ -185,12 +186,11 @@ const taskDeleteEvents = (pm) => {
 
 const taskEditButtonEvents = (pm) => {
   const taskEditBtn = document.querySelectorAll('.taskEditButton');
-  const editTaskName = document.querySelector('#editProjName');
   taskEditBtn.forEach((el) => el.addEventListener('click', () => {
     // pm.currProFromId = el.parentElement.id;
     removeTaskHiddenAttr();
     showTaskEditForm(el, pm);
-    // useTaskPlaceholderNames(editTaskName);
+    useTaskPlaceholderNames(el, pm);
   }));
 };
 
@@ -199,13 +199,29 @@ const removeTaskHiddenAttr = () => {
   taskEls.forEach((el) => { el.classList.remove('hidden'); });
 };
 
-function showTaskEditForm(el, pm) {
+function showTaskEditForm(el) {
   const taskSection = document.getElementById('taskList');
   el.closest('.taskElement').classList.add('hidden');
   editTaskForm.classList.add('visible');
   taskSection.insertBefore(editTaskForm, el.closest('.taskElement'));
   // pm.currProFromId = el.parentElement.parentElement.dataset.projId;
 }
+
+const useTaskPlaceholderNames = (el, pm) => {
+  const task = pm.findTaskById(el.closest('.taskElement').dataset.taskId);
+
+  const editTaskName = document.querySelector('#newTask');
+  editTaskName.value = task.taskName;
+
+  const editTaskNotes = document.querySelector('#newNotes');
+  editTaskNotes.value = task.notes;
+
+  const editTaskDate = document.querySelector('#newDate');
+  editTaskDate.value = format(task.dueDateObj, 'yyyy MM dd').replace(/ /g, '-');
+
+  const editTaskPriority = document.querySelector('#newPriority');
+  editTaskPriority.checked = task.isPriority;
+};
 
 // const taskEditSave = (pm) => {
 //   const editTaskForm = document.getElementById('editTaskForm');
