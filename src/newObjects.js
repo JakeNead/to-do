@@ -26,6 +26,7 @@ const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, projectId,
     get dueDateObj() { return parseISO(dueDate); },
 
     togglePriority() { isPriority = isPriority === 'true' ? 'false' : 'true'; },
+    set isPriority(bool) { isPriority = bool; },
     get isPriority() { return isPriority; },
 
     toggleCompleted() { completed = !completed; },

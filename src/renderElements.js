@@ -31,8 +31,8 @@ const projElements = (PM) => {
       <span class='projElement' data-proj-id=${item.id}>${item.projName}
       </span>
       <div class='projectButtons'>
-        <button class='projectEditButton'> Edit</button>
-        <button class='projectDeleteButton'> Delete</button>
+        <button class='projectEditButton'> <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 40 40"><path d="M7.792 39.5q-1.125 0-1.959-.833Q5 37.833 5 36.708V12.292q0-1.125.833-1.959.834-.833 1.959-.833H24l-2.792 2.792H7.792v24.416h24.416v-13.5L35 20.417v16.291q0 1.125-.833 1.959-.834.833-1.959.833ZM20 24.5Zm7.375-14.458 2 1.958-11.583 11.542v3.166h3.125l11.625-11.625 1.958 1.959L22.083 29.5H15v-7.083Zm7.125 7-7.125-7 4.167-4.167q.791-.792 1.958-.792 1.167 0 2 .834l3.083 3.125q.792.833.792 1.979 0 1.146-.792 1.937Z"/></svg></button>
+        <button class='projectDeleteButton'> <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 40 40"><path d="M11.125 35Q10 35 9.188 34.167q-.813-.834-.813-1.959V9.167H6.667V6.375h8V5h10.666v1.375h8v2.792h-1.708v23.041q0 1.125-.813 1.959Q30 35 28.875 35Zm17.75-25.833h-17.75v23.041h17.75ZM15.208 28.708h2.75V12.625h-2.75Zm6.834 0h2.75V12.625h-2.75ZM11.125 9.167v23.041Z"/></svg></button>
       </div>
     </li>`;
   });
@@ -99,7 +99,6 @@ const projEditSave = (pm) => {
   editProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     pm.renameProject(editProjName.value);
-    // updateTaskHeader(editProjName.value);
     hideProjEditForm();
     renderProjects(pm);
   });
@@ -128,7 +127,7 @@ const renderTaskList = (pm) => {
   isCompletedEvents(pm);
   taskDeleteEvents(pm);
   taskEditButtonEvents(pm);
-  // taskEditSave(pm);
+  taskEditSave(pm);
   taskEditCancel(pm);
 };
 
@@ -139,14 +138,14 @@ const renderTaskElements = (pm) => {
     taskSection.innerHTML += `<div data-task-id=${tasks[i].id} class='taskElement'>
       <div class='mainTaskContent'> 
         <div class='taskElementLeftSide'>
-        <svg class='priorityIcon ${tasks[i].isPriority}' xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M479.911-120Q451-120 430.5-140.589q-20.5-20.588-20.5-49.5Q410-219 430.589-239.5q20.588-20.5 49.5-20.5Q509-260 529.5-239.411q20.5 20.588 20.5 49.5Q550-161 529.411-140.5q-20.588 20.5-49.5 20.5ZM410-360v-480h140v480H410Z"/></svg>
+        <svg class='priorityIcon ${tasks[i].isPriority}' xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="40"><path d="M479.911-120Q451-120 430.5-140.589q-20.5-20.588-20.5-49.5Q410-219 430.589-239.5q20.588-20.5 49.5-20.5Q509-260 529.5-239.411q20.5 20.588 20.5 49.5Q550-161 529.411-140.5q-20.588 20.5-49.5 20.5ZM410-360v-480h140v480H410Z"/></svg>
           <button data-task-complete=${tasks[i].completed} data-task-id=${tasks[i].id} type='button'> </button>
           <h3> ${tasks[i].taskName} </h3>
         </div>
         <div class='taskElementRightSide'>
           <span>${tasks[i].dueDate}</span>
-          <button class='taskEditButton'data-task-edit =${tasks[i].id}>edit</button>
-          <button class='taskDeleteButton' data-proj-id=${tasks[i].projId} data-task-id=${tasks[i].id}>delete</button>
+          <button class='taskEditButton'data-task-edit =${tasks[i].id}><svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 40 40"><path d="M7.792 39.5q-1.125 0-1.959-.833Q5 37.833 5 36.708V12.292q0-1.125.833-1.959.834-.833 1.959-.833H24l-2.792 2.792H7.792v24.416h24.416v-13.5L35 20.417v16.291q0 1.125-.833 1.959-.834.833-1.959.833ZM20 24.5Zm7.375-14.458 2 1.958-11.583 11.542v3.166h3.125l11.625-11.625 1.958 1.959L22.083 29.5H15v-7.083Zm7.125 7-7.125-7 4.167-4.167q.791-.792 1.958-.792 1.167 0 2 .834l3.083 3.125q.792.833.792 1.979 0 1.146-.792 1.937Z"/></svg></button>
+          <button class='taskDeleteButton' data-proj-id=${tasks[i].projId} data-task-id=${tasks[i].id}><svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 40 40"><path d="M11.125 35Q10 35 9.188 34.167q-.813-.834-.813-1.959V9.167H6.667V6.375h8V5h10.666v1.375h8v2.792h-1.708v23.041q0 1.125-.813 1.959Q30 35 28.875 35Zm17.75-25.833h-17.75v23.041h17.75ZM15.208 28.708h2.75V12.625h-2.75Zm6.834 0h2.75V12.625h-2.75ZM11.125 9.167v23.041Z"/></svg></button>
         </div>
       </div>
       <p class='taskNote hidden' >${tasks[i].notes}</p>
@@ -187,7 +186,6 @@ const taskDeleteEvents = (pm) => {
 const taskEditButtonEvents = (pm) => {
   const taskEditBtn = document.querySelectorAll('.taskEditButton');
   taskEditBtn.forEach((el) => el.addEventListener('click', () => {
-    // pm.currProFromId = el.parentElement.id;
     removeTaskHiddenAttr();
     showTaskEditForm(el, pm);
     useTaskPlaceholderNames(el, pm);
@@ -204,7 +202,6 @@ function showTaskEditForm(el) {
   el.closest('.taskElement').classList.add('hidden');
   editTaskForm.classList.add('visible');
   taskSection.insertBefore(editTaskForm, el.closest('.taskElement'));
-  // pm.currProFromId = el.parentElement.parentElement.dataset.projId;
 }
 
 const useTaskPlaceholderNames = (el, pm) => {
@@ -223,15 +220,20 @@ const useTaskPlaceholderNames = (el, pm) => {
   editTaskPriority.checked = task.isPriority;
 };
 
-// const taskEditSave = (pm) => {
-//   const editTaskForm = document.getElementById('editTaskForm');
-//   editTaskForm.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     pm.renameProject(editProjName.value);
-//     hideTaskEditForm();
-//     renderTasks(pm);
-//   });
-// };
+const taskEditSave = (pm) => {
+  const editTaskForm = document.getElementById('editTaskForm');
+  editTaskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    editTaskForm.classList.remove('visible');
+    const task = pm.findTaskById(editTaskForm.nextElementSibling.dataset.taskId);
+    console.log(newPriority.checked);
+    task.taskName = newTask.value;
+    task.notes = newNotes.value;
+    task.dueDate = newDate.value;
+    task.isPriority = newPriority.checked;
+    renderTaskList(pm);
+  });
+};
 
 const taskEditCancel = (pm) => {
   const editTaskCancelButton = document.getElementById('editTaskCancelButton');

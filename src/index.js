@@ -16,6 +16,6 @@ taskFilters(pm);
 modalEvents(pm);
 renderProjects(pm);
 
-// edit task functionality
+// edit task save functionality
 // button SVGs
 // completed task section?
