@@ -54,7 +54,7 @@ main {
 }
 
 nav {
-  min-width: 250px;
+  min-width: 300px;
   max-width: 600px;
   background-color: rgb(55 62 77);
   padding: 2rem;
@@ -63,11 +63,32 @@ nav {
 #taskFilters {
   list-style: none;
   padding: 0px;
+  font-size: 1.3rem;
+}
+
+#taskFilters li {
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+#add-project,
+#add-task,
+#project-submit,
+#project-cancel,
+#task-submit,
+#task-cancel {
+  background-color: var(--color-header);
+  color: var(--color-light-font);
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
 }
 
 #projects-section {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--color-light-font);
 }
 #projectList {
   list-style: none;
@@ -83,16 +104,30 @@ nav {
 
 .projectButtons {
   display: flex;
+  align-items: center;
 }
 
-#editProjectContainer {
+.projectEditButton {
+  margin-bottom: 4px;
+}
+
+.projectDeleteButton {
+}
+
+#editProjectForm input {
+  width: 12rem;
+  padding: 0.3rem;
+}
+
+#editProjectButtons > button {
+  margin-top: 0.5rem;
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
 }
 
 #tasks {
   padding: 2rem;
-}
-
-#taskList {
 }
 
 .taskElement {
@@ -134,15 +169,13 @@ nav {
 .projectDeleteButton {
   background: none;
   border: none;
+  cursor: pointer;
   width: 2.5rem;
   height: 2.5rem;
 }
 
 .taskEditButton {
   margin-bottom: 3px;
-}
-.projectEditButton {
-  padding-bottom: 3px;
 }
 
 .taskElementRightSide svg,
@@ -164,8 +197,6 @@ nav {
 
 .taskNote {
   margin: 0 1rem 1rem 3.5rem;
-  /* margin-left: 1rem;
-  margin-right: 1rem; */
 }
 
 .priorityIcon {

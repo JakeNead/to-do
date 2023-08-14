@@ -17,15 +17,17 @@ const initPage = () => {
   </ul>
   <div id='projects-section'>
   <h3>Projects</h3>
-  <button id='add-project'>+ Add Project</div>
+  <button id='add-project'>+ Add Project</button>
+  </div>
   <ul id='projectList'>
   <div id="editProjectContainer" class="hidden">
   <form id ="editProjectForm" action="#">
-      <label for="editProjName"></label>
+      <label for="editProjName">
       <input type="text" id="editProjName" name="editProjName" required>
-      <div class="buttons">
-        <button type="submit" id="projectSaveButton">Save</button>
-        <button type="reset" id="projectCancelButton">Cancel</button>
+      </label>
+      <div id="editProjectButtons">
+        <button title="Save" type="submit" id="projectSaveButton" title='Save'>Save</button>
+        <button type="reset" id="projectCancelButton" title='Cancel'>Cancel</button>
       </div>
   </form>
   </div>
@@ -83,7 +85,7 @@ const initPage = () => {
     <input type="text" name="projectInput" id="projectInput" placeholder="Project Name" required>
     <div id='project-modal-buttons'>
     <button id='project-submit' type="submit">Add</button>
-    <button data-close-button>Cancel</button>
+    <button id='project-cancel' data-close-button>Cancel</button>
     </div>
 </form>
 </div>
@@ -94,7 +96,7 @@ const initPage = () => {
     <input type="text" name="task" id="task" placeholder="Task Name" required>
 
     <label for="description"></label>
-    <input type="text" name='description' id = 'description' placeholder="Description">
+    <textarea type="text" name='description' id = 'description' placeholder="Notes"></textarea>
 
     <label for="date"></label>
     <input type="date" name="date" id="date" required>
@@ -112,7 +114,7 @@ const initPage = () => {
  
     <div id='task-modal-buttons'>
     <button id='task-submit' type="submit">Add</button>
-    <button data-close-button >Cancel</button>
+    <button id='task-cancel' data-close-button >Cancel</button>
     </div>
   </form>
 </div>

@@ -26,7 +26,7 @@ const demoArray = [
     ],
   },
   {
-    projName: 'Work Magic',
+    projName: 'Magic',
     id: 'c92d7892-3bb7-494c-a1f5-af579d23e96f',
     taskList: [
       {
@@ -57,12 +57,10 @@ const demoArray = [
     taskList: [],
   }];
 
-// Save to local storage whenever a project or task is modified
 const updateLocalStorage = (pm) => {
   localStorage.setItem('todoStorage', JSON.stringify(pm.getStorage));
 };
 
-// Used init load only
 const lookForLocalStorage = (pm) => {
   if (localStorage.getItem('todoStorage') === null) {
     instantiateObjects(demoArray, pm);
@@ -71,7 +69,6 @@ const lookForLocalStorage = (pm) => {
   }
 };
 
-// Create object instances from the demoArray or local JSON data
 const instantiateObjects = (storage, pm) => {
   for (let i = 0; i < storage.length; i += 1) {
     pm.addProject(storage[i].projName);
