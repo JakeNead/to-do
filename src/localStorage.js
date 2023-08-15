@@ -8,10 +8,10 @@ const demoArray = [
         projId: 'c92d7892-3bb7-494c-a1f5-af579d23e96f',
         taskName: 'Mow lawn',
         notes: "Don't forget to mow by the front yard maple",
-        dueDate: 'Jul 25th 2023',
-        dueDateObj: '2023-07-25T07:00:00.000Z',
+        dueDate: 'Aug 14th 2023',
+        dueDateObj: '2023-08-14T07:00:00.000Z',
         completed: false,
-        isPriority: false,
+        isPriority: true,
       },
       {
         id: 'b99c594d-52ee-41c9-b7f2-bc8a17b75bd6',
@@ -20,7 +20,7 @@ const demoArray = [
         notes: 'Use the ladder to get the upper branches.',
         dueDate: 'Jul 27th 2023',
         dueDateObj: '2023-07-27T07:00:00.000Z',
-        completed: false,
+        completed: true,
         isPriority: false,
       },
     ],
@@ -74,7 +74,8 @@ const instantiateObjects = (storage, pm) => {
     pm.addProject(storage[i].projName);
     for (let j = 0; j < storage[i].taskList.length; j += 1) {
       let task = storage[i].taskList[j];
-      pm.getStorage[i].addTask(task.taskName, task.notes, task.dueDateObj, task.isPriority, pm.getStorage[i].id);
+      console.log(task.completed);
+      pm.getStorage[i].addTask(task.taskName, task.notes, task.dueDateObj, task.isPriority, pm.getStorage[i].id, task.completed);
     }
   }
 };

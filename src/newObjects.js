@@ -2,14 +2,14 @@ import {
   format, isToday, isThisWeek, parseISO,
 } from 'date-fns';
 
-const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, projectId, taskCompleted = false) => {
+const CreateTask = (taskName, taskNotes, taskDueDate, taskIsPriority, projectId, taskIsCompleted = false) => {
   const id = crypto.randomUUID();
   const projId = projectId;
   let name = taskName;
   let notes = taskNotes;
   let dueDate = taskDueDate;
   let isPriority = taskIsPriority;
-  let completed = taskCompleted;
+  let completed = taskIsCompleted;
 
   return {
     get id() { return id; },
@@ -39,8 +39,8 @@ const CreateProject = (projName) => {
 
   const id = crypto.randomUUID();
 
-  const addTask = (taskName, taskNotes, taskDueDate, taskIsPriority) => {
-    taskList.push(CreateTask(taskName, taskNotes, taskDueDate, taskIsPriority, id));
+  const addTask = (taskName, taskNotes, taskDueDate, taskIsPriority, taskId, taskIsCompleted) => {
+    taskList.push(CreateTask(taskName, taskNotes, taskDueDate, taskIsPriority, taskId, taskIsCompleted));
   };
 
   const deleteTask = (taskId) => {

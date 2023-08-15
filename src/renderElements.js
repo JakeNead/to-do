@@ -187,6 +187,7 @@ const isCompletedEvents = (pm) => {
   const isCompletedButtons = document.querySelectorAll('[data-task-complete]');
   isCompletedButtons.forEach((btn) => btn.addEventListener('click', (e) => {
     pm.findTaskById(btn.dataset.taskId).toggleCompleted();
+    updateLocalStorage(pm);
     removeTasks();
     renderTaskList(pm);
   }));

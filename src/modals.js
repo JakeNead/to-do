@@ -65,8 +65,6 @@ const modalEvents = (pm) => {
     overlay.classList.remove('active');
   }
 
-  console.log(document.querySelector('#project-form'));
-
   // add new project
   projectForm.addEventListener('submit', addNewProject);
 

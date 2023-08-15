@@ -16,21 +16,21 @@ const initPage = () => {
     <li id="priorityTasks" >Priority</li>
   </ul>
   <div id='projects-section'>
-  <h3>Projects</h3>
-  <button id='add-project'>+ Add Project</button>
+    <h3>Projects</h3>
+    <button id='add-project'>+ Add Project</button>
   </div>
   <ul id='projectList'>
-  <div id="editProjectContainer" class="hidden">
-  <form id ="editProjectForm" action="#">
-      <label for="editProjName">
-      <input type="text" id="editProjName" name="editProjName" required>
-      </label>
-      <div id="editProjectButtons">
-        <button title="Save" type="submit" id="projectSaveButton" title='Save'>Save</button>
-        <button type="reset" id="projectCancelButton" title='Cancel'>Cancel</button>
-      </div>
-  </form>
-  </div>
+    <div id="editProjectContainer" class="hidden">
+      <form id ="editProjectForm" action="#">
+        <label for="editProjName">
+        <input type="text" id="editProjName" name="editProjName" required>
+        </label>
+        <div id="editProjectButtons">
+          <button title="Save" type="submit" id="projectSaveButton" title='Save'>Save</button>
+          <button type="reset" id="projectCancelButton" title='Cancel'>Cancel</button>
+        </div>
+      </form>
+    </div>
   </ul>
   </nav>
   
@@ -64,7 +64,7 @@ const initPage = () => {
         <button type="submit" id="editTaskSaveButton">Save</button>
         <button type="reset" id="editTaskCancelButton">Cancel</button>
       </div>
-    </div
+    </div>
   </form>
   </div>
   <div id='completedTaskList'>
@@ -84,14 +84,14 @@ const initPage = () => {
 
   <div id="project-modal" class='modal'>
     <form id='project-form' action="#">
-    <label for="projectInput" ></label>
-    <input type="text" name="projectInput" id="projectInput" placeholder="Project Name" required>
-    <div id='project-modal-buttons'>
-    <button id='project-submit' type="submit">Add</button>
-    <button id='project-cancel' data-close-button>Cancel</button>
-    </div>
-</form>
-</div>
+      <label for="projectInput" ></label>
+      <input type="text" name="projectInput" id="projectInput" placeholder="Project Name" required>
+      <div id='project-modal-buttons'>
+      <button id='project-submit' type="submit">Add</button>
+      <button id='project-cancel' data-close-button>Cancel</button>
+      </div>
+    </form>
+  </div>
 
 <div id="task-modal" class='modal'>
   <form id='task-form' action="#">
@@ -121,7 +121,7 @@ const initPage = () => {
     </div>
   </form>
 </div>
-  </div>
+</div>
   <div id='overlay'> </div>
   `;
 };
