@@ -105,17 +105,30 @@ const PM = () => {
     allTasks().splice(index, 1);
   };
 
+  const currentCompletedTaskArray = () => {
+    if (currentProject === 'All') {
+      return allTasks().filter((obj) => obj.completed === true);
+    } if (currentProject === 'Today') {
+      return todayTasks().filter((obj) => obj.completed === true);
+    } if (currentProject === 'Week') {
+      return weekTasks().filter((obj) => obj.completed === true);
+    } if (currentProject === 'Priority') {
+      return priorityTasks().filter((obj) => obj.completed === true);
+    }
+    return currentProject.taskList.filter((obj) => obj.completed === true);
+  };
+
   const currentTaskArray = () => {
     if (currentProject === 'All') {
-      return allTasks();
+      return allTasks().filter((obj) => obj.completed === false);
     } if (currentProject === 'Today') {
-      return todayTasks();
+      return todayTasks().filter((obj) => obj.completed === false);
     } if (currentProject === 'Week') {
-      return weekTasks();
+      return weekTasks().filter((obj) => obj.completed === false);
     } if (currentProject === 'Priority') {
-      return priorityTasks();
+      return priorityTasks().filter((obj) => obj.completed === false);
     }
-    return currentProject.taskList;
+    return currentProject.taskList.filter((obj) => obj.completed === false);
   };
 
   return {
@@ -131,6 +144,7 @@ const PM = () => {
     findProject,
     findProjectById,
     findTaskById,
+    currentCompletedTaskArray,
     currentTaskArray,
     get getStorage() { return storage; },
     set storage(newStorage) { storage = newStorage; },

@@ -65,6 +65,8 @@ const modalEvents = (pm) => {
     overlay.classList.remove('active');
   }
 
+  console.log(document.querySelector('#project-form'));
+
   // add new project
   projectForm.addEventListener('submit', addNewProject);
 
@@ -85,7 +87,6 @@ const modalEvents = (pm) => {
 
   function addNewTask(e) {
     e.preventDefault();
-    console.log(e);
     const projObj = pm.findProject(projectName.value);
     if (projObj.isUniqueTask(task.value)) {
       projObj.addTask(

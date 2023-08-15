@@ -16,5 +16,8 @@ taskFilters(pm);
 modalEvents(pm);
 renderProjects(pm);
 
+// edit task form style
+// completed click local storage update?
 // completed styling
 // completed section?
+// light themes

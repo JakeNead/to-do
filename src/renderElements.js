@@ -1,4 +1,4 @@
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 import { updateLocalStorage } from './localStorage';
 
 // remove Elements
@@ -133,6 +133,7 @@ const renderTaskList = (pm) => {
 
 const renderTaskElements = (pm) => {
   let tasks = pm.currentTaskArray();
+  let completedTasks = pm.currentCompletedTaskArray();
   const taskSection = document.getElementById('taskList');
   for (let i = 0; i < tasks.length; i += 1) {
     taskSection.innerHTML += `<div data-task-id=${tasks[i].id} class='taskElement'>
@@ -149,6 +150,24 @@ const renderTaskElements = (pm) => {
         </div>
       </div>
       <p class='taskNote hidden' >${tasks[i].notes}</p>
+      </div>`;
+  }
+  const completedTaskSection = document.getElementById('completedTaskList');
+  for (let i = 0; i < completedTasks.length; i += 1) {
+    completedTaskSection.innerHTML += `<div data-task-id=${completedTasks[i].id} class='taskElement completedTaskElement'>
+      <div class='mainTaskContent'> 
+        <div class='taskElementLeftSide'>
+        <svg class='priorityIcon ${completedTasks[i].isPriority}' xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 0 40 40" width="40"><path d="M479.911-120Q451-120 430.5-140.589q-20.5-20.588-20.5-49.5Q410-219 430.589-239.5q20.588-20.5 49.5-20.5Q509-260 529.5-239.411q20.5 20.588 20.5 49.5Q550-161 529.411-140.5q-20.588 20.5-49.5 20.5ZM410-360v-480h140v480H410Z"/></svg>
+          <button data-task-complete=${completedTasks[i].completed} data-task-id=${completedTasks[i].id} type='button'> </button>
+          <h3 class='completed'> ${completedTasks[i].taskName} </h3>
+        </div>
+        <div class='taskElementRightSide'>
+          <span class='completed'>${completedTasks[i].dueDate}</span>
+          <button class='taskEditButton'data-task-edit =${completedTasks[i].id}><svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 40 40"><path d="M7.792 39.5q-1.125 0-1.959-.833Q5 37.833 5 36.708V12.292q0-1.125.833-1.959.834-.833 1.959-.833H24l-2.792 2.792H7.792v24.416h24.416v-13.5L35 20.417v16.291q0 1.125-.833 1.959-.834.833-1.959.833ZM20 24.5Zm7.375-14.458 2 1.958-11.583 11.542v3.166h3.125l11.625-11.625 1.958 1.959L22.083 29.5H15v-7.083Zm7.125 7-7.125-7 4.167-4.167q.791-.792 1.958-.792 1.167 0 2 .834l3.083 3.125q.792.833.792 1.979 0 1.146-.792 1.937Z"/></svg></button>
+          <button class='taskDeleteButton' data-proj-id=${completedTasks[i].projId} data-task-id=${completedTasks[i].id}><svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 40 40"><path d="M11.125 35Q10 35 9.188 34.167q-.813-.834-.813-1.959V9.167H6.667V6.375h8V5h10.666v1.375h8v2.792h-1.708v23.041q0 1.125-.813 1.959Q30 35 28.875 35Zm17.75-25.833h-17.75v23.041h17.75ZM15.208 28.708h2.75V12.625h-2.75Zm6.834 0h2.75V12.625h-2.75ZM11.125 9.167v23.041Z"/></svg></button>
+        </div>
+      </div>
+      <p class='taskNote hidden completed' >${completedTasks[i].notes}</p>
       </div>`;
   }
 };
