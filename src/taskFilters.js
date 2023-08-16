@@ -8,24 +8,20 @@ const taskFilters = (pm) => {
 
   today.addEventListener('click', () => {
     pm.currPro = 'Today';
-    removeTasks();
     renderTaskList(pm);
   });
 
   week.addEventListener('click', () => {
     pm.currPro = 'Week';
-    removeTasks();
     renderTaskList(pm);
   });
 
   all.addEventListener('click', () => {
     pm.currPro = 'All';
-    removeTasks();
     renderTaskList(pm);
   });
   priority.addEventListener('click', () => {
     pm.currPro = 'Priority';
-    removeTasks();
     renderTaskList(pm);
   });
 };
