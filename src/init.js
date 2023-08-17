@@ -36,7 +36,7 @@ const initPage = () => {
   
   <section id='tasks'>
   <div id='taskHeaderSection'>
-  <h2 id='taskHeader'></h2>
+  <h2 id='taskHeader'>Tasks</h2>
   <button id='add-task' >+ Add Task</button>
   </div>
   <div id='taskList'>
@@ -60,16 +60,15 @@ const initPage = () => {
         </div>
       </div>
 
-      <div class="taskEditButtons">
+      <div id="taskEditButtons">
         <button type="submit" id="editTaskSaveButton">Save</button>
         <button type="reset" id="editTaskCancelButton">Cancel</button>
       </div>
     </div>
   </form>
   </div>
-  <div id='completedTaskList'>
   <h2 id='completedTaskHeader'>Completed</h2>
-  </div>
+  <div id='completedTaskList'></div>
   </section>
 
   </main>
