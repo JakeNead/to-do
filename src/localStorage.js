@@ -74,7 +74,6 @@ const instantiateObjects = (storage, pm) => {
     pm.addProject(storage[i].projName);
     for (let j = 0; j < storage[i].taskList.length; j += 1) {
       let task = storage[i].taskList[j];
-      console.log(task.completed);
       pm.getStorage[i].addTask(task.taskName, task.notes, task.dueDateObj, task.isPriority, pm.getStorage[i].id, task.completed);
     }
   }
