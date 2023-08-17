@@ -55,7 +55,8 @@ header > svg {
 
 #taskHeaderSection,
 #taskList,
-#completedTaskList {
+#completedTaskList,
+#completedTaskHeader {
   max-width: 800px;
 }
 
