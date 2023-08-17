@@ -1,11 +1,15 @@
 :root {
-  --color-light-font: hsl(225, 77%, 92%);
-  --color-tint-font: hsl(214, 96%, 81%);
-  --color-dark-font: hsl(227, 28%, 64%);
-  --color-header: hsl(219, 16%, 32%);
-  --color-nav: hsl(221, 17%, 26%);
-  --color-main: hsl(220, 16%, 22%);
-  --color-main-dark: hsl(220, 16%, 19%);
+  --light-font: hsl(225, 75%, 97%);
+  --tint-font: hsl(214, 96%, 85%);
+  --dark-font: hsl(227, 28%, 64%);
+  --header: hsl(219, 16%, 32%);
+  --nav: hsl(221, 17%, 26%);
+  --main: hsl(220, 16%, 22%);
+  --main-dark: hsl(220, 16%, 19%);
+  --valid: hsl(180, 45%, 84%);
+  --valid-bold: hsl(181, 100%, 21%);
+  --invalid: hsl(345, 100%, 92%);
+  --invalid-bold: hsl(341, 53%, 44%);
 }
 body {
   font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
@@ -16,7 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: rgb(217 225 250);
+  color: var(--light-font);
 }
 
 header {
@@ -24,8 +28,8 @@ header {
   justify-content: center;
   align-items: center;
   position: relative;
-  background-color: var(--color-header);
-  color: var(--color-tint-font);
+  background-color: var(--header);
+  color: var(--tint-font);
 }
 
 h1 {
@@ -38,30 +42,33 @@ header > svg {
   position: absolute;
   right: 1rem;
   fill: currentColor;
+  display: none;
 }
 #taskHeaderSection,
 #completedTaskHeader {
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid var(--color-light-font);
-  padding: 1rem;
+  align-items: center;
+  border-bottom: 2px solid var(--light-font);
+  padding-bottom: 1rem;
 }
 
 #taskHeaderSection,
-#taskList {
+#taskList,
+#completedTaskList {
   max-width: 800px;
 }
 
 main {
   display: flex;
   height: 100%;
-  background-color: var(--color-main);
+  background-color: var(--main);
 }
 
 nav {
   min-width: 300px;
   max-width: 600px;
-  background-color: var(--color-nav);
+  background-color: var(--nav);
   padding: 2rem;
 }
 
@@ -82,8 +89,8 @@ nav {
 #project-cancel,
 #task-submit,
 #task-cancel {
-  background-color: var(--color-header);
-  color: var(--color-light-font);
+  background-color: var(--header);
+  color: var(--light-font);
   border-radius: 0.4rem;
   padding: 0.4rem 0.6rem;
   cursor: pointer;
@@ -93,12 +100,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--color-light-font);
+  border-bottom: 2px solid var(--light-font);
 }
 
-#projects-section h3 {
+#projects-section h3,
+h2 {
   font-size: 1.5rem;
-  color: var(--color-tint-font);
+  color: var(--tint-font);
 }
 
 #projectList {
@@ -130,8 +138,9 @@ nav {
   padding: 0.3rem;
 }
 
-#editProjectButtons > button {
-  margin-top: 0.5rem;
+#editProjectButtons > button,
+#taskEditButtons > button {
+  margin: 0.5rem 0.5rem 0 0.5rem;
   border-radius: 0.4rem;
   padding: 0.4rem 0.6rem;
   cursor: pointer;
@@ -146,8 +155,8 @@ nav {
 
 .taskElement,
 #editTaskContainer {
-  border: 1px solid var(--color-light-font);
-  background-color: var(--color-nav);
+  border: 1px solid var(--light-font);
+  background-color: var(--nav);
   border-radius: 4px;
   margin-top: 1rem;
 }
@@ -200,19 +209,19 @@ nav {
 
 .taskElementRightSide svg,
 .projectButtons svg {
-  fill: var(--color-light-font);
+  fill: var(--light-font);
   width: 100%;
   height: 100%;
 }
 
 [data-task-complete="false"] {
-  border: 2px solid var(--color-light-font);
-  background-color: var(--color-header);
+  border: 2px solid var(--light-font);
+  background-color: var(--header);
 }
 
 [data-task-complete="true"] {
-  border: 2px solid var(--color-dark-font);
-  background-color: var(--color-main-dark);
+  border: 2px solid var(--dark-font);
+  background-color: var(--main-dark);
 }
 
 .taskNote {
@@ -231,27 +240,59 @@ nav {
   top: 5px;
   height: 1.2rem;
 }
+
 .completed {
   text-decoration: line-through;
 }
 
 .completedTaskElement {
-  color: var(--color-dark-font);
-  border: 1px solid var(--color-dark-font);
+  color: var(--dark-font);
+  border: 1px solid var(--dark-font);
 }
 
 .completedTaskElement svg {
-  fill: var(--color-dark-font);
+  fill: var(--dark-font);
 }
 
 #editTaskContainer {
   display: flex;
+  justify-content: space-between;
   padding: 1rem;
+  gap: 1rem;
+}
+
+#newNameAndNotes,
+#newDateAndPriority,
+#taskEditButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+#newNameAndNotes {
+  flex-grow: 2;
+}
+
+#newDateAndPriority {
+  margin: 0.3rem;
+  flex-grow: 1;
+}
+
+#taskEditButtons {
+  flex-grow: 1;
+  align-items: end;
+}
+
+input,
+select,
+textarea {
+  border-radius: 4px;
 }
 
 #newTask,
 #newNotes {
   padding: 0.3rem;
+  max-width: 20rem;
 }
 
 #newNotes {
@@ -259,17 +300,71 @@ nav {
   resize: none;
 }
 
+#newDate {
+  padding: 0.25rem;
+}
+
+#newPriority {
+  accent-color: gold;
+}
+
+#newTask,
+#newNotes,
+#newDate,
+textarea {
+  color: var(--light-font);
+  background-color: var(--main);
+}
+
+#editTaskSaveButton,
+#projectSaveButton,
+#project-submit,
+#task-submit {
+  width: 5rem;
+  border: none;
+  font-weight: 550;
+  color: var(--valid-bold);
+  background-color: var(--valid);
+}
+
+#editTaskSaveButton:hover,
+#projectSaveButton:hover,
+#project-submit:hover,
+#task-submit:hover {
+  color: var(--valid);
+  background-color: var(--valid-bold);
+}
+
+#editTaskCancelButton,
+#projectCancelButton,
+#project-cancel,
+#task-cancel {
+  width: 5rem;
+  border: none;
+  font-weight: 550;
+  color: var(--invalid-bold);
+  background-color: var(--invalid);
+}
+
+#editTaskCancelButton:hover,
+#projectCancelButton:hover,
+#project-cancel:hover,
+#task-cancel:hover {
+  color: var(--invalid);
+  background-color: var(--invalid-bold);
+}
+
 section {
   flex-grow: 2;
 }
 
 footer {
-  background-color: rgb(68 77 94);
+  background-color: var(--header);
   height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(217 225 250);
+  color: var(--light-font);
 }
 footer p {
   font-size: 1.2rem;
@@ -278,7 +373,7 @@ footer p {
 #odin-logo {
   height: 1.4rem;
   margin: 0.5rem;
-  fill: rgb(217 225 250);
+  fill: var(--light-font);
 }
 
 .hidden {

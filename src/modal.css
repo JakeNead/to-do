@@ -36,10 +36,6 @@ textarea,
   color: var(--color-light-font);
 }
 
-#priority {
-  fill: green;
-}
-
 #projectInput::placeholder,
 #task::placeholder,
 #description::placeholder,
