@@ -51,9 +51,10 @@ const initPage = () => {
       </div>
 
       <div id='newDateAndPriority'>
-        <label for="newDate"></label>
+        <label for="newDate">
         <input type="date" name="newDate" id="newDate" required>
-    
+        </label>
+        
         <div id='newPriorityCheckbox'> 
         <label for="newPriority">Priority</label>
         <input type="checkbox" name="newPriority" id="newPriority" value="isPriority">
